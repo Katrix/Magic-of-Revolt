@@ -6,6 +6,6 @@ In a way, yes. I guess you could say that Psi made me realize and see the magic 
 
 Magic of Revolt is currently in very VERY early development, and there is no gurantee that I will finish anything here.
 
-Botania by Katrix is licensed under the Botania License
+Magic of Revolt by Katrix is licensed under the Botania License
 
 Thanks to Vazkii to lots of useful Helpers and such :D.

@@ -6,24 +6,24 @@
  * Magic of Revolt is Open Source and distributed under the
  * Botania license: https://github.com/Katrix-/Magic-of-Revolt/blob/master/LICENSE.md
  */
-package katrix.magicOfRevolt.spell.object.primitive;
+package katrix.magicOfRevolt.spell.object;
 
-import katrix.magicOfRevolt.spell.object.SpellObject;
+import net.minecraft.block.Block;
 import net.minecraft.world.World;
 
-public class SpellFloat extends SpellObject{
+public class SpellBlock extends SpellObject {
 	
-	private float spellFloat;
+	private Block block;
 
-	public SpellFloat(World world) {
+	public SpellBlock(World world) {
 		super(world);
 	}
 
-	public float getFloat() {
-		return spellFloat;
+	public Block getBlock() {
+		return block;
 	}
 
-	public void setFloat(float spellFloat) {
-		this.spellFloat = spellFloat;
+	public void setBlock(Block block) {
+		this.block = block;
 	}
 }

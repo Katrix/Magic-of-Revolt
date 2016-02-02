@@ -4,7 +4,7 @@
  * https://github.com/Katrix-/Magic-of-Revolt
  * 
  * Magic of Revolt is Open Source and distributed under the
- * Botania license: https://github.com/Katrix-/JTG/blob/master/LICENSE.md
+ * Botania license: https://github.com/Katrix-/Magic-of-Revolt/blob/master/LICENSE.md
  */
 package katrix.magicOfRevolt.tile;
 
