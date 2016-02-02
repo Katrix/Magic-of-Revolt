@@ -1,0 +1,6 @@
+{
+  "parent": "magicofrevolt:item/parent_item",
+  "textures": {
+    "layer0": "magicofrevolt:items/magicStick"
+  }
+}
