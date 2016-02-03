@@ -8,33 +8,33 @@
  */
 package katrix.magicOfRevolt.spell.object;
 
-import net.minecraft.block.Block;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-public class SpellBlock extends SpellObject {
+public class SpellMOP extends SpellObject {
 
-	private Block block;
+	private MovingObjectPosition mop;
 
-	public SpellBlock(World world) {
+	public SpellMOP(World world) {
 		super(world);
 	}
 
-	private SpellBlock(SpellBlock block) {
-		super(block);
-		this.block = block.block;
+	private SpellMOP(SpellMOP vector) {
+		super(vector);
+		this.mop = vector.mop;
 	}
 
 	@Override
-	public SpellBlock copy() {
-		return new SpellBlock(this);
+	public SpellMOP copy() {
+		return new SpellMOP(this);
 	}
 
-	public Block getBlock() {
-		return block;
+	public MovingObjectPosition getMOP() {
+		return mop;
 	}
 
-	public SpellBlock setBlock(Block block) {
-		this.block = block;
+	public SpellMOP setMOP(MovingObjectPosition mop) {
+		this.mop = mop;
 		return this;
 	}
 }

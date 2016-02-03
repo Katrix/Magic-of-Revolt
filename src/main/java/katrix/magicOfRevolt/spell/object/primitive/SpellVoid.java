@@ -11,29 +11,21 @@ package katrix.magicOfRevolt.spell.object.primitive;
 import katrix.magicOfRevolt.spell.object.SpellObject;
 import net.minecraft.world.World;
 
-public class SpellFloat extends SpellObject {
+//Not really a primitive. Used where you would normally use void.
+public final class SpellVoid extends SpellObject {
 
-	private float spellFloat;
+	public static final SpellVoid spell = new SpellVoid();
 
-	public SpellFloat(World world) {
+	private SpellVoid() {
+		this(null);
+	}
+
+	private SpellVoid(World world) {
 		super(world);
 	}
 
-	private SpellFloat(SpellFloat spellFloat) {
-		super(spellFloat);
-		this.spellFloat = spellFloat.spellFloat;
-	}
-
 	@Override
-	public SpellFloat copy() {
-		return new SpellFloat(this);
-	}
-
-	public float getFloat() {
-		return spellFloat;
-	}
-
-	public void setFloat(float spellFloat) {
-		this.spellFloat = spellFloat;
+	public SpellObject copy() {
+		return spell;
 	}
 }
