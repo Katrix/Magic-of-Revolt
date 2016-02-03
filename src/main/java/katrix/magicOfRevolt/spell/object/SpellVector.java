@@ -13,8 +13,9 @@ import net.minecraft.util.Vec3;
 public class SpellVector extends SpellObject {
 
 	private Vec3 vector;
-	
-	public SpellVector() {}
+
+	public SpellVector() {
+	}
 
 	private SpellVector(SpellVector vector) {
 		this.vector = vector.vector;

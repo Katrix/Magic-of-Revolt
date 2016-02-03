@@ -14,8 +14,9 @@ import katrix.magicOfRevolt.spell.object.SpellObject;
 public class SpellString extends SpellObject {
 
 	private String string;
-	
-	public SpellString() {}
+
+	public SpellString() {
+	}
 
 	private SpellString(SpellString string) {
 		this.string = string.string;

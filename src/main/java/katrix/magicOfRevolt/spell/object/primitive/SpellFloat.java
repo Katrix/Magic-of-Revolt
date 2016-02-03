@@ -13,8 +13,9 @@ import katrix.magicOfRevolt.spell.object.SpellObject;
 public class SpellFloat extends SpellObject {
 
 	private float spellFloat;
-	
-	public SpellFloat() {}
+
+	public SpellFloat() {
+	}
 
 	private SpellFloat(SpellFloat spellFloat) {
 		this.spellFloat = spellFloat.spellFloat;

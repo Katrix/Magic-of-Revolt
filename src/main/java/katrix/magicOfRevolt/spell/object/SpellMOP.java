@@ -13,11 +13,12 @@ import net.minecraft.util.MovingObjectPosition;
 public class SpellMOP extends SpellObject {
 
 	private MovingObjectPosition mop;
-	
-	public SpellMOP() {}
+
+	public SpellMOP() {
+	}
 
 	private SpellMOP(SpellMOP vector) {
-		this.mop = vector.mop;
+		mop = vector.mop;
 	}
 
 	@Override

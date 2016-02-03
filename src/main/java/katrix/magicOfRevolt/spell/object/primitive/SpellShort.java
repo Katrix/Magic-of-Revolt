@@ -13,8 +13,9 @@ import katrix.magicOfRevolt.spell.object.SpellObject;
 public class SpellShort extends SpellObject {
 
 	private short spellShort;
-	
-	public SpellShort() {}
+
+	public SpellShort() {
+	}
 
 	private SpellShort(SpellShort spellShort) {
 		this.spellShort = spellShort.spellShort;

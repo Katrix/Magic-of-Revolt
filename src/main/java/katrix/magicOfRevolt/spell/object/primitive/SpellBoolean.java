@@ -13,8 +13,9 @@ import katrix.magicOfRevolt.spell.object.SpellObject;
 public class SpellBoolean extends SpellObject {
 
 	private boolean spellBoolean;
-	
-	public SpellBoolean() {}
+
+	public SpellBoolean() {
+	}
 
 	private SpellBoolean(SpellBoolean spellBoolean) {
 		this.spellBoolean = spellBoolean.spellBoolean;

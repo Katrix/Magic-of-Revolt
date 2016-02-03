@@ -13,8 +13,9 @@ import katrix.magicOfRevolt.spell.object.SpellObject;
 public class SpellByte extends SpellObject {
 
 	private byte spellByte;
-	
-	public SpellByte() {}
+
+	public SpellByte() {
+	}
 
 	private SpellByte(SpellByte spellByte) {
 		this.spellByte = spellByte.spellByte;

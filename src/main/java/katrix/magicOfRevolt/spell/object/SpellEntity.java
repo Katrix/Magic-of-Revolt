@@ -13,8 +13,9 @@ import net.minecraft.entity.Entity;
 public class SpellEntity extends SpellObject {
 
 	private Entity entity;
-	
-	public SpellEntity() {}
+
+	public SpellEntity() {
+	}
 
 	private SpellEntity(SpellEntity entity) {
 		this.entity = entity.entity;

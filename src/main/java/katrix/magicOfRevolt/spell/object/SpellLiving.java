@@ -14,8 +14,9 @@ import net.minecraft.entity.EntityLivingBase;
 public class SpellLiving extends SpellObject {
 
 	private EntityLivingBase living;
-	
-	public SpellLiving() {}
+
+	public SpellLiving() {
+	}
 
 	private SpellLiving(SpellLiving living) {
 		this.living = living.living;

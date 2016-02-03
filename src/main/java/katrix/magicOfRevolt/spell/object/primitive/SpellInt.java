@@ -13,8 +13,9 @@ import katrix.magicOfRevolt.spell.object.SpellObject;
 public class SpellInt extends SpellObject {
 
 	private int spellInt;
-	
-	public SpellInt() {}
+
+	public SpellInt() {
+	}
 
 	private SpellInt(SpellInt spellInt) {
 		this.spellInt = spellInt.spellInt;

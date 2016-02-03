@@ -13,8 +13,9 @@ import net.minecraft.block.Block;
 public class SpellBlock extends SpellObject {
 
 	private Block block;
-	
-	public SpellBlock() {}
+
+	public SpellBlock() {
+	}
 
 	private SpellBlock(SpellBlock block) {
 		this.block = block.block;

@@ -38,7 +38,7 @@ public class SpellSetFire extends SpellEntityTarget {
 		this.duration = duration;
 		warmup = intDur / 2;
 		mindCost = intDur * 10;
-		
+
 		inputs.set(DURATION_INDEX, duration);
 	}
 }

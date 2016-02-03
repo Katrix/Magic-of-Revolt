@@ -13,8 +13,9 @@ import net.minecraft.block.state.IBlockState;
 public class SpellIBlockState extends SpellObject {
 
 	private IBlockState state;
-	
-	public SpellIBlockState() {}
+
+	public SpellIBlockState() {
+	}
 
 	private SpellIBlockState(SpellIBlockState state) {
 		this.state = state.state;

@@ -13,8 +13,9 @@ import katrix.magicOfRevolt.spell.object.SpellObject;
 public class SpellDouble extends SpellObject {
 
 	private double spellDouble;
-	
-	public SpellDouble() {}
+
+	public SpellDouble() {
+	}
 
 	private SpellDouble(SpellDouble spellDouble) {
 		this.spellDouble = spellDouble.spellDouble;

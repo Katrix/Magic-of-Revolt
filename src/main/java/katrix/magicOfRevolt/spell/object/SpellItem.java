@@ -13,8 +13,9 @@ import net.minecraft.item.Item;
 public class SpellItem extends SpellObject {
 
 	private Item item;
-	
-	public SpellItem() {}
+
+	public SpellItem() {
+	}
 
 	public SpellItem(SpellItem item) {
 		this.item = item.item;

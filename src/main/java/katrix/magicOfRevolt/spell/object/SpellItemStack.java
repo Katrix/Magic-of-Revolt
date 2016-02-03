@@ -13,8 +13,9 @@ import net.minecraft.item.ItemStack;
 public class SpellItemStack extends SpellObject {
 
 	private ItemStack stack;
-	
-	public SpellItemStack() {}
+
+	public SpellItemStack() {
+	}
 
 	private SpellItemStack(SpellItemStack stack) {
 		this.stack = stack.stack;

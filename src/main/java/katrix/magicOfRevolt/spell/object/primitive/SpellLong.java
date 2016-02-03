@@ -13,8 +13,9 @@ import katrix.magicOfRevolt.spell.object.SpellObject;
 public class SpellLong extends SpellObject {
 
 	private long spellLong;
-	
-	public SpellLong() {}
+
+	public SpellLong() {
+	}
 
 	private SpellLong(SpellLong spellLong) {
 		this.spellLong = spellLong.spellLong;

@@ -13,8 +13,9 @@ import net.minecraft.util.BlockPos;
 public class SpellBlockPos extends SpellObject {
 
 	private BlockPos pos;
-	
-	public SpellBlockPos() {}
+
+	public SpellBlockPos() {
+	}
 
 	private SpellBlockPos(SpellBlockPos pos) {
 		this.pos = pos.pos;

@@ -16,18 +16,20 @@ public final class SpellVoid extends SpellObject {
 
 	public static final SpellVoid spell = new SpellVoid();
 
-	private SpellVoid() {}
+	private SpellVoid() {
+	}
 
 	@Override
 	public SpellObject copy() {
 		return spell;
 	}
-	
+
 	@Override
 	public Spell runSpell(Spell parent) {
 		return this;
 	}
-	
+
+	@Override
 	public Spell calculateCost() {
 		return this;
 	}

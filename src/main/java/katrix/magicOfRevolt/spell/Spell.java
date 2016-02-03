@@ -30,11 +30,12 @@ public abstract class Spell implements ICommandSender {
 	protected int warmup;
 	protected int mindCost;
 	protected List<Spell> inputs = new ArrayList<Spell>();
-	
+
 	protected String name = "spell";
 	protected World world;
-	
-	public Spell() {}
+
+	public Spell() {
+	}
 
 	protected Spell(Spell spell) {
 		warmup = spell.warmup;
@@ -43,27 +44,27 @@ public abstract class Spell implements ICommandSender {
 
 	public void fizzle(String reason) {
 		IChatComponent message = new ChatComponentTranslation("spell.fizzle." + reason, new Object[0]);
-		this.addChatMessage(message);
+		addChatMessage(message);
 	}
 
 	public void fizzleParameters() {
 		fizzle("parameters");
 	}
-	
+
 	public Spell calculateCost() {
-		for(Spell spell : this.getInputs()) {
-			if(spell != null) {
+		for (Spell spell : getInputs()) {
+			if (spell != null) {
 				spell.calculateCost();
-				this.mindCost += spell.mindCost;
-				this.warmup += spell.warmup;
+				mindCost += spell.mindCost;
+				warmup += spell.warmup;
 			}
 		}
 		return this;
 	}
-	
+
 	public Spell runSpell(Spell parent) {
-		for(Spell spell : this.getInputs()) {
-			if(spell != null) {
+		for (Spell spell : getInputs()) {
+			if (spell != null) {
 				spell.runSpell(this);
 			}
 			else {
@@ -80,11 +81,11 @@ public abstract class Spell implements ICommandSender {
 	public int getMindCost() {
 		return mindCost;
 	}
-	
+
 	public List<Spell> getInputs() {
 		return ImmutableList.copyOf(inputs);
 	}
-	
+
 	@Override
 	public String getName() {
 		return StatCollector.translateToLocal("spell." + name + ".name");
@@ -92,14 +93,15 @@ public abstract class Spell implements ICommandSender {
 
 	@Override
 	public IChatComponent getDisplayName() {
-        ChatComponentText chatcomponenttext = new ChatComponentText(this.getName());
-        //chatcomponenttext.getChatStyle().setChatHoverEvent(this.getHoverEvent());
-        //chatcomponenttext.getChatStyle().setInsertion(this.getUniqueID().toString());
-        return chatcomponenttext;
+		ChatComponentText chatcomponenttext = new ChatComponentText(getName());
+		//chatcomponenttext.getChatStyle().setChatHoverEvent(this.getHoverEvent());
+		//chatcomponenttext.getChatStyle().setInsertion(this.getUniqueID().toString());
+		return chatcomponenttext;
 	}
 
 	@Override
-	public void addChatMessage(IChatComponent component) {}
+	public void addChatMessage(IChatComponent component) {
+	}
 
 	@Override
 	public boolean canCommandSenderUseCommand(int permLevel, String commandName) {
@@ -118,12 +120,10 @@ public abstract class Spell implements ICommandSender {
 
 	@Override
 	public World getEntityWorld() {
-		if(world != null) {
+		if (world != null)
 			return world;
-		}
-		else {
+		else
 			return MinecraftServer.getServer().getEntityWorld();
-		}
 	}
 
 	@Override
@@ -137,5 +137,6 @@ public abstract class Spell implements ICommandSender {
 	}
 
 	@Override
-	public void setCommandStat(Type type, int amount) {}
+	public void setCommandStat(Type type, int amount) {
+	}
 }
