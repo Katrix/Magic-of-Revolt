@@ -9,18 +9,14 @@
 package katrix.magicOfRevolt.spell.object.primitive;
 
 import katrix.magicOfRevolt.spell.object.SpellObject;
-import net.minecraft.world.World;
 
 public class SpellDouble extends SpellObject {
 
 	private double spellDouble;
-
-	public SpellDouble(World world) {
-		super(world);
-	}
+	
+	public SpellDouble() {}
 
 	private SpellDouble(SpellDouble spellDouble) {
-		super(spellDouble);
 		this.spellDouble = spellDouble.spellDouble;
 	}
 

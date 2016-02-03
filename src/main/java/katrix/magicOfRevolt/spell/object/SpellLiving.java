@@ -10,18 +10,14 @@ package katrix.magicOfRevolt.spell.object;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.world.World;
 
 public class SpellLiving extends SpellObject {
 
 	private EntityLivingBase living;
-
-	public SpellLiving(World world) {
-		super(world);
-	}
+	
+	public SpellLiving() {}
 
 	private SpellLiving(SpellLiving living) {
-		super(living);
 		this.living = living.living;
 	}
 

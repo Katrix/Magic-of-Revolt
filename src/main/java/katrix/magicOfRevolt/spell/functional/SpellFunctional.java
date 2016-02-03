@@ -12,6 +12,12 @@ import katrix.magicOfRevolt.spell.Spell;
 import katrix.magicOfRevolt.spell.object.SpellObject;
 
 public abstract class SpellFunctional extends Spell {
+	
+	public Spell runSpell(Spell parent) {
+		Spell retSpell = super.runSpell(parent);
+		execute();
+		return retSpell;
+	}
 
 	public abstract SpellObject execute();
 

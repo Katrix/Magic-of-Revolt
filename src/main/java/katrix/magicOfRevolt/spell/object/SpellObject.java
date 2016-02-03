@@ -10,22 +10,7 @@ package katrix.magicOfRevolt.spell.object;
 
 import katrix.magicOfRevolt.spell.ICopyable;
 import katrix.magicOfRevolt.spell.Spell;
-import net.minecraft.world.World;
 
 public abstract class SpellObject extends Spell implements ICopyable<SpellObject> {
 
-	protected World world;
-
-	public SpellObject(World world) {
-		this.world = world;
-	}
-
-	protected SpellObject(SpellObject object) {
-		super(object);
-		world = object.world;
-	}
-
-	public World getWorld() {
-		return world;
-	}
 }

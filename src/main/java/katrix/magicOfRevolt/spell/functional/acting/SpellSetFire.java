@@ -15,6 +15,7 @@ import katrix.magicOfRevolt.spell.object.primitive.SpellVoid;
 public class SpellSetFire extends SpellEntityTarget {
 
 	private SpellInt duration;
+	private static final int DURATION_INDEX = 1;
 
 	@Override
 	public SpellObject execute() {
@@ -34,9 +35,10 @@ public class SpellSetFire extends SpellEntityTarget {
 
 	public void setDuration(SpellInt duration) {
 		int intDur = duration.getInteger();
-
 		this.duration = duration;
 		warmup = intDur / 2;
 		mindCost = intDur * 10;
+		
+		inputs.set(DURATION_INDEX, duration);
 	}
 }

@@ -13,27 +13,31 @@ import katrix.magicOfRevolt.spell.object.SpellVector;
 
 public class SpellAddVector extends SpellFunctional {
 
-	private SpellVector input1;
-	private SpellVector input2;
+	private SpellVector vec1;
+	private SpellVector vec2;
+	private static final int VEC1_INDEX = 0;
+	private static final int VEC2_INDEX = 1;
 
 	@Override
 	public SpellObject execute() {
-		return input1.copy().setVector(input1.getVector().add(input2.getVector()));
+		return vec1.copy().setVector(vec1.getVector().add(vec2.getVector()));
 	}
 
-	public SpellVector getInput1() {
-		return input1;
+	public SpellVector getVec1() {
+		return vec1;
 	}
 
-	public void setInput1(SpellVector input1) {
-		this.input1 = input1;
+	public void setVec1(SpellVector vec1) {
+		this.vec1 = vec1;
+		inputs.set(VEC1_INDEX, vec1);
 	}
 
-	public SpellVector getInput2() {
-		return input2;
+	public SpellVector getVec2() {
+		return vec2;
 	}
 
-	public void setInput2(SpellVector input2) {
-		this.input2 = input2;
+	public void setVec2(SpellVector vec2) {
+		this.vec2 = vec2;
+		inputs.set(VEC2_INDEX, vec2);
 	}
 }

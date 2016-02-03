@@ -9,18 +9,14 @@
 package katrix.magicOfRevolt.spell.object.primitive;
 
 import katrix.magicOfRevolt.spell.object.SpellObject;
-import net.minecraft.world.World;
 
 public class SpellFloat extends SpellObject {
 
 	private float spellFloat;
-
-	public SpellFloat(World world) {
-		super(world);
-	}
+	
+	public SpellFloat() {}
 
 	private SpellFloat(SpellFloat spellFloat) {
-		super(spellFloat);
 		this.spellFloat = spellFloat.spellFloat;
 	}
 

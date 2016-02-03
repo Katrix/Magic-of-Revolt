@@ -9,18 +9,14 @@
 package katrix.magicOfRevolt.spell.object.primitive;
 
 import katrix.magicOfRevolt.spell.object.SpellObject;
-import net.minecraft.world.World;
 
 public class SpellLong extends SpellObject {
 
 	private long spellLong;
-
-	public SpellLong(World world) {
-		super(world);
-	}
+	
+	public SpellLong() {}
 
 	private SpellLong(SpellLong spellLong) {
-		super(spellLong);
 		this.spellLong = spellLong.spellLong;
 	}
 

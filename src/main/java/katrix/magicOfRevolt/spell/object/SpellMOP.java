@@ -9,18 +9,14 @@
 package katrix.magicOfRevolt.spell.object;
 
 import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.world.World;
 
 public class SpellMOP extends SpellObject {
 
 	private MovingObjectPosition mop;
-
-	public SpellMOP(World world) {
-		super(world);
-	}
+	
+	public SpellMOP() {}
 
 	private SpellMOP(SpellMOP vector) {
-		super(vector);
 		this.mop = vector.mop;
 	}
 

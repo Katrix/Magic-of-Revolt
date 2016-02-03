@@ -13,6 +13,7 @@ import katrix.magicOfRevolt.spell.object.SpellBlockPos;
 public abstract class SpellBlockPosTarget extends SpellActing implements ISpellTarget<SpellBlockPos> {
 
 	protected SpellBlockPos target;
+	private static final int TARGET_INDEX = 0;
 
 	@Override
 	public SpellBlockPos getTarget() {
@@ -22,5 +23,6 @@ public abstract class SpellBlockPosTarget extends SpellActing implements ISpellT
 	@Override
 	public void setTarget(SpellBlockPos target) {
 		this.target = target;
+		inputs.set(TARGET_INDEX, target);
 	}
 }

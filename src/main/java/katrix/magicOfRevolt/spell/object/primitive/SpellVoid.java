@@ -8,24 +8,27 @@
  */
 package katrix.magicOfRevolt.spell.object.primitive;
 
+import katrix.magicOfRevolt.spell.Spell;
 import katrix.magicOfRevolt.spell.object.SpellObject;
-import net.minecraft.world.World;
 
-//Not really a primitive. Used where you would normally use void.
+//Not really a primitive. Used where you would normally use void or null. A real null is uses to specify that a input was never set.
 public final class SpellVoid extends SpellObject {
 
 	public static final SpellVoid spell = new SpellVoid();
 
-	private SpellVoid() {
-		this(null);
-	}
-
-	private SpellVoid(World world) {
-		super(world);
-	}
+	private SpellVoid() {}
 
 	@Override
 	public SpellObject copy() {
 		return spell;
+	}
+	
+	@Override
+	public Spell runSpell(Spell parent) {
+		return this;
+	}
+	
+	public Spell calculateCost() {
+		return this;
 	}
 }

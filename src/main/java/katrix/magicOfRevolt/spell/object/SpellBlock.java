@@ -9,18 +9,14 @@
 package katrix.magicOfRevolt.spell.object;
 
 import net.minecraft.block.Block;
-import net.minecraft.world.World;
 
 public class SpellBlock extends SpellObject {
 
 	private Block block;
-
-	public SpellBlock(World world) {
-		super(world);
-	}
+	
+	public SpellBlock() {}
 
 	private SpellBlock(SpellBlock block) {
-		super(block);
 		this.block = block.block;
 	}
 

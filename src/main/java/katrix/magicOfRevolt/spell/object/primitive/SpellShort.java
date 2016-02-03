@@ -9,18 +9,14 @@
 package katrix.magicOfRevolt.spell.object.primitive;
 
 import katrix.magicOfRevolt.spell.object.SpellObject;
-import net.minecraft.world.World;
 
 public class SpellShort extends SpellObject {
 
 	private short spellShort;
-
-	public SpellShort(World world) {
-		super(world);
-	}
+	
+	public SpellShort() {}
 
 	private SpellShort(SpellShort spellShort) {
-		super(spellShort);
 		this.spellShort = spellShort.spellShort;
 	}
 

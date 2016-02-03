@@ -9,19 +9,15 @@
 package katrix.magicOfRevolt.spell.object.primitive;
 
 import katrix.magicOfRevolt.spell.object.SpellObject;
-import net.minecraft.world.World;
 
 //Yes, I know that a String is technically not a primitive, but I still put it here for convenience sake.
 public class SpellString extends SpellObject {
 
 	private String string;
-
-	public SpellString(World world) {
-		super(world);
-	}
+	
+	public SpellString() {}
 
 	private SpellString(SpellString string) {
-		super(string);
 		this.string = string.string;
 	}
 

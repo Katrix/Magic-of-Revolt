@@ -9,18 +9,14 @@
 package katrix.magicOfRevolt.spell.object;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.world.World;
 
 public class SpellEntity extends SpellObject {
 
 	private Entity entity;
-
-	public SpellEntity(World world) {
-		super(world);
-	}
+	
+	public SpellEntity() {}
 
 	private SpellEntity(SpellEntity entity) {
-		super(entity);
 		this.entity = entity.entity;
 	}
 

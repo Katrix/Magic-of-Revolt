@@ -9,18 +9,14 @@
 package katrix.magicOfRevolt.spell.object.primitive;
 
 import katrix.magicOfRevolt.spell.object.SpellObject;
-import net.minecraft.world.World;
 
 public class SpellByte extends SpellObject {
 
 	private byte spellByte;
-
-	public SpellByte(World world) {
-		super(world);
-	}
+	
+	public SpellByte() {}
 
 	private SpellByte(SpellByte spellByte) {
-		super(spellByte);
 		this.spellByte = spellByte.spellByte;
 	}
 

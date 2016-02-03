@@ -15,11 +15,12 @@ import katrix.magicOfRevolt.spell.object.primitive.SpellVoid;
 public class SpellSetBlock extends SpellBlockPosTarget {
 
 	protected SpellIBlockState state;
+	private static final int STATE_INDEX = 1;
 
 	@Override
 	public SpellObject execute() {
 		if (target != null && state != null) {
-			target.getWorld().setBlockState(target.getPos(), state.getBlockState());
+			world.setBlockState(target.getPos(), state.getBlockState());
 		}
 		else {
 			fizzleParameters();
@@ -32,8 +33,8 @@ public class SpellSetBlock extends SpellBlockPosTarget {
 		return state;
 	}
 
-
 	public void setState(SpellIBlockState state) {
 		this.state = state;
+		inputs.set(STATE_INDEX, state);
 	}
 }

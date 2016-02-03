@@ -9,18 +9,14 @@
 package katrix.magicOfRevolt.spell.object;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 
 public class SpellItemStack extends SpellObject {
 
 	private ItemStack stack;
-
-	public SpellItemStack(World world) {
-		super(world);
-	}
+	
+	public SpellItemStack() {}
 
 	private SpellItemStack(SpellItemStack stack) {
-		super(stack);
 		this.stack = stack.stack;
 	}
 

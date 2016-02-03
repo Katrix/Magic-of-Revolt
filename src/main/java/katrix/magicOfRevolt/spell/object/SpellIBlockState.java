@@ -9,18 +9,14 @@
 package katrix.magicOfRevolt.spell.object;
 
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.world.World;
 
 public class SpellIBlockState extends SpellObject {
 
 	private IBlockState state;
-
-	public SpellIBlockState(World world) {
-		super(world);
-	}
+	
+	public SpellIBlockState() {}
 
 	private SpellIBlockState(SpellIBlockState state) {
-		super(state);
 		this.state = state.state;
 	}
 

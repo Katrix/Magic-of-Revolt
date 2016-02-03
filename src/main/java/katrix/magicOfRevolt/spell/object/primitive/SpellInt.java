@@ -9,18 +9,14 @@
 package katrix.magicOfRevolt.spell.object.primitive;
 
 import katrix.magicOfRevolt.spell.object.SpellObject;
-import net.minecraft.world.World;
 
 public class SpellInt extends SpellObject {
 
 	private int spellInt;
-
-	public SpellInt(World world) {
-		super(world);
-	}
+	
+	public SpellInt() {}
 
 	private SpellInt(SpellInt spellInt) {
-		super(spellInt);
 		this.spellInt = spellInt.spellInt;
 	}
 

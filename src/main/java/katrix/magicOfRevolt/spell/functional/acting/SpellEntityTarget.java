@@ -13,6 +13,7 @@ import katrix.magicOfRevolt.spell.object.SpellEntity;
 public abstract class SpellEntityTarget extends SpellActing implements ISpellTarget<SpellEntity> {
 
 	protected SpellEntity target;
+	private static final int TARGET_INDEX = 0;
 
 	@Override
 	public SpellEntity getTarget() {
@@ -22,5 +23,6 @@ public abstract class SpellEntityTarget extends SpellActing implements ISpellTar
 	@Override
 	public void setTarget(SpellEntity target) {
 		this.target = target;
+		inputs.set(TARGET_INDEX, target);
 	}
 }

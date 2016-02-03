@@ -9,18 +9,14 @@
 package katrix.magicOfRevolt.spell.object.primitive;
 
 import katrix.magicOfRevolt.spell.object.SpellObject;
-import net.minecraft.world.World;
 
 public class SpellBoolean extends SpellObject {
 
 	private boolean spellBoolean;
-
-	public SpellBoolean(World world) {
-		super(world);
-	}
+	
+	public SpellBoolean() {}
 
 	private SpellBoolean(SpellBoolean spellBoolean) {
-		super(spellBoolean);
 		this.spellBoolean = spellBoolean.spellBoolean;
 	}
 

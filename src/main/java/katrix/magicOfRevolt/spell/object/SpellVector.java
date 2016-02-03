@@ -9,18 +9,14 @@
 package katrix.magicOfRevolt.spell.object;
 
 import net.minecraft.util.Vec3;
-import net.minecraft.world.World;
 
 public class SpellVector extends SpellObject {
 
 	private Vec3 vector;
-
-	public SpellVector(World world) {
-		super(world);
-	}
+	
+	public SpellVector() {}
 
 	private SpellVector(SpellVector vector) {
-		super(vector);
 		this.vector = vector.vector;
 	}
 
