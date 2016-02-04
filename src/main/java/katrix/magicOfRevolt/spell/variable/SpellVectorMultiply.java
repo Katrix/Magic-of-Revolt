@@ -6,7 +6,7 @@
  * Magic of Revolt is Open Source and distributed under the
  * Botania license: https://github.com/Katrix-/Magic-of-Revolt/blob/master/LICENSE.md
  */
-package katrix.magicOfRevolt.spell.functional;
+package katrix.magicOfRevolt.spell.variable;
 
 import katrix.magicOfRevolt.spell.ISpellVariable;
 import katrix.magicOfRevolt.spell.Spell;
