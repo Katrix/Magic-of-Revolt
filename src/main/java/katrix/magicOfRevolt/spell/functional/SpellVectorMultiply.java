@@ -9,9 +9,11 @@
 package katrix.magicOfRevolt.spell.functional;
 
 import katrix.magicOfRevolt.spell.ISpellVariable;
+import katrix.magicOfRevolt.spell.Spell;
 import katrix.magicOfRevolt.spell.object.SpellVector;
+import net.minecraft.util.Vec3;
 
-public class SpellAddVector extends SpellFunctional implements ISpellVariable<SpellAddVector, SpellVector> {
+public class SpellVectorMultiply extends Spell implements ISpellVariable<SpellVectorMultiply, SpellVector> {
 
 	private ISpellVariable<?, SpellVector> vec1;
 	private ISpellVariable<?, SpellVector> vec2;
@@ -20,8 +22,9 @@ public class SpellAddVector extends SpellFunctional implements ISpellVariable<Sp
 
 	@Override
 	public SpellVector getVariable() {
-		SpellVector vec = vec1.getVariable();
-		return vec.copy().setVector(vec.getVector().add(vec2.getVariable().getVector()));
+		Vec3 vector1 = vec1.getVariable().getVector();
+		Vec3 vector2 = vec2.getVariable().getVector();
+		return new SpellVector().setVector(new Vec3(vector1.xCoord * vector2.xCoord, vector1.yCoord * vector2.yCoord, vector1.zCoord * vector2.zCoord));
 	}
 
 	public ISpellVariable<?, SpellVector> getVec1() {
@@ -43,7 +46,7 @@ public class SpellAddVector extends SpellFunctional implements ISpellVariable<Sp
 	}
 
 	@Override
-	public SpellAddVector getSpell() {
+	public SpellVectorMultiply getSpell() {
 		return this;
 	}
 }

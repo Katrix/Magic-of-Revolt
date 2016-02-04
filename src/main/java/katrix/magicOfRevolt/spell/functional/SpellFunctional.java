@@ -9,7 +9,10 @@
 package katrix.magicOfRevolt.spell.functional;
 
 import katrix.magicOfRevolt.spell.Spell;
+import katrix.magicOfRevolt.spell.object.SpellObject;
 
 public abstract class SpellFunctional extends Spell {
+	
+	public abstract SpellObject execute();
 
 }

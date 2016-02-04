@@ -32,8 +32,9 @@ public class SpellFloat extends SpellObject implements ISpellVariable<SpellFloat
 		return spellFloat;
 	}
 
-	public void setFloat(float spellFloat) {
+	public SpellFloat setFloat(float spellFloat) {
 		this.spellFloat = spellFloat;
+		return this;
 	}
 
 	@Override

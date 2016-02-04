@@ -9,9 +9,10 @@
 package katrix.magicOfRevolt.spell.functional.acting;
 
 import katrix.magicOfRevolt.spell.ISpellVariable;
+import katrix.magicOfRevolt.spell.functional.SpellFunctional;
 import katrix.magicOfRevolt.spell.object.SpellObject;
 
-public abstract class SpellTarget<T extends SpellObject> extends SpellActing {
+public abstract class SpellTarget<T extends SpellObject> extends SpellFunctional {
 	
 	protected ISpellVariable<?, T> target;
 	private static final int TARGET_INDEX = 0;

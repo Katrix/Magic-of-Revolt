@@ -30,53 +30,59 @@ public class SpellOutput extends Spell {
 		return input1;
 	}
 
-	public void setInput1(Spell input) {
+	public SpellOutput setInput1(Spell input) {
 		input1 = input;
-		inputs.set(INPUT1_INXED, input);
+		addInput(INPUT1_INXED, input);
+		return this;
 	}
 
 	public Spell getInput2() {
 		return input2;
 	}
 
-	public void setInput2(Spell input) {
+	public SpellOutput setInput2(Spell input) {
 		input2 = input;
-		inputs.set(INPUT2_INXED, input);
+		addInput(INPUT2_INXED, input);
+		return this;
 	}
 
 	public Spell getInput3() {
 		return input3;
 	}
 
-	public void setInput3(Spell input) {
+	public SpellOutput setInput3(Spell input) {
 		input3 = input;
-		inputs.set(INPUT3_INXED, input);
+		addInput(INPUT3_INXED, input);
+		return this;
 	}
 
 	public Spell getInput4() {
 		return input4;
 	}
 
-	public void setInput4(Spell input) {
+	public SpellOutput setInput4(Spell input) {
 		input4 = input;
-		inputs.set(INPUT4_INXED, input);
+		addInput(INPUT4_INXED, input);
+		return this;
 	}
 
 	public Spell getInput5() {
 		return input5;
 	}
 
-	public void setInput5(Spell input) {
+	public SpellOutput setInput5(Spell input) {
 		input5 = input;
-		inputs.set(INPUT5_INXED, input);
+		addInput(INPUT5_INXED, input);
+		return this;
 	}
 
 	public Spell getInput6() {
 		return input6;
 	}
 
-	public void setInput6(Spell input) {
+	public SpellOutput setInput6(Spell input) {
 		input6 = input;
-		inputs.set(INPUT6_INXED, input);
+		addInput(INPUT6_INXED, input);
+		return this;
 	}
 }

@@ -8,8 +8,9 @@
  */
 package katrix.magicOfRevolt.spell;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.google.common.collect.ImmutableList;
 
@@ -29,7 +30,7 @@ public abstract class Spell implements ICommandSender {
 
 	protected int warmup;
 	protected int mindCost;
-	protected List<Spell> inputs = new ArrayList<>();
+	private Map<Integer, Spell> inputs = new HashMap<>();
 
 	protected String name = "spell";
 	protected World world;
@@ -76,7 +77,7 @@ public abstract class Spell implements ICommandSender {
 	}
 
 	public List<Spell> getInputs() {
-		return ImmutableList.copyOf(inputs);
+		return ImmutableList.copyOf(inputs.values());
 	}
 	
 	public Spell setWorld(World world) {
@@ -85,12 +86,7 @@ public abstract class Spell implements ICommandSender {
 	}
 	
 	protected void addInput(int index, Spell spell) {
-		if(inputs.size() > index) {
-			inputs.add(index, spell);
-		}
-		else {
-			inputs.set(index, spell);
-		}
+		inputs.put(index, spell);
 	}
 
 	@Override
