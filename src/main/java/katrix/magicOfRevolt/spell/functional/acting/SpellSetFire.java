@@ -9,11 +9,12 @@
 package katrix.magicOfRevolt.spell.functional.acting;
 
 import katrix.magicOfRevolt.spell.ISpellVariable;
+import katrix.magicOfRevolt.spell.object.SpellLiving;
 import katrix.magicOfRevolt.spell.object.SpellObject;
 import katrix.magicOfRevolt.spell.object.primitive.SpellInt;
 import katrix.magicOfRevolt.spell.object.primitive.SpellVoid;
 
-public class SpellSetFire extends SpellEntityTarget {
+public class SpellSetFire extends SpellTarget<SpellLiving> {
 
 	private ISpellVariable<?, SpellInt> duration;
 	private static final int DURATION_INDEX = 1;

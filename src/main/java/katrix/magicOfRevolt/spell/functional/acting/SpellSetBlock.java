@@ -9,11 +9,12 @@
 package katrix.magicOfRevolt.spell.functional.acting;
 
 import katrix.magicOfRevolt.spell.ISpellVariable;
+import katrix.magicOfRevolt.spell.object.SpellBlockPos;
 import katrix.magicOfRevolt.spell.object.SpellIBlockState;
 import katrix.magicOfRevolt.spell.object.SpellObject;
 import katrix.magicOfRevolt.spell.object.primitive.SpellVoid;
 
-public class SpellSetBlock extends SpellBlockPosTarget {
+public class SpellSetBlock extends SpellTarget<SpellBlockPos> {
 
 	protected ISpellVariable<?, SpellIBlockState> state;
 	private static final int STATE_INDEX = 1;

@@ -11,9 +11,17 @@ package katrix.magicOfRevolt.spell.functional.acting;
 import katrix.magicOfRevolt.spell.ISpellVariable;
 import katrix.magicOfRevolt.spell.object.SpellObject;
 
-public interface ISpellTarget<T extends SpellObject> {
+public abstract class SpellTarget<T extends SpellObject> extends SpellActing {
+	
+	protected ISpellVariable<?, T> target;
+	private static final int TARGET_INDEX = 0;
+	
+	public ISpellVariable<?, T> getTarget() {
+		return target;
+	}
 
-	public ISpellVariable<?, T> getTarget();
-
-	public void setTarget(ISpellVariable<?, T> target);
+	public void setTarget(ISpellVariable<?, T> target) {
+		this.target = target;
+		inputs.set(TARGET_INDEX, target.getSpell());
+	}
 }
