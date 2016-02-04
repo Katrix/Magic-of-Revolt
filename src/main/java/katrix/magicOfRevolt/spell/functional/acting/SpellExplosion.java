@@ -8,21 +8,17 @@
  */
 package katrix.magicOfRevolt.spell.functional.acting;
 
-import katrix.magicOfRevolt.spell.ISpellVariable;
+import katrix.magicOfRevolt.spell.object.SpellBlockPos;
 import katrix.magicOfRevolt.spell.object.SpellObject;
+import katrix.magicOfRevolt.spell.object.primitive.SpellVoid;
+import net.minecraft.util.BlockPos;
 
-public abstract class SpellTarget<T extends SpellObject> extends SpellActing {
-	
-	protected ISpellVariable<?, T> target;
-	private static final int TARGET_INDEX = 0;
-	
-	public ISpellVariable<?, T> getTarget() {
-		return target;
-	}
+public class SpellExplosion extends SpellTarget<SpellBlockPos> {
 
-	public SpellTarget<T> setTarget(ISpellVariable<?, T> target) {
-		this.target = target;
-		addInput(TARGET_INDEX, target.getSpell());
-		return this;
+	@Override
+	public SpellObject execute() {
+		BlockPos pos = target.getVariable().getPos();
+		world.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), 2F, false);
+		return SpellVoid.spell;
 	}
 }

@@ -41,6 +41,6 @@ public class SpellSetFire extends SpellTarget<SpellLiving> {
 		warmup = intDur / 2;
 		mindCost = intDur * 10;
 
-		inputs.set(DURATION_INDEX, duration.getSpell());
+		addInput(DURATION_INDEX, duration.getSpell());
 	}
 }

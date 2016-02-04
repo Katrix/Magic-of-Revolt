@@ -58,9 +58,39 @@ public abstract class Spell implements ICommandSender {
 	public int getMindCost() {
 		return mindCost;
 	}
+	
+	public int getTotalMindCost() {
+		int total = getMindCost();
+		for(Spell spell: getInputs()) {
+			total += spell.getMindCost();
+		}
+		return total;
+	}
+	
+	public int getTotalWarmup() {
+		int total = getWarmup();
+		for(Spell spell: getInputs()) {
+			total += spell.getWarmup();
+		}
+		return total;
+	}
 
 	public List<Spell> getInputs() {
 		return ImmutableList.copyOf(inputs);
+	}
+	
+	public Spell setWorld(World world) {
+		this.world = world;
+		return this;
+	}
+	
+	protected void addInput(int index, Spell spell) {
+		if(inputs.size() > index) {
+			inputs.add(index, spell);
+		}
+		else {
+			inputs.set(index, spell);
+		}
 	}
 
 	@Override

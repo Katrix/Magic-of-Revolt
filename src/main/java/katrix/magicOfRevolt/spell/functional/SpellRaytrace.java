@@ -30,7 +30,7 @@ public class SpellRaytrace extends SpellFunctional implements ISpellVariable<Spe
 
 	public void setInput1(ISpellVariable<?, SpellVector> vec1) {
 		this.vec1 = vec1;
-		inputs.set(VEC1_INDEX, vec1.getSpell());
+		addInput(VEC1_INDEX, vec1.getSpell());
 	}
 
 	public ISpellVariable<?, SpellVector> getInput2() {
@@ -39,7 +39,7 @@ public class SpellRaytrace extends SpellFunctional implements ISpellVariable<Spe
 
 	public void setInput2(ISpellVariable<?, SpellVector> vec2) {
 		this.vec2 = vec2;
-		inputs.set(VEC2_INDEX, vec2.getSpell());
+		addInput(VEC2_INDEX, vec2.getSpell());
 	}
 
 	@Override

@@ -2,17 +2,23 @@ package katrix.magicOfRevolt.spell;
 
 import katrix.magicOfRevolt.spell.object.SpellObject;
 
-public class SpellBridge extends Spell {
+public class SpellBridge extends Spell implements ISpellVariable<SpellBridge, SpellObject> {
 
 	private SpellObject bridgeObject;
 	private static final int BRIDGE_INDEX = 0;
 
-	public SpellObject getBridgeObject() {
+	public void setBridgeObject(SpellObject bridgeObject) {
+		this.bridgeObject = bridgeObject;
+		addInput(BRIDGE_INDEX, bridgeObject);
+	}
+	
+	@Override
+	public SpellObject getVariable() {
 		return bridgeObject;
 	}
 
-	public void setBridgeObject(SpellObject bridgeObject) {
-		this.bridgeObject = bridgeObject;
-		inputs.set(BRIDGE_INDEX, bridgeObject);
+	@Override
+	public SpellBridge getSpell() {
+		return this;
 	}
 }
