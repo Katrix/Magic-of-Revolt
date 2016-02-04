@@ -8,9 +8,11 @@
  */
 package katrix.magicOfRevolt.spell.object;
 
+import katrix.magicOfRevolt.spell.ICopyable;
+import katrix.magicOfRevolt.spell.ISpellVariable;
 import net.minecraft.util.Vec3;
 
-public class SpellVector extends SpellObject {
+public class SpellVector extends SpellObject implements ISpellVariable<SpellVector, SpellVector>, ICopyable<SpellVector> {
 
 	private Vec3 vector;
 
@@ -32,6 +34,16 @@ public class SpellVector extends SpellObject {
 
 	public SpellVector setVector(Vec3 vector) {
 		this.vector = vector;
+		return this;
+	}
+
+	@Override
+	public SpellVector getVariable() {
+		return this;
+	}
+
+	@Override
+	public SpellVector getSpell() {
 		return this;
 	}
 }

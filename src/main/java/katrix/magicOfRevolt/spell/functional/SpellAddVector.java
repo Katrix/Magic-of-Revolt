@@ -8,36 +8,42 @@
  */
 package katrix.magicOfRevolt.spell.functional;
 
-import katrix.magicOfRevolt.spell.object.SpellObject;
+import katrix.magicOfRevolt.spell.ISpellVariable;
 import katrix.magicOfRevolt.spell.object.SpellVector;
 
-public class SpellAddVector extends SpellFunctional {
+public class SpellAddVector extends SpellFunctional implements ISpellVariable<SpellAddVector, SpellVector> {
 
-	private SpellVector vec1;
-	private SpellVector vec2;
+	private ISpellVariable<?, SpellVector> vec1;
+	private ISpellVariable<?, SpellVector> vec2;
 	private static final int VEC1_INDEX = 0;
 	private static final int VEC2_INDEX = 1;
 
 	@Override
-	public SpellObject execute() {
-		return vec1.copy().setVector(vec1.getVector().add(vec2.getVector()));
+	public SpellVector getVariable() {
+		SpellVector vec = vec1.getVariable();
+		return vec.copy().setVector(vec.getVector().add(vec2.getVariable().getVector()));
 	}
 
-	public SpellVector getVec1() {
+	public ISpellVariable<?, SpellVector> getVec1() {
 		return vec1;
 	}
 
-	public void setVec1(SpellVector vec1) {
+	public void setVec1(ISpellVariable<?, SpellVector> vec1) {
 		this.vec1 = vec1;
-		inputs.set(VEC1_INDEX, vec1);
+		inputs.set(VEC1_INDEX, vec1.getSpell());
 	}
 
-	public SpellVector getVec2() {
+	public ISpellVariable<?, SpellVector> getVec2() {
 		return vec2;
 	}
 
-	public void setVec2(SpellVector vec2) {
+	public void setVec2(ISpellVariable<?, SpellVector> vec2) {
 		this.vec2 = vec2;
-		inputs.set(VEC2_INDEX, vec2);
+		inputs.set(VEC2_INDEX, vec2.getSpell());
+	}
+
+	@Override
+	public SpellAddVector getSpell() {
+		return this;
 	}
 }

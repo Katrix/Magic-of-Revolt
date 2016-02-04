@@ -8,9 +8,11 @@
  */
 package katrix.magicOfRevolt.spell.object;
 
+import katrix.magicOfRevolt.spell.ICopyable;
+import katrix.magicOfRevolt.spell.ISpellVariable;
 import net.minecraft.util.BlockPos;
 
-public class SpellBlockPos extends SpellObject {
+public class SpellBlockPos extends SpellObject implements ISpellVariable<SpellBlockPos, SpellBlockPos>, ICopyable<SpellBlockPos> {
 
 	private BlockPos pos;
 
@@ -32,6 +34,16 @@ public class SpellBlockPos extends SpellObject {
 
 	public SpellBlockPos setPos(BlockPos pos) {
 		this.pos = pos;
+		return this;
+	}
+
+	@Override
+	public SpellBlockPos getVariable() {
+		return this;
+	}
+
+	@Override
+	public SpellBlockPos getSpell() {
 		return this;
 	}
 }

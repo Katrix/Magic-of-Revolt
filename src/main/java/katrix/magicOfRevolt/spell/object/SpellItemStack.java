@@ -8,9 +8,11 @@
  */
 package katrix.magicOfRevolt.spell.object;
 
+import katrix.magicOfRevolt.spell.ICopyable;
+import katrix.magicOfRevolt.spell.ISpellVariable;
 import net.minecraft.item.ItemStack;
 
-public class SpellItemStack extends SpellObject {
+public class SpellItemStack extends SpellObject implements ISpellVariable<SpellItemStack, SpellItemStack>, ICopyable<SpellItemStack> {
 
 	private ItemStack stack;
 
@@ -32,5 +34,15 @@ public class SpellItemStack extends SpellObject {
 
 	public void setStack(ItemStack stack) {
 		this.stack = stack;
+	}
+
+	@Override
+	public SpellItemStack getVariable() {
+		return this;
+	}
+
+	@Override
+	public SpellItemStack getSpell() {
+		return this;
 	}
 }

@@ -8,21 +8,22 @@
  */
 package katrix.magicOfRevolt.spell.functional.acting;
 
+import katrix.magicOfRevolt.spell.ISpellVariable;
 import katrix.magicOfRevolt.spell.object.SpellBlockPos;
 
 public abstract class SpellBlockPosTarget extends SpellActing implements ISpellTarget<SpellBlockPos> {
 
-	protected SpellBlockPos target;
+	protected ISpellVariable<?, SpellBlockPos> target;
 	private static final int TARGET_INDEX = 0;
 
 	@Override
-	public SpellBlockPos getTarget() {
+	public ISpellVariable<?, SpellBlockPos> getTarget() {
 		return target;
 	}
 
 	@Override
-	public void setTarget(SpellBlockPos target) {
+	public void setTarget(ISpellVariable<?, SpellBlockPos> target) {
 		this.target = target;
-		inputs.set(TARGET_INDEX, target);
+		inputs.set(TARGET_INDEX, target.getSpell());
 	}
 }

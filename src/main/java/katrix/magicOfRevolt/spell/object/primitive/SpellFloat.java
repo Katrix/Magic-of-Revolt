@@ -8,9 +8,11 @@
  */
 package katrix.magicOfRevolt.spell.object.primitive;
 
+import katrix.magicOfRevolt.spell.ICopyable;
+import katrix.magicOfRevolt.spell.ISpellVariable;
 import katrix.magicOfRevolt.spell.object.SpellObject;
 
-public class SpellFloat extends SpellObject {
+public class SpellFloat extends SpellObject implements ISpellVariable<SpellFloat, SpellFloat>, ICopyable<SpellFloat> {
 
 	private float spellFloat;
 
@@ -32,5 +34,15 @@ public class SpellFloat extends SpellObject {
 
 	public void setFloat(float spellFloat) {
 		this.spellFloat = spellFloat;
+	}
+
+	@Override
+	public SpellFloat getVariable() {
+		return this;
+	}
+
+	@Override
+	public SpellFloat getSpell() {
+		return this;
 	}
 }

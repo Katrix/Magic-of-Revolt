@@ -8,11 +8,12 @@
  */
 package katrix.magicOfRevolt.spell.functional.acting;
 
+import katrix.magicOfRevolt.spell.ISpellVariable;
 import katrix.magicOfRevolt.spell.object.SpellObject;
 
 public interface ISpellTarget<T extends SpellObject> {
 
-	public T getTarget();
+	public ISpellVariable<?, T> getTarget();
 
-	public void setTarget(T target);
+	public void setTarget(ISpellVariable<?, T> target);
 }

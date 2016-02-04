@@ -8,10 +8,12 @@
  */
 package katrix.magicOfRevolt.spell.object.primitive;
 
+import katrix.magicOfRevolt.spell.ICopyable;
+import katrix.magicOfRevolt.spell.ISpellVariable;
 import katrix.magicOfRevolt.spell.object.SpellObject;
 
 //Yes, I know that a String is technically not a primitive, but I still put it here for convenience sake.
-public class SpellString extends SpellObject {
+public class SpellString extends SpellObject implements ISpellVariable<SpellString, SpellString>, ICopyable<SpellString> {
 
 	private String string;
 
@@ -33,5 +35,15 @@ public class SpellString extends SpellObject {
 
 	public void setString(String string) {
 		this.string = string;
+	}
+
+	@Override
+	public SpellString getVariable() {
+		return this;
+	}
+
+	@Override
+	public SpellString getSpell() {
+		return this;
 	}
 }

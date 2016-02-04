@@ -8,21 +8,22 @@
  */
 package katrix.magicOfRevolt.spell.functional.acting;
 
+import katrix.magicOfRevolt.spell.ISpellVariable;
 import katrix.magicOfRevolt.spell.object.SpellEntity;
 
 public abstract class SpellEntityTarget extends SpellActing implements ISpellTarget<SpellEntity> {
 
-	protected SpellEntity target;
+	protected ISpellVariable<?, SpellEntity> target;
 	private static final int TARGET_INDEX = 0;
 
 	@Override
-	public SpellEntity getTarget() {
+	public ISpellVariable<?, SpellEntity> getTarget() {
 		return target;
 	}
 
 	@Override
-	public void setTarget(SpellEntity target) {
+	public void setTarget(ISpellVariable<?, SpellEntity> target) {
 		this.target = target;
-		inputs.set(TARGET_INDEX, target);
+		inputs.set(TARGET_INDEX, target.getSpell());
 	}
 }

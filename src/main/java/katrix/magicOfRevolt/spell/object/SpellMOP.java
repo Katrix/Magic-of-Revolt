@@ -8,9 +8,11 @@
  */
 package katrix.magicOfRevolt.spell.object;
 
+import katrix.magicOfRevolt.spell.ICopyable;
+import katrix.magicOfRevolt.spell.ISpellVariable;
 import net.minecraft.util.MovingObjectPosition;
 
-public class SpellMOP extends SpellObject {
+public class SpellMOP extends SpellObject implements ISpellVariable<SpellMOP, SpellMOP>, ICopyable<SpellMOP> {
 
 	private MovingObjectPosition mop;
 
@@ -32,6 +34,16 @@ public class SpellMOP extends SpellObject {
 
 	public SpellMOP setMOP(MovingObjectPosition mop) {
 		this.mop = mop;
+		return this;
+	}
+
+	@Override
+	public SpellMOP getVariable() {
+		return this;
+	}
+
+	@Override
+	public SpellMOP getSpell() {
 		return this;
 	}
 }

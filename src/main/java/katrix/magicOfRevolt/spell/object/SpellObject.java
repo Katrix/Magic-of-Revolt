@@ -8,9 +8,8 @@
  */
 package katrix.magicOfRevolt.spell.object;
 
-import katrix.magicOfRevolt.spell.ICopyable;
 import katrix.magicOfRevolt.spell.Spell;
 
-public abstract class SpellObject extends Spell implements ICopyable<SpellObject> {
+public abstract class SpellObject extends Spell {
 
 }

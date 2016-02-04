@@ -29,7 +29,7 @@ public abstract class Spell implements ICommandSender {
 
 	protected int warmup;
 	protected int mindCost;
-	protected List<Spell> inputs = new ArrayList<Spell>();
+	protected List<Spell> inputs = new ArrayList<>();
 
 	protected String name = "spell";
 	protected World world;
@@ -49,29 +49,6 @@ public abstract class Spell implements ICommandSender {
 
 	public void fizzleParameters() {
 		fizzle("parameters");
-	}
-
-	public Spell calculateCost() {
-		for (Spell spell : getInputs()) {
-			if (spell != null) {
-				spell.calculateCost();
-				mindCost += spell.mindCost;
-				warmup += spell.warmup;
-			}
-		}
-		return this;
-	}
-
-	public Spell runSpell(Spell parent) {
-		for (Spell spell : getInputs()) {
-			if (spell != null) {
-				spell.runSpell(this);
-			}
-			else {
-				fizzleParameters();
-			}
-		}
-		return this;
 	}
 
 	public int getWarmup() {

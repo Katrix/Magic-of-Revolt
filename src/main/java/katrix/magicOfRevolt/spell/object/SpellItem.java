@@ -8,9 +8,11 @@
  */
 package katrix.magicOfRevolt.spell.object;
 
+import katrix.magicOfRevolt.spell.ICopyable;
+import katrix.magicOfRevolt.spell.ISpellVariable;
 import net.minecraft.item.Item;
 
-public class SpellItem extends SpellObject {
+public class SpellItem extends SpellObject implements ISpellVariable<SpellItem, SpellItem>, ICopyable<SpellItem> {
 
 	private Item item;
 
@@ -32,6 +34,16 @@ public class SpellItem extends SpellObject {
 
 	public SpellItem setItem(Item item) {
 		this.item = item;
+		return this;
+	}
+
+	@Override
+	public SpellItem getVariable() {
+		return this;
+	}
+
+	@Override
+	public SpellItem getSpell() {
 		return this;
 	}
 }

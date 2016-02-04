@@ -8,9 +8,11 @@
  */
 package katrix.magicOfRevolt.spell.object;
 
+import katrix.magicOfRevolt.spell.ICopyable;
+import katrix.magicOfRevolt.spell.ISpellVariable;
 import net.minecraft.block.state.IBlockState;
 
-public class SpellIBlockState extends SpellObject {
+public class SpellIBlockState extends SpellObject implements ISpellVariable<SpellIBlockState, SpellIBlockState>, ICopyable<SpellIBlockState> {
 
 	private IBlockState state;
 
@@ -32,6 +34,16 @@ public class SpellIBlockState extends SpellObject {
 
 	public SpellIBlockState setBlockState(IBlockState state) {
 		this.state = state;
+		return this;
+	}
+
+	@Override
+	public SpellIBlockState getVariable() {
+		return this;
+	}
+
+	@Override
+	public SpellIBlockState getSpell() {
 		return this;
 	}
 }

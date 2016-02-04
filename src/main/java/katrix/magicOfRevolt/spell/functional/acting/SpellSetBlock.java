@@ -8,19 +8,20 @@
  */
 package katrix.magicOfRevolt.spell.functional.acting;
 
+import katrix.magicOfRevolt.spell.ISpellVariable;
 import katrix.magicOfRevolt.spell.object.SpellIBlockState;
 import katrix.magicOfRevolt.spell.object.SpellObject;
 import katrix.magicOfRevolt.spell.object.primitive.SpellVoid;
 
 public class SpellSetBlock extends SpellBlockPosTarget {
 
-	protected SpellIBlockState state;
+	protected ISpellVariable<?, SpellIBlockState> state;
 	private static final int STATE_INDEX = 1;
 
 	@Override
 	public SpellObject execute() {
 		if (target != null && state != null) {
-			world.setBlockState(target.getPos(), state.getBlockState());
+			world.setBlockState(target.getVariable().getPos(), state.getVariable().getBlockState());
 		}
 		else {
 			fizzleParameters();
@@ -29,12 +30,12 @@ public class SpellSetBlock extends SpellBlockPosTarget {
 		return SpellVoid.spell;
 	}
 
-	public SpellIBlockState getState() {
+	public ISpellVariable<?, SpellIBlockState> getState() {
 		return state;
 	}
 
-	public void setState(SpellIBlockState state) {
+	public void setState(ISpellVariable<?, SpellIBlockState> state) {
 		this.state = state;
-		inputs.set(STATE_INDEX, state);
+		inputs.set(STATE_INDEX, state.getSpell());
 	}
 }

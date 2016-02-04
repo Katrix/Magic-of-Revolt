@@ -8,20 +8,21 @@
  */
 package katrix.magicOfRevolt.spell.functional.acting;
 
+import katrix.magicOfRevolt.spell.ISpellVariable;
 import katrix.magicOfRevolt.spell.object.SpellObject;
 import katrix.magicOfRevolt.spell.object.primitive.SpellInt;
 import katrix.magicOfRevolt.spell.object.primitive.SpellVoid;
 
 public class SpellSetFire extends SpellEntityTarget {
 
-	private SpellInt duration;
+	private ISpellVariable<?, SpellInt> duration;
 	private static final int DURATION_INDEX = 1;
 
 	@Override
 	public SpellObject execute() {
-		int durInt = duration.getInteger();
+		int durInt = duration.getVariable().getInteger();
 		if (target != null && durInt != 0) {
-			target.getEntity().setFire(durInt);
+			target.getVariable().getEntity().setFire(durInt);
 		}
 		else {
 			fizzleParameters();
@@ -29,16 +30,16 @@ public class SpellSetFire extends SpellEntityTarget {
 		return SpellVoid.spell;
 	}
 
-	public SpellInt getDuration() {
+	public ISpellVariable<?, SpellInt> getDuration() {
 		return duration;
 	}
 
-	public void setDuration(SpellInt duration) {
-		int intDur = duration.getInteger();
+	public void setDuration(ISpellVariable<?, SpellInt> duration) {
+		int intDur = duration.getVariable().getInteger();
 		this.duration = duration;
 		warmup = intDur / 2;
 		mindCost = intDur * 10;
 
-		inputs.set(DURATION_INDEX, duration);
+		inputs.set(DURATION_INDEX, duration.getSpell());
 	}
 }

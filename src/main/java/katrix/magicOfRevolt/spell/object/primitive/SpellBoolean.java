@@ -8,9 +8,11 @@
  */
 package katrix.magicOfRevolt.spell.object.primitive;
 
+import katrix.magicOfRevolt.spell.ICopyable;
+import katrix.magicOfRevolt.spell.ISpellVariable;
 import katrix.magicOfRevolt.spell.object.SpellObject;
 
-public class SpellBoolean extends SpellObject {
+public class SpellBoolean extends SpellObject implements ISpellVariable<SpellBoolean, SpellBoolean>, ICopyable<SpellBoolean> {
 
 	private boolean spellBoolean;
 
@@ -32,5 +34,15 @@ public class SpellBoolean extends SpellObject {
 
 	public void setBoolean(boolean spellBoolean) {
 		this.spellBoolean = spellBoolean;
+	}
+
+	@Override
+	public SpellBoolean getVariable() {
+		return this;
+	}
+
+	@Override
+	public SpellBoolean getSpell() {
+		return this;
 	}
 }

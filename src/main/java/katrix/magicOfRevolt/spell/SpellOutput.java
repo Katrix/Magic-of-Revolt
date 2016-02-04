@@ -8,10 +8,7 @@
  */
 package katrix.magicOfRevolt.spell;
 
-import katrix.magicOfRevolt.spell.object.SpellObject;
 import katrix.magicOfRevolt.spell.object.primitive.SpellVoid;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.IChatComponent;
 
 public class SpellOutput extends Spell {
 
@@ -28,25 +25,6 @@ public class SpellOutput extends Spell {
 	private static final int INPUT4_INXED = 3;
 	private static final int INPUT5_INXED = 4;
 	private static final int INPUT6_INXED = 5;
-
-	@Override
-	public Spell runSpell(Spell parent) {
-		for (Spell spell : getInputs()) {
-			if (spell != null) {
-				if (parent == null && spell != SpellVoid.spell && spell instanceof SpellObject) {
-					IChatComponent message = new ChatComponentText(spell.runSpell(this).toString());
-					addChatMessage(message);
-				}
-				else {
-					spell.runSpell(this);
-				}
-			}
-			else {
-				fizzleParameters();
-			}
-		}
-		return this;
-	}
 
 	public Spell getInput1() {
 		return input1;
