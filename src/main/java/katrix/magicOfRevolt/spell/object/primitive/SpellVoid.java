@@ -10,11 +10,13 @@ package katrix.magicOfRevolt.spell.object.primitive;
 
 import katrix.magicOfRevolt.spell.ISpellVariable;
 import katrix.magicOfRevolt.spell.object.SpellObject;
+import net.minecraft.nbt.NBTTagCompound;
 
 //Not really a primitive. Used where you would normally use void or null. A real null is uses to specify that a input was never set.
 public final class SpellVoid extends SpellObject implements ISpellVariable<SpellVoid, SpellVoid> {
 
 	public static final SpellVoid spell = new SpellVoid();
+	public static final String className = spell.getClass().getName();
 
 	private SpellVoid() {
 	}
@@ -27,5 +29,16 @@ public final class SpellVoid extends SpellObject implements ISpellVariable<Spell
 	@Override
 	public SpellVoid getSpell() {
 		return spell;
+	}
+	
+	@Override
+	public NBTTagCompound serializeNBT() {
+		NBTTagCompound tag = new NBTTagCompound();
+		tag.setString(NBT_CLASS, className);
+		return tag;
+	}
+
+	@Override
+	public void deserializeNBT(NBTTagCompound tag) {
 	}
 }

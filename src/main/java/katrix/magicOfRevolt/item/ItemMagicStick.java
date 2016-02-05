@@ -8,11 +8,17 @@
  */
 package katrix.magicOfRevolt.item;
 
-import katrix.magicOfRevolt.block.RevoltBlock;
+import katrix.magicOfRevolt.helper.LogHelper;
 import katrix.magicOfRevolt.lib.LibItemName;
+import katrix.magicOfRevolt.spell.Spell;
+import katrix.magicOfRevolt.spell.SpellOutput;
+import katrix.magicOfRevolt.spell.functional.acting.SpellExplosion;
+import katrix.magicOfRevolt.spell.object.SpellBlockPos;
+import katrix.magicOfRevolt.spell.object.primitive.SpellFloat;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
@@ -27,8 +33,45 @@ public class ItemMagicStick extends ItemRevoltBase {
 
 	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
-		BlockPos blockPos = new BlockPos(pos.getX(), pos.getY(), pos.getZ()).offset(side);
-		world.setBlockState(blockPos, RevoltBlock.magicCircle.getDefaultState());
+		//BlockPos blockPos = new BlockPos(pos.getX(), pos.getY(), pos.getZ()).offset(side);
+		//world.setBlockState(blockPos, RevoltBlock.magicCircle.getDefaultState());
+		
+		SpellBlockPos spellPos = new SpellBlockPos();
+		spellPos.setPos(pos);
+		
+		SpellFloat spellFloat = new SpellFloat();
+		spellFloat.setFloat(3F);
+		
+		SpellExplosion explode = new SpellExplosion();
+		explode.setStrength(spellFloat).setTarget(spellPos);
+		
+		/*
+		SpellLiving living = new SpellLiving();
+		living.setEntity(player);
+		
+		SpellVectorFromLook vector = new SpellVectorFromLook();
+		vector.setLiving(living);
+		
+		SpellEntity entity = new SpellEntity();
+		entity.setEntity(player);
+		
+		SpellAddMotion motion = new SpellAddMotion();
+		motion.setMotion(vector).setTarget(entity);
+		*/
+		
+		SpellOutput output = new SpellOutput();
+		//output.setInput1(motion);
+		output.setInput2(explode);
+		
+		NBTTagCompound tag = output.serializeNBT();
+		
+		SpellOutput output1 = (SpellOutput)Spell.getSpellFromNBT(tag);
+		
+		if(!world.isRemote) {
+			LogHelper.info(tag.toString());
+			LogHelper.info(output1.serializeNBT().toString());
+		}
+		
 		return super.onItemUse(stack, player, world, pos, side, hitX, hitY, hitZ);
 	}
 }

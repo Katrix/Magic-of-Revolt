@@ -14,9 +14,12 @@ import java.util.Map;
 
 import com.google.common.collect.ImmutableList;
 
+import katrix.magicOfRevolt.spell.object.primitive.SpellVoid;
 import net.minecraft.command.CommandResultStats.Type;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.Entity;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
@@ -25,22 +28,24 @@ import net.minecraft.util.IChatComponent;
 import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.common.util.INBTSerializable;
 
-public abstract class Spell implements ICommandSender {
+public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCompound> {
 
-	protected int warmup;
-	protected int mindCost;
 	private Map<Integer, Spell> inputs = new HashMap<>();
-
-	protected String name = "spell";
 	protected World world;
+
+	public static final String NBT_INPUTS = "inputs";
+	public static final String NBT_KEY = "key";
+	public static final String NBT_VALUE = "value";
+	public static final String NBT_CLASS = "class";
 
 	public Spell() {
 	}
 
 	protected Spell(Spell spell) {
-		warmup = spell.warmup;
-		mindCost = spell.mindCost;
+		inputs = spell.inputs;
 	}
 
 	public void fizzle(String reason) {
@@ -53,24 +58,24 @@ public abstract class Spell implements ICommandSender {
 	}
 
 	public int getWarmup() {
-		return warmup;
+		return 2;
 	}
 
 	public int getMindCost() {
-		return mindCost;
+		return 5;
 	}
-	
+
 	public int getTotalMindCost() {
 		int total = getMindCost();
-		for(Spell spell: getInputs()) {
+		for (Spell spell : getInputs()) {
 			total += spell.getMindCost();
 		}
 		return total;
 	}
-	
+
 	public int getTotalWarmup() {
 		int total = getWarmup();
-		for(Spell spell: getInputs()) {
+		for (Spell spell : getInputs()) {
 			total += spell.getWarmup();
 		}
 		return total;
@@ -79,19 +84,27 @@ public abstract class Spell implements ICommandSender {
 	public List<Spell> getInputs() {
 		return ImmutableList.copyOf(inputs.values());
 	}
-	
+
+	public List<Integer> getKeys() {
+		return ImmutableList.copyOf(inputs.keySet());
+	}
+
 	public Spell setWorld(World world) {
 		this.world = world;
 		return this;
 	}
-	
+
 	protected void addInput(int index, Spell spell) {
 		inputs.put(index, spell);
 	}
 
+	public String getSpellName() {
+		return "spell";
+	}
+
 	@Override
 	public String getName() {
-		return StatCollector.translateToLocal("spell." + name + ".name");
+		return StatCollector.translateToLocal("spell." + getSpellName() + ".name");
 	}
 
 	@Override
@@ -141,5 +154,61 @@ public abstract class Spell implements ICommandSender {
 
 	@Override
 	public void setCommandStat(Type type, int amount) {
+	}
+
+	@Override
+	public NBTTagCompound serializeNBT() {
+		NBTTagCompound tag = new NBTTagCompound();
+
+		List<Spell> value = getInputs();
+		List<Integer> keys = getKeys();
+		NBTTagList inputs = new NBTTagList();
+
+		for (int i = 0; i < value.size(); i++) {
+			Spell spell = value.get(i);
+			int key = keys.get(i);
+			NBTTagCompound entry = new NBTTagCompound();
+
+			entry.setInteger(NBT_KEY, key);
+			entry.setTag(NBT_VALUE, spell.serializeNBT());
+			inputs.appendTag(entry);
+		}
+
+		tag.setTag(NBT_INPUTS, inputs);
+		tag.setString(NBT_CLASS, this.getClass().getName());
+		return tag;
+	}
+
+	@Override
+	public void deserializeNBT(NBTTagCompound tag) {
+		NBTTagList inputs = tag.getTagList(NBT_INPUTS, Constants.NBT.TAG_COMPOUND);
+		for (int i = 0; i < inputs.tagCount(); i++) {
+			NBTTagCompound entry = inputs.getCompoundTagAt(i);
+			NBTTagCompound value = entry.getCompoundTag(NBT_VALUE);
+			Spell spell = getSpellFromNBT(value);
+			this.inputs.put(entry.getInteger(NBT_KEY), spell);
+		}
+	}
+
+	public static Spell getSpellFromNBT(NBTTagCompound tag) {
+		Spell spell = getRawSpellFromNBT(tag);
+		spell.deserializeNBT(tag);
+		return spell;
+	}
+	
+	private static Spell getRawSpellFromNBT(NBTTagCompound tag) {
+		Spell spell = null;
+		if (tag.getString(NBT_CLASS) == SpellVoid.className) {
+			spell = SpellVoid.spell;
+		}
+		else {
+			try {
+				spell = (Spell)Class.forName(tag.getString(NBT_CLASS)).newInstance();
+			}
+			catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+		return spell;
 	}
 }

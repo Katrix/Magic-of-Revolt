@@ -8,7 +8,10 @@
  */
 package katrix.magicOfRevolt.spell;
 
+import java.util.List;
+
 import katrix.magicOfRevolt.spell.object.primitive.SpellVoid;
+import net.minecraft.nbt.NBTTagCompound;
 
 public class SpellOutput extends Spell {
 
@@ -25,6 +28,23 @@ public class SpellOutput extends Spell {
 	private static final int INPUT4_INXED = 3;
 	private static final int INPUT5_INXED = 4;
 	private static final int INPUT6_INXED = 5;
+	
+	public static final String NBT_INPUT1 = "input1";
+	public static final String NBT_INPUT2 = "input2";
+	public static final String NBT_INPUT3 = "input3";
+	public static final String NBT_INPUT4 = "input4";
+	public static final String NBT_INPUT5 = "input5";
+	public static final String NBT_INPUT6 = "input6";
+	
+	
+	public SpellOutput() {
+    	addInput(INPUT1_INXED, SpellVoid.spell);
+    	addInput(INPUT2_INXED, SpellVoid.spell);
+    	addInput(INPUT3_INXED, SpellVoid.spell);
+    	addInput(INPUT4_INXED, SpellVoid.spell);
+    	addInput(INPUT5_INXED, SpellVoid.spell);
+    	addInput(INPUT6_INXED, SpellVoid.spell);
+	}
 
 	public Spell getInput1() {
 		return input1;
@@ -84,5 +104,22 @@ public class SpellOutput extends Spell {
 		input6 = input;
 		addInput(INPUT6_INXED, input);
 		return this;
+	}
+	
+    public NBTTagCompound serializeNBT() {
+    	NBTTagCompound tag = super.serializeNBT();
+		return tag;
+	}
+    
+    public void deserializeNBT(NBTTagCompound tag) {
+    	super.deserializeNBT(tag);
+    	
+    	List<Spell> inputs = getInputs();
+    	input1 = inputs.get(INPUT1_INXED);
+    	input2 = inputs.get(INPUT2_INXED);
+    	input3 = inputs.get(INPUT3_INXED);
+    	input4 = inputs.get(INPUT4_INXED);
+    	input5 = inputs.get(INPUT5_INXED);
+    	input6 = inputs.get(INPUT6_INXED);
 	}
 }

@@ -36,11 +36,7 @@ public class SpellSetFire extends SpellTarget<SpellLiving> {
 	}
 
 	public void setDuration(ISpellVariable<?, SpellInt> duration) {
-		int intDur = duration.getVariable().getInteger();
 		this.duration = duration;
-		warmup = intDur / 2;
-		mindCost = intDur * 10;
-
 		addInput(DURATION_INDEX, duration.getSpell());
 	}
 }
