@@ -33,7 +33,7 @@ public class SpellVectorMultiply extends Spell implements ISpellVariable<SpellVe
 
 	public void setVec1(ISpellVariable<?, SpellVector> vec1) {
 		this.vec1 = vec1;
-		addInput(VEC1_INDEX, vec1.getSpell());
+		setInput(VEC1_INDEX, vec1.getSpell());
 	}
 
 	public ISpellVariable<?, SpellVector> getVec2() {
@@ -42,7 +42,7 @@ public class SpellVectorMultiply extends Spell implements ISpellVariable<SpellVe
 
 	public void setVec2(ISpellVariable<?, SpellVector> vec2) {
 		this.vec2 = vec2;
-		addInput(VEC2_INDEX, vec2.getSpell());
+		setInput(VEC2_INDEX, vec2.getSpell());
 	}
 
 	@Override

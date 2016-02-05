@@ -14,7 +14,6 @@ import java.util.Map;
 
 import com.google.common.collect.ImmutableList;
 
-import katrix.magicOfRevolt.spell.object.primitive.SpellVoid;
 import net.minecraft.command.CommandResultStats.Type;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.Entity;
@@ -39,7 +38,7 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 	public static final String NBT_INPUTS = "inputs";
 	public static final String NBT_KEY = "key";
 	public static final String NBT_VALUE = "value";
-	public static final String NBT_CLASS = "class";
+	public static final String NBT_ID = "id";
 
 	public Spell() {
 	}
@@ -94,7 +93,7 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 		return this;
 	}
 
-	protected void addInput(int index, Spell spell) {
+	protected void setInput(int index, Spell spell) {
 		inputs.put(index, spell);
 	}
 
@@ -175,7 +174,7 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 		}
 
 		tag.setTag(NBT_INPUTS, inputs);
-		tag.setString(NBT_CLASS, this.getClass().getName());
+		tag.setString(NBT_ID, SpellRegistry.getStringFromClass(this.getClass()));
 		return tag;
 	}
 
@@ -185,30 +184,8 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 		for (int i = 0; i < inputs.tagCount(); i++) {
 			NBTTagCompound entry = inputs.getCompoundTagAt(i);
 			NBTTagCompound value = entry.getCompoundTag(NBT_VALUE);
-			Spell spell = getSpellFromNBT(value);
+			Spell spell = SpellRegistry.createSpellFromNBT(value);
 			this.inputs.put(entry.getInteger(NBT_KEY), spell);
 		}
-	}
-
-	public static Spell getSpellFromNBT(NBTTagCompound tag) {
-		Spell spell = getRawSpellFromNBT(tag);
-		spell.deserializeNBT(tag);
-		return spell;
-	}
-	
-	private static Spell getRawSpellFromNBT(NBTTagCompound tag) {
-		Spell spell = null;
-		if (tag.getString(NBT_CLASS) == SpellVoid.className) {
-			spell = SpellVoid.spell;
-		}
-		else {
-			try {
-				spell = (Spell)Class.forName(tag.getString(NBT_CLASS)).newInstance();
-			}
-			catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-				e.printStackTrace();
-			}
-		}
-		return spell;
 	}
 }

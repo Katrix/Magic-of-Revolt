@@ -29,7 +29,7 @@ public class SpellVectorFromLook extends Spell implements ISpellVariable<SpellVe
 	
 	public SpellVectorFromLook setLiving(ISpellVariable<?, SpellLiving> living) {
 		this.living = living;
-		addInput(LIVING_INDEX, living.getSpell());
+		setInput(LIVING_INDEX, living.getSpell());
 		return this;
 	}
 

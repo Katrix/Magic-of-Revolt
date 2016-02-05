@@ -33,7 +33,7 @@ public class SpellExplosion extends SpellTarget<SpellBlockPos> {
 
 	public SpellExplosion setStrength(ISpellVariable<?, SpellFloat> strength) {
 		this.strength = strength;
-		addInput(STRENGTH_INDEX, strength.getSpell());
+		setInput(STRENGTH_INDEX, strength.getSpell());
 		return this;
 	}
 }

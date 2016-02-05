@@ -37,6 +37,6 @@ public class SpellSetBlock extends SpellTarget<SpellBlockPos> {
 
 	public void setState(ISpellVariable<?, SpellIBlockState> state) {
 		this.state = state;
-		addInput(STATE_INDEX, state.getSpell());
+		setInput(STATE_INDEX, state.getSpell());
 	}
 }

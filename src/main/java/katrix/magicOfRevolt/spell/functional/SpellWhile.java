@@ -41,7 +41,7 @@ public class SpellWhile extends SpellFunctional {
 	
 	public SpellWhile setSpell1(SpellFunctional spell) {
 		this.spell = spell;
-		addInput(SPELL_INDEX, spell);
+		setInput(SPELL_INDEX, spell);
 		return this;
 	}
 	
@@ -51,7 +51,7 @@ public class SpellWhile extends SpellFunctional {
 	
 	public SpellWhile setCondition(ISpellVariable<?, SpellBoolean> condition) {
 		this.condition = condition;
-		addInput(CONDITION_INDEX, condition.getSpell());
+		setInput(CONDITION_INDEX, condition.getSpell());
 		return this;
 	}
 }

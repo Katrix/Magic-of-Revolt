@@ -12,7 +12,7 @@ public class SpellBridge extends Spell implements ISpellVariable<SpellBridge, Sp
 
 	public void setBridgeObject(SpellObject bridgeObject) {
 		this.bridgeObject = bridgeObject;
-		addInput(BRIDGE_INDEX, bridgeObject);
+		setInput(BRIDGE_INDEX, bridgeObject);
 	}
 	
 	@Override
@@ -35,6 +35,6 @@ public class SpellBridge extends Spell implements ISpellVariable<SpellBridge, Sp
 	@Override
     public void deserializeNBT(NBTTagCompound tag) {
     	super.deserializeNBT(tag);
-    	bridgeObject = (SpellObject)Spell.getSpellFromNBT(tag.getCompoundTag(NBT_OBJECT));
+    	bridgeObject = (SpellObject)SpellRegistry.createSpellFromNBT(tag.getCompoundTag(NBT_OBJECT));
 	}
 }

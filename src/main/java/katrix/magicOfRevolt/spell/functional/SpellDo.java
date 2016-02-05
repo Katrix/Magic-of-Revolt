@@ -41,7 +41,7 @@ public class SpellDo extends SpellFunctional {
 	
 	public SpellDo setSpell1(SpellFunctional spell) {
 		this.spell = spell;
-		addInput(SPELL_INDEX, spell);
+		setInput(SPELL_INDEX, spell);
 		return this;
 	}
 	
@@ -51,7 +51,7 @@ public class SpellDo extends SpellFunctional {
 	
 	public SpellDo setCondition(ISpellVariable<?, SpellBoolean> condition) {
 		this.condition = condition;
-		addInput(CONDITION_INDEX, condition.getSpell());
+		setInput(CONDITION_INDEX, condition.getSpell());
 		return this;
 	}
 }

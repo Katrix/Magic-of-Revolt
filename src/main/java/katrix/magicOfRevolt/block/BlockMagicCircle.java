@@ -66,8 +66,8 @@ public class BlockMagicCircle extends BlockRevoltBase implements ITileEntityProv
 		motion.setMotion(vector).setTarget(entity);
 		
 		SpellOutput output = new SpellOutput();
-		output.setInput1(explode);
-		output.setInput2(motion);
+		output.setInputNo(0, explode);
+		output.setInputNo(1, motion);
 		
 		list.add(output);
 		list.add(explode);

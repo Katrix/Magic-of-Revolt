@@ -12,6 +12,7 @@ import katrix.magicOfRevolt.helper.LogHelper;
 import katrix.magicOfRevolt.lib.LibItemName;
 import katrix.magicOfRevolt.spell.Spell;
 import katrix.magicOfRevolt.spell.SpellOutput;
+import katrix.magicOfRevolt.spell.SpellRegistry;
 import katrix.magicOfRevolt.spell.functional.acting.SpellExplosion;
 import katrix.magicOfRevolt.spell.object.SpellBlockPos;
 import katrix.magicOfRevolt.spell.object.primitive.SpellFloat;
@@ -60,16 +61,15 @@ public class ItemMagicStick extends ItemRevoltBase {
 		*/
 		
 		SpellOutput output = new SpellOutput();
-		//output.setInput1(motion);
-		output.setInput2(explode);
+		//output.setInputNo(0, motion);
+		output.setInputNo(1, explode);
 		
 		NBTTagCompound tag = output.serializeNBT();
-		
-		SpellOutput output1 = (SpellOutput)Spell.getSpellFromNBT(tag);
+		Spell output1 = SpellRegistry.createSpellFromNBT(tag);
 		
 		if(!world.isRemote) {
-			LogHelper.info(tag.toString());
-			LogHelper.info(output1.serializeNBT().toString());
+			LogHelper.info(tag);
+			LogHelper.info(output1.serializeNBT());
 		}
 		
 		return super.onItemUse(stack, player, world, pos, side, hitX, hitY, hitZ);

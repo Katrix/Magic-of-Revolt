@@ -23,7 +23,7 @@ public abstract class SpellTarget<T extends SpellObject> extends SpellFunctional
 
 	public SpellTarget<T> setTarget(ISpellVariable<?, T> target) {
 		this.target = target;
-		addInput(TARGET_INDEX, target.getSpell());
+		setInput(TARGET_INDEX, target.getSpell());
 		return this;
 	}
 }

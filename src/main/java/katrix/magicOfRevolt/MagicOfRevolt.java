@@ -39,6 +39,7 @@ public class MagicOfRevolt {
 		RevoltBlock.preInit();
 		RevoltTile.preInit();
 		proxy.registerModels();
+		proxy.registerSpells();
 	}
 
 	@EventHandler

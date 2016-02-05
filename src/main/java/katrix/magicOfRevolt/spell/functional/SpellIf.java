@@ -40,7 +40,7 @@ public class SpellIf extends SpellFunctional {
 	
 	public SpellIf setSpell1(SpellFunctional spell) {
 		this.spell1 = spell;
-		addInput(SPELL1_INDEX, spell);
+		setInput(SPELL1_INDEX, spell);
 		return this;
 	}
 
@@ -52,7 +52,7 @@ public class SpellIf extends SpellFunctional {
 	
 	public SpellIf setSpell2(SpellFunctional spell) {
 		this.spell2 = spell;
-		addInput(SPELL2_INDEX, spell);
+		setInput(SPELL2_INDEX, spell);
 		return this;
 	}
 	
@@ -63,7 +63,7 @@ public class SpellIf extends SpellFunctional {
 	
 	public SpellIf setCondition(ISpellVariable<?, SpellBoolean> condition) {
 		this.condition = condition;
-		addInput(CONDITION_INDEX, condition.getSpell());
+		setInput(CONDITION_INDEX, condition.getSpell());
 		return this;
 	}
 }

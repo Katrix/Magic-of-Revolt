@@ -37,6 +37,6 @@ public class SpellSetFire extends SpellTarget<SpellLiving> {
 
 	public void setDuration(ISpellVariable<?, SpellInt> duration) {
 		this.duration = duration;
-		addInput(DURATION_INDEX, duration.getSpell());
+		setInput(DURATION_INDEX, duration.getSpell());
 	}
 }

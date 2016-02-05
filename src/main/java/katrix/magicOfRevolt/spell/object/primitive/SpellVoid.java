@@ -16,7 +16,7 @@ import net.minecraft.nbt.NBTTagCompound;
 public final class SpellVoid extends SpellObject implements ISpellVariable<SpellVoid, SpellVoid> {
 
 	public static final SpellVoid spell = new SpellVoid();
-	public static final String className = spell.getClass().getName();
+	public static final String spellName = "magicOfRevolt:void";
 
 	private SpellVoid() {
 	}
@@ -34,7 +34,7 @@ public final class SpellVoid extends SpellObject implements ISpellVariable<Spell
 	@Override
 	public NBTTagCompound serializeNBT() {
 		NBTTagCompound tag = new NBTTagCompound();
-		tag.setString(NBT_CLASS, className);
+		tag.setString(NBT_ID, spellName);
 		return tag;
 	}
 

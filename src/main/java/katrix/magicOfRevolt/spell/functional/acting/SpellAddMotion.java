@@ -35,7 +35,7 @@ public class SpellAddMotion extends SpellTarget<SpellEntity> {
 
 	public SpellAddMotion setMotion(ISpellVariable<?, SpellVector> vector) {
 		this.vector = vector;
-		addInput(VECTOR_INDEX, vector.getSpell());
+		setInput(VECTOR_INDEX, vector.getSpell());
 		return this;
 	}
 }

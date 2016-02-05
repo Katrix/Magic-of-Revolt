@@ -8,9 +8,24 @@
  */
 package katrix.magicOfRevolt;
 
+import katrix.magicOfRevolt.spell.SpellOutput;
+import katrix.magicOfRevolt.spell.SpellRegistry;
+import katrix.magicOfRevolt.spell.functional.acting.SpellExplosion;
+import katrix.magicOfRevolt.spell.object.SpellBlockPos;
+import katrix.magicOfRevolt.spell.object.primitive.SpellFloat;
+import katrix.magicOfRevolt.spell.object.primitive.SpellVoid;
+
 public class CommonProxy {
 
 	public void registerModels() {
 		//NO-OP
+	}
+	
+	public void registerSpells() {
+		SpellRegistry.register(SpellBlockPos.class, "objectBlockPos", MagicOfRevolt.instance);
+		SpellRegistry.register(SpellFloat.class, "objectFloat", MagicOfRevolt.instance);
+		SpellRegistry.register(SpellExplosion.class, "explosion", MagicOfRevolt.instance);
+		SpellRegistry.register(SpellOutput.class, "output", MagicOfRevolt.instance);
+		SpellRegistry.register(SpellVoid.class, "void", MagicOfRevolt.instance);
 	}
 }
