@@ -11,42 +11,66 @@ package katrix.magicOfRevolt.spell.variable;
 import katrix.magicOfRevolt.spell.ISpellVariable;
 import katrix.magicOfRevolt.spell.Spell;
 import katrix.magicOfRevolt.spell.object.SpellVector;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagDouble;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.Vec3;
+import net.minecraftforge.common.util.Constants;
 
 public class SpellVectorMultiply extends Spell implements ISpellVariable<SpellVectorMultiply, SpellVector> {
 
-	private ISpellVariable<?, SpellVector> vec1;
-	private ISpellVariable<?, SpellVector> vec2;
+	private Vec3 vec1;
+	private Vec3 vec2;
 	private static final int VEC1_INDEX = 0;
 	private static final int VEC2_INDEX = 1;
+	
+	private static final String NBT_VEC1 = "vec1";
+	private static final String NBT_VEC2 = "vec1";
 
 	@Override
 	public SpellVector getVariable() {
-		Vec3 vector1 = vec1.getVariable().getVector();
-		Vec3 vector2 = vec2.getVariable().getVector();
-		return new SpellVector().setVector(new Vec3(vector1.xCoord * vector2.xCoord, vector1.yCoord * vector2.yCoord, vector1.zCoord * vector2.zCoord));
-	}
-
-	public ISpellVariable<?, SpellVector> getVec1() {
-		return vec1;
+		return new SpellVector().setVector(new Vec3(vec1.xCoord * vec2.xCoord, vec1.yCoord * vec2.yCoord, vec1.zCoord * vec2.zCoord));
 	}
 
 	public void setVec1(ISpellVariable<?, SpellVector> vec1) {
-		this.vec1 = vec1;
+		this.vec1 = vec1.getVariable().getVector();
 		setInput(VEC1_INDEX, vec1.getSpell());
 	}
 
-	public ISpellVariable<?, SpellVector> getVec2() {
-		return vec2;
-	}
-
 	public void setVec2(ISpellVariable<?, SpellVector> vec2) {
-		this.vec2 = vec2;
+		this.vec2 = vec2.getVariable().getVector();
 		setInput(VEC2_INDEX, vec2.getSpell());
 	}
 
 	@Override
 	public SpellVectorMultiply getSpell() {
 		return this;
+	}
+	
+	@Override
+    public NBTTagCompound serializeNBT() {
+    	NBTTagCompound tag = super.serializeNBT();
+    	NBTTagList list1 = new NBTTagList();
+    	list1.appendTag(new NBTTagDouble(vec1.xCoord));
+    	list1.appendTag(new NBTTagDouble(vec1.yCoord));
+    	list1.appendTag(new NBTTagDouble(vec1.zCoord));
+    	tag.setTag(NBT_VEC1, list1);
+    	
+    	NBTTagList list2 = new NBTTagList();
+    	list2.appendTag(new NBTTagDouble(vec2.xCoord));
+    	list2.appendTag(new NBTTagDouble(vec2.yCoord));
+    	list2.appendTag(new NBTTagDouble(vec2.zCoord));
+    	tag.setTag(NBT_VEC2, list2);
+		return tag;
+	}
+    
+	@Override
+    public void deserializeNBT(NBTTagCompound tag) {
+    	super.deserializeNBT(tag);
+    	NBTTagList list1 = tag.getTagList(NBT_VEC1, Constants.NBT.TAG_DOUBLE);
+    	vec1 = new Vec3(list1.getDoubleAt(0), list1.getDoubleAt(1), list1.getDoubleAt(2));
+    	
+    	NBTTagList list2 = tag.getTagList(NBT_VEC2, Constants.NBT.TAG_DOUBLE);
+    	vec2 = new Vec3(list2.getDoubleAt(0), list2.getDoubleAt(1), list2.getDoubleAt(2));
 	}
 }

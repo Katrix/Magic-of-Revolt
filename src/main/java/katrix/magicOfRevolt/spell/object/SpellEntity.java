@@ -11,10 +11,14 @@ package katrix.magicOfRevolt.spell.object;
 import katrix.magicOfRevolt.spell.ICopyable;
 import katrix.magicOfRevolt.spell.ISpellVariable;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
+import net.minecraft.nbt.NBTTagCompound;
 
 public class SpellEntity extends SpellObject implements ISpellVariable<SpellEntity, SpellEntity>, ICopyable<SpellEntity> {
 
 	private Entity entity;
+	
+	private static final String NBT_ENTITY = "entity";
 
 	public SpellEntity() {
 	}
@@ -46,5 +50,18 @@ public class SpellEntity extends SpellObject implements ISpellVariable<SpellEnti
 	@Override
 	public SpellEntity getSpell() {
 		return this;
+	}
+	
+	@Override
+    public NBTTagCompound serializeNBT() {
+    	NBTTagCompound tag = super.serializeNBT();
+    	tag.setTag(NBT_ENTITY, entity.serializeNBT());
+		return tag;
+	}
+    
+	@Override
+    public void deserializeNBT(NBTTagCompound tag) {
+    	super.deserializeNBT(tag);
+    	entity = EntityList.createEntityFromNBT(tag.getCompoundTag(NBT_ENTITY), null); //FIXME: Not good at all
 	}
 }

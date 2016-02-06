@@ -11,10 +11,13 @@ package katrix.magicOfRevolt.spell.object.primitive;
 import katrix.magicOfRevolt.spell.ICopyable;
 import katrix.magicOfRevolt.spell.ISpellVariable;
 import katrix.magicOfRevolt.spell.object.SpellObject;
+import net.minecraft.nbt.NBTTagCompound;
 
 public class SpellBoolean extends SpellObject implements ISpellVariable<SpellBoolean, SpellBoolean>, ICopyable<SpellBoolean> {
 
 	private boolean spellBoolean;
+	
+	private static final String NBT_BOOLEAN = "boolean";
 
 	public SpellBoolean() {
 	}
@@ -44,5 +47,18 @@ public class SpellBoolean extends SpellObject implements ISpellVariable<SpellBoo
 	@Override
 	public SpellBoolean getSpell() {
 		return this;
+	}
+	
+	@Override
+    public NBTTagCompound serializeNBT() {
+    	NBTTagCompound tag = super.serializeNBT();
+    	tag.setBoolean(NBT_BOOLEAN, spellBoolean);
+		return tag;
+	}
+    
+	@Override
+    public void deserializeNBT(NBTTagCompound tag) {
+    	super.deserializeNBT(tag);
+    	spellBoolean = tag.getBoolean(NBT_BOOLEAN);
 	}
 }

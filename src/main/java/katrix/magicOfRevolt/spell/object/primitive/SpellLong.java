@@ -11,10 +11,13 @@ package katrix.magicOfRevolt.spell.object.primitive;
 import katrix.magicOfRevolt.spell.ICopyable;
 import katrix.magicOfRevolt.spell.ISpellVariable;
 import katrix.magicOfRevolt.spell.object.SpellObject;
+import net.minecraft.nbt.NBTTagCompound;
 
 public class SpellLong extends SpellObject implements ISpellVariable<SpellLong, SpellLong>, ICopyable<SpellLong> {
 
 	private long spellLong;
+	
+	private static final String NBT_LONG = "long";
 
 	public SpellLong() {
 	}
@@ -44,5 +47,18 @@ public class SpellLong extends SpellObject implements ISpellVariable<SpellLong, 
 	@Override
 	public SpellLong getSpell() {
 		return this;
+	}
+	
+	@Override
+    public NBTTagCompound serializeNBT() {
+    	NBTTagCompound tag = super.serializeNBT();
+    	tag.setLong(NBT_LONG, spellLong);
+		return tag;
+	}
+    
+	@Override
+    public void deserializeNBT(NBTTagCompound tag) {
+    	super.deserializeNBT(tag);
+    	spellLong = tag.getLong(NBT_LONG);
 	}
 }

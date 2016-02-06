@@ -54,7 +54,7 @@ public class BlockMagicCircle extends BlockRevoltBase implements ITileEntityProv
 		explode.setStrength(spellFloat).setTarget(spellPos);
 		
 		SpellLiving living = new SpellLiving();
-		living.setEntity(player);
+		living.setLiving(player);
 		
 		SpellVectorFromLook vector = new SpellVectorFromLook();
 		vector.setLiving(living);

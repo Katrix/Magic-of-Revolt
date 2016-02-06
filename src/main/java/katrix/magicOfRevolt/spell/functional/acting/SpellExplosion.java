@@ -13,27 +13,39 @@ import katrix.magicOfRevolt.spell.object.SpellBlockPos;
 import katrix.magicOfRevolt.spell.object.SpellObject;
 import katrix.magicOfRevolt.spell.object.primitive.SpellFloat;
 import katrix.magicOfRevolt.spell.object.primitive.SpellVoid;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
 
 public class SpellExplosion extends SpellTarget<SpellBlockPos> {
 	
-	protected ISpellVariable<?, SpellFloat> strength;
+	protected float strength;
 	private static final int STRENGTH_INDEX = 1;
+	
+	private static final String NBT_STRENGTH = "strength";
 
 	@Override
 	public SpellObject execute() {
-		BlockPos pos = target.getVariable().getPos();
-		world.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), strength.getVariable().getFloat(), false);
+		BlockPos pos = target.getPos();
+		world.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), strength, false);
 		return SpellVoid.spell;
-	}
-	
-	public ISpellVariable<?, SpellFloat> getStrength() {
-		return strength;
 	}
 
 	public SpellExplosion setStrength(ISpellVariable<?, SpellFloat> strength) {
-		this.strength = strength;
+		this.strength = strength.getVariable().getFloat();
 		setInput(STRENGTH_INDEX, strength.getSpell());
 		return this;
+	}
+	
+	@Override
+    public NBTTagCompound serializeNBT() {
+    	NBTTagCompound tag = super.serializeNBT();
+    	tag.setFloat(NBT_STRENGTH, strength);
+		return tag;
+	}
+    
+	@Override
+    public void deserializeNBT(NBTTagCompound tag) {
+    	super.deserializeNBT(tag);
+    	strength = tag.getFloat(NBT_STRENGTH);
 	}
 }

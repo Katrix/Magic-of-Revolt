@@ -10,11 +10,17 @@ package katrix.magicOfRevolt.spell.object;
 
 import katrix.magicOfRevolt.spell.ICopyable;
 import katrix.magicOfRevolt.spell.ISpellVariable;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagDouble;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.Vec3;
+import net.minecraftforge.common.util.Constants;
 
 public class SpellVector extends SpellObject implements ISpellVariable<SpellVector, SpellVector>, ICopyable<SpellVector> {
 
 	private Vec3 vector;
+	
+	private static final String NBT_VECTOR = "vector";
 
 	public SpellVector() {
 	}
@@ -45,5 +51,23 @@ public class SpellVector extends SpellObject implements ISpellVariable<SpellVect
 	@Override
 	public SpellVector getSpell() {
 		return this;
+	}
+	
+	@Override
+    public NBTTagCompound serializeNBT() {
+    	NBTTagCompound tag = super.serializeNBT();
+    	NBTTagList list = new NBTTagList();
+    	list.appendTag(new NBTTagDouble(vector.xCoord));
+    	list.appendTag(new NBTTagDouble(vector.yCoord));
+    	list.appendTag(new NBTTagDouble(vector.zCoord));
+    	tag.setTag(NBT_VECTOR, list);
+		return tag;
+	}
+    
+	@Override
+    public void deserializeNBT(NBTTagCompound tag) {
+    	super.deserializeNBT(tag);
+    	NBTTagList list = tag.getTagList(NBT_VECTOR, Constants.NBT.TAG_DOUBLE);
+    	vector = new Vec3(list.getDoubleAt(0), list.getDoubleAt(1), list.getDoubleAt(2));
 	}
 }

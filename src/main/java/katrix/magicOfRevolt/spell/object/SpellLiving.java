@@ -10,12 +10,15 @@ package katrix.magicOfRevolt.spell.object;
 
 import katrix.magicOfRevolt.spell.ICopyable;
 import katrix.magicOfRevolt.spell.ISpellVariable;
-import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.nbt.NBTTagCompound;
 
 public class SpellLiving extends SpellObject implements ISpellVariable<SpellLiving, SpellLiving>, ICopyable<SpellLiving> {
 
 	private EntityLivingBase living;
+	
+	private static final String NBT_LIVING = "living";
 
 	public SpellLiving() {
 	}
@@ -29,11 +32,11 @@ public class SpellLiving extends SpellObject implements ISpellVariable<SpellLivi
 		return new SpellLiving(this);
 	}
 
-	public Entity getEntity() {
+	public EntityLivingBase getLiving() {
 		return living;
 	}
 
-	public void setEntity(EntityLivingBase living) {
+	public void setLiving(EntityLivingBase living) {
 		this.living = living;
 		world = living.worldObj;
 	}
@@ -46,5 +49,18 @@ public class SpellLiving extends SpellObject implements ISpellVariable<SpellLivi
 	@Override
 	public SpellLiving getSpell() {
 		return this;
+	}
+	
+	@Override
+    public NBTTagCompound serializeNBT() {
+    	NBTTagCompound tag = super.serializeNBT();
+    	tag.setTag(NBT_LIVING, living.serializeNBT());
+		return tag;
+	}
+    
+	@Override
+    public void deserializeNBT(NBTTagCompound tag) {
+    	super.deserializeNBT(tag);
+    	living = (EntityLivingBase)EntityList.createEntityFromNBT(tag.getCompoundTag(NBT_LIVING), null); //FIXME: Not good at all
 	}
 }

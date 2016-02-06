@@ -9,22 +9,28 @@
 package katrix.magicOfRevolt.spell.functional;
 
 import katrix.magicOfRevolt.spell.ISpellVariable;
+import katrix.magicOfRevolt.spell.SpellRegistry;
 import katrix.magicOfRevolt.spell.object.SpellObject;
 import katrix.magicOfRevolt.spell.object.primitive.SpellBoolean;
 import katrix.magicOfRevolt.spell.object.primitive.SpellVoid;
+import net.minecraft.nbt.NBTTagCompound;
 
 public class SpellIf extends SpellFunctional {
 	
 	private SpellFunctional spell1;
 	private SpellFunctional spell2;
-	private ISpellVariable<?, SpellBoolean> condition;
+	private boolean condition;
 	private static final int SPELL1_INDEX = 0;
 	private static final int SPELL2_INDEX = 1;
 	private static final int CONDITION_INDEX = 2;
+	
+	public static final String NBT_SPELL1 = "spell1";
+	public static final String NBT_SPELL2 = "spell2";
+	public static final String NBT_CONDITION = "condition";
 
 	@Override
 	public SpellObject execute() {
-		if(condition.getVariable().getBoolean()) {
+		if(condition) {
 			spell1.execute();
 		}
 		else if(spell2 != null) {
@@ -33,22 +39,11 @@ public class SpellIf extends SpellFunctional {
 		return SpellVoid.spell;
 	}
 	
-	public SpellFunctional getSpell1() {
-		return spell1;
-	}
-
-	
 	public SpellIf setSpell1(SpellFunctional spell) {
 		this.spell1 = spell;
 		setInput(SPELL1_INDEX, spell);
 		return this;
 	}
-
-	
-	public SpellFunctional getSpell2() {
-		return spell2;
-	}
-
 	
 	public SpellIf setSpell2(SpellFunctional spell) {
 		this.spell2 = spell;
@@ -56,14 +51,26 @@ public class SpellIf extends SpellFunctional {
 		return this;
 	}
 	
-	public ISpellVariable<?, SpellBoolean> getCondition() {
-		return condition;
-	}
-
-	
 	public SpellIf setCondition(ISpellVariable<?, SpellBoolean> condition) {
-		this.condition = condition;
+		this.condition = condition.getVariable().getBoolean();
 		setInput(CONDITION_INDEX, condition.getSpell());
 		return this;
+	}
+	
+	@Override
+    public NBTTagCompound serializeNBT() {
+    	NBTTagCompound tag = super.serializeNBT();
+    	tag.setTag(NBT_SPELL1, spell1.serializeNBT());
+    	tag.setTag(NBT_SPELL2, spell2.serializeNBT());
+    	tag.setBoolean(NBT_CONDITION, condition);
+		return tag;
+	}
+    
+	@Override
+    public void deserializeNBT(NBTTagCompound tag) {
+    	super.deserializeNBT(tag);
+    	spell1 = (SpellFunctional)SpellRegistry.createSpellFromNBT(tag.getCompoundTag(NBT_SPELL1));
+    	spell2 = (SpellFunctional)SpellRegistry.createSpellFromNBT(tag.getCompoundTag(NBT_SPELL2));
+    	condition = tag.getBoolean(NBT_CONDITION);
 	}
 }

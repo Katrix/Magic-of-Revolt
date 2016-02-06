@@ -20,7 +20,7 @@ public class SpellBlockPos extends SpellObject implements ISpellVariable<SpellBl
 
 	private BlockPos pos;
 	
-	public static final String NBT_POS = "pos";
+	private static final String NBT_POS = "pos";
 
 	public SpellBlockPos() {
 	}

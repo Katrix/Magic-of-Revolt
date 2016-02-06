@@ -11,10 +11,13 @@ package katrix.magicOfRevolt.spell.object;
 import katrix.magicOfRevolt.spell.ICopyable;
 import katrix.magicOfRevolt.spell.ISpellVariable;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 
 public class SpellItemStack extends SpellObject implements ISpellVariable<SpellItemStack, SpellItemStack>, ICopyable<SpellItemStack> {
 
 	private ItemStack stack;
+	
+	private static final String NBT_STACK = "stack";
 
 	public SpellItemStack() {
 	}
@@ -44,5 +47,18 @@ public class SpellItemStack extends SpellObject implements ISpellVariable<SpellI
 	@Override
 	public SpellItemStack getSpell() {
 		return this;
+	}
+	
+	@Override
+    public NBTTagCompound serializeNBT() {
+    	NBTTagCompound tag = super.serializeNBT();
+    	tag.setTag(NBT_STACK, stack.serializeNBT());
+		return tag;
+	}
+    
+	@Override
+    public void deserializeNBT(NBTTagCompound tag) {
+    	super.deserializeNBT(tag);
+    	ItemStack.loadItemStackFromNBT(tag.getCompoundTag(NBT_STACK));
 	}
 }

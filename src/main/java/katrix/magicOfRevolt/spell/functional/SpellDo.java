@@ -9,16 +9,21 @@
 package katrix.magicOfRevolt.spell.functional;
 
 import katrix.magicOfRevolt.spell.ISpellVariable;
+import katrix.magicOfRevolt.spell.SpellRegistry;
 import katrix.magicOfRevolt.spell.object.SpellObject;
 import katrix.magicOfRevolt.spell.object.primitive.SpellBoolean;
 import katrix.magicOfRevolt.spell.object.primitive.SpellVoid;
+import net.minecraft.nbt.NBTTagCompound;
 
 public class SpellDo extends SpellFunctional {
 	
 	private SpellFunctional spell;
-	private ISpellVariable<?, SpellBoolean> condition;
+	private boolean condition;
 	private static final int SPELL_INDEX = 0;
 	private static final int CONDITION_INDEX = 1;
+	
+	public static final String NBT_SPELL = "spell";
+	public static final String NBT_CONDITION = "condition";
 	
 	private int limit = 0;
 
@@ -27,16 +32,12 @@ public class SpellDo extends SpellFunctional {
 		do {
 			spell.execute();
 			limit++;
-		} while (condition.getVariable().getBoolean() && limit < 1000);
+		} while (condition && limit < 1000);
 		
 		if(limit >= 1000) {
 			fizzle("infiniteLoop");
 		}
 		return SpellVoid.spell;
-	}
-	
-	public SpellFunctional getSpell() {
-		return spell;
 	}
 	
 	public SpellDo setSpell1(SpellFunctional spell) {
@@ -45,13 +46,24 @@ public class SpellDo extends SpellFunctional {
 		return this;
 	}
 	
-	public ISpellVariable<?, SpellBoolean> getCondition() {
-		return condition;
-	}
-	
 	public SpellDo setCondition(ISpellVariable<?, SpellBoolean> condition) {
-		this.condition = condition;
+		this.condition = condition.getVariable().getBoolean();
 		setInput(CONDITION_INDEX, condition.getSpell());
 		return this;
+	}
+	
+	@Override
+    public NBTTagCompound serializeNBT() {
+    	NBTTagCompound tag = super.serializeNBT();
+    	tag.setTag(NBT_SPELL, spell.serializeNBT());
+    	tag.setBoolean(NBT_CONDITION, condition);
+		return tag;
+	}
+    
+	@Override
+    public void deserializeNBT(NBTTagCompound tag) {
+    	super.deserializeNBT(tag);
+    	spell = (SpellFunctional)SpellRegistry.createSpellFromNBT(tag.getCompoundTag(NBT_SPELL));
+    	condition = tag.getBoolean(NBT_CONDITION);
 	}
 }

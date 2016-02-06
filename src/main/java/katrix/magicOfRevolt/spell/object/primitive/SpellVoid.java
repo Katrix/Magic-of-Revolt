@@ -34,7 +34,6 @@ public final class SpellVoid extends SpellObject implements ISpellVariable<Spell
 	@Override
 	public NBTTagCompound serializeNBT() {
 		NBTTagCompound tag = new NBTTagCompound();
-		tag.setString(NBT_ID, spellName);
 		return tag;
 	}
 

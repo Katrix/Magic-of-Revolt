@@ -15,4 +15,5 @@ public interface ISpellVariable<T extends Spell, V extends SpellObject>{
 	public V getVariable();
 	
 	public T getSpell();
+	
 }

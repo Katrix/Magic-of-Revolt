@@ -10,9 +10,9 @@ public class SpellBridge extends Spell implements ISpellVariable<SpellBridge, Sp
 	
 	public static final String NBT_OBJECT = "bridgeObject";
 
-	public void setBridgeObject(SpellObject bridgeObject) {
-		this.bridgeObject = bridgeObject;
-		setInput(BRIDGE_INDEX, bridgeObject);
+	public void setBridgeObject(ISpellVariable<?, SpellObject> bridgeObject) {
+		this.bridgeObject = bridgeObject.getVariable();
+		setInput(BRIDGE_INDEX, bridgeObject.getSpell());
 	}
 	
 	@Override

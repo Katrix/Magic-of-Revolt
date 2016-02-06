@@ -11,11 +11,14 @@ package katrix.magicOfRevolt.spell.object.primitive;
 import katrix.magicOfRevolt.spell.ICopyable;
 import katrix.magicOfRevolt.spell.ISpellVariable;
 import katrix.magicOfRevolt.spell.object.SpellObject;
+import net.minecraft.nbt.NBTTagCompound;
 
 //Yes, I know that a String is technically not a primitive, but I still put it here for convenience sake.
 public class SpellString extends SpellObject implements ISpellVariable<SpellString, SpellString>, ICopyable<SpellString> {
 
 	private String string;
+	
+	private static final String NBT_STRING = "string";
 
 	public SpellString() {
 	}
@@ -45,5 +48,18 @@ public class SpellString extends SpellObject implements ISpellVariable<SpellStri
 	@Override
 	public SpellString getSpell() {
 		return this;
+	}
+	
+	@Override
+    public NBTTagCompound serializeNBT() {
+    	NBTTagCompound tag = super.serializeNBT();
+    	tag.setString(NBT_STRING, string);
+		return tag;
+	}
+    
+	@Override
+    public void deserializeNBT(NBTTagCompound tag) {
+    	super.deserializeNBT(tag);
+    	string = tag.getString(NBT_STRING);
 	}
 }

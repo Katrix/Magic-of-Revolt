@@ -14,28 +14,47 @@ import katrix.magicOfRevolt.spell.object.SpellObject;
 import katrix.magicOfRevolt.spell.object.SpellVector;
 import katrix.magicOfRevolt.spell.object.primitive.SpellVoid;
 import net.minecraft.entity.Entity;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagDouble;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.Vec3;
+import net.minecraftforge.common.util.Constants;
 
 public class SpellAddMotion extends SpellTarget<SpellEntity> {
 	
-	protected ISpellVariable<?, SpellVector> vector;
+	protected Vec3 vector;
 	private static final int VECTOR_INDEX = 1;
+	
+	private static final String NBT_MOTION = "motion";
 
 	@Override
 	public SpellObject execute() {
-		Entity entity = target.getVariable().getEntity();
-		Vec3 vec = vector.getVariable().getVector();
-		entity.addVelocity(vec.xCoord, vec.yCoord, vec.zCoord);
+		Entity entity = target.getEntity();
+		entity.addVelocity(vector.xCoord, vector.yCoord, vector.zCoord);
 		return SpellVoid.spell;
-	}
-	
-	public ISpellVariable<?, SpellVector> getMotion() {
-		return vector;
 	}
 
 	public SpellAddMotion setMotion(ISpellVariable<?, SpellVector> vector) {
-		this.vector = vector;
+		this.vector = vector.getVariable().getVector();
 		setInput(VECTOR_INDEX, vector.getSpell());
 		return this;
+	}
+	
+	@Override
+    public NBTTagCompound serializeNBT() {
+    	NBTTagCompound tag = super.serializeNBT();
+    	NBTTagList list = new NBTTagList();
+    	list.appendTag(new NBTTagDouble(vector.xCoord));
+    	list.appendTag(new NBTTagDouble(vector.yCoord));
+    	list.appendTag(new NBTTagDouble(vector.zCoord));
+    	tag.setTag(NBT_MOTION, list);
+		return tag;
+	}
+    
+	@Override
+    public void deserializeNBT(NBTTagCompound tag) {
+    	super.deserializeNBT(tag);
+    	NBTTagList list = tag.getTagList(NBT_MOTION, Constants.NBT.TAG_DOUBLE);
+    	vector = new Vec3(list.getDoubleAt(0), list.getDoubleAt(1), list.getDoubleAt(2));
 	}
 }
