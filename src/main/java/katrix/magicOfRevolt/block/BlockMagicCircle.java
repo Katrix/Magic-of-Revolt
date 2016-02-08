@@ -8,13 +8,8 @@
  */
 package katrix.magicOfRevolt.block;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import katrix.magicOfRevolt.lib.LibBlockName;
-import katrix.magicOfRevolt.spell.Spell;
 import katrix.magicOfRevolt.spell.SpellOutput;
-import katrix.magicOfRevolt.spell.functional.SpellFunctional;
 import katrix.magicOfRevolt.spell.functional.acting.SpellAddMotion;
 import katrix.magicOfRevolt.spell.functional.acting.SpellExplosion;
 import katrix.magicOfRevolt.spell.object.SpellBlockPos;
@@ -42,55 +37,44 @@ public class BlockMagicCircle extends BlockRevoltBase implements ITileEntityProv
 
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ) {
-		List<Spell> list = new ArrayList<>();
-		
-		SpellBlockPos spellPos = new SpellBlockPos(world);
-		spellPos.setPos(pos);
-		
-		SpellFloat spellFloat = new SpellFloat(world);
-		spellFloat.setFloat(3F);
-		
-		SpellExplosion explode = new SpellExplosion(world);
-		explode.setStrength(spellFloat).setTarget(spellPos);
-		
-		SpellLiving living = new SpellLiving(world);
-		living.setLiving(player);
-		
-		SpellVectorFromLook vector = new SpellVectorFromLook(world);
-		vector.setLiving(living);
-		
-		SpellEntity entity = new SpellEntity(world);
-		entity.setEntity(player);
-		
-		SpellAddMotion motion = new SpellAddMotion(world);
-		motion.setMotion(vector).setTarget(entity);
-		
-		SpellOutput output = new SpellOutput(world);
-		output.setInputNo(0, explode);
-		output.setInputNo(1, motion);
-		
-		list.add(output);
-		list.add(explode);
-		list.add(spellFloat);
-		list.add(spellPos);
-		list.add(motion);
-		list.add(entity);
-		list.add(vector);
-		list.add(living);
-		
-		for(Spell spell : list) {
-			if(spell instanceof SpellOutput) {
-				SpellOutput out = (SpellOutput)spell;
-				for(Spell input : out.getInputs()) {
-					if(input instanceof SpellFunctional) {
-						((SpellFunctional)input).execute();
-					}
-				}
-			}
+		if(player.isSneaking()) {
+			getTile(world, pos).activate();
+		}
+		else {
+			SpellBlockPos spellPos = new SpellBlockPos(world);
+			spellPos.setPos(pos);
+			
+			SpellFloat spellFloat = new SpellFloat(world);
+			spellFloat.setFloat(3F);
+			
+			SpellExplosion explode = new SpellExplosion(world);
+			explode.setStrength(spellFloat).setTarget(spellPos);
+			
+			SpellLiving living = new SpellLiving(world);
+			living.setLiving(player);
+			
+			SpellVectorFromLook vector = new SpellVectorFromLook(world);
+			vector.setLiving(living);
+			
+			SpellEntity entity = new SpellEntity(world);
+			entity.setEntity(player);
+			
+			SpellAddMotion motion = new SpellAddMotion(world);
+			motion.setMotion(vector).setTarget(entity);
+			
+			SpellOutput output = new SpellOutput(world);
+			output.setInputNo(0, explode);
+			output.setInputNo(1, motion);
+			
+			getTile(world, pos).setSpell(output);
 		}
 		
 		//player.openGui(MagicOfRevolt.instance, LibGuiID.SPELLSLINGER_CREATION, world, pos.getX(), pos.getY(), pos.getZ());
 		return true;
+	}
+	
+	public TileMagicCircle getTile(World world, BlockPos pos) {
+		return (TileMagicCircle)world.getTileEntity(pos);
 	}
 
 	@Override

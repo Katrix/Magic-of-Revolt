@@ -8,16 +8,44 @@
  */
 package katrix.magicOfRevolt.tile;
 
+import katrix.magicOfRevolt.spell.ISpellActivator;
+import katrix.magicOfRevolt.spell.Spell;
+import katrix.magicOfRevolt.spell.object.primitive.SpellVoid;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.ITickable;
 import net.minecraft.world.World;
 
-public class TileMagicCircle extends TileEntity {
+public class TileMagicCircle extends TileEntity implements ITickable, ISpellActivator {
+	
+	private Spell spell = SpellVoid.spell;
+	private boolean active;
 
 	public TileMagicCircle() {
 	}
+	
+	@Override
+	public void setSpell(Spell spell) {
+		this.spell = spell;
+	}
+	
+	@Override
+	public void activate() {
+		active = true;
+	}
+	
+	public void disable() {
+		active = false;
+	}
 
+	@Override
+	public void update() {
+		if(active) {
+			spell.onUpdate();
+		}
+	}
+	
 	@Override
 	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate) {
 		return oldState.getBlock() != newSate.getBlock();
