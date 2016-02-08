@@ -12,6 +12,7 @@ import katrix.magicOfRevolt.spell.ICopyable;
 import katrix.magicOfRevolt.spell.ISpellVariable;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 
 public class SpellItemStack extends SpellObject implements ISpellVariable<SpellItemStack, SpellItemStack>, ICopyable<SpellItemStack> {
 
@@ -19,10 +20,12 @@ public class SpellItemStack extends SpellObject implements ISpellVariable<SpellI
 	
 	private static final String NBT_STACK = "stack";
 
-	public SpellItemStack() {
+	public SpellItemStack(World world) {
+		super(world);
 	}
 
 	private SpellItemStack(SpellItemStack stack) {
+		super(stack);
 		this.stack = stack.stack;
 	}
 

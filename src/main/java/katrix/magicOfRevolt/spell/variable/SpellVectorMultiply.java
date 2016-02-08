@@ -15,9 +15,14 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagDouble;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.Vec3;
+import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 
 public class SpellVectorMultiply extends Spell implements ISpellVariable<SpellVectorMultiply, SpellVector> {
+
+	public SpellVectorMultiply(World world) {
+		super(world);
+	}
 
 	private Vec3 vec1;
 	private Vec3 vec2;
@@ -29,7 +34,7 @@ public class SpellVectorMultiply extends Spell implements ISpellVariable<SpellVe
 
 	@Override
 	public SpellVector getVariable() {
-		return new SpellVector().setVector(new Vec3(vec1.xCoord * vec2.xCoord, vec1.yCoord * vec2.yCoord, vec1.zCoord * vec2.zCoord));
+		return new SpellVector(world).setVector(new Vec3(vec1.xCoord * vec2.xCoord, vec1.yCoord * vec2.yCoord, vec1.zCoord * vec2.zCoord));
 	}
 
 	public void setVec1(ISpellVariable<?, SpellVector> vec1) {

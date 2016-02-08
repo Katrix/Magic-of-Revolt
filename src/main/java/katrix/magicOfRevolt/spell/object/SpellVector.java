@@ -14,6 +14,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagDouble;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.Vec3;
+import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 
 public class SpellVector extends SpellObject implements ISpellVariable<SpellVector, SpellVector>, ICopyable<SpellVector> {
@@ -22,10 +23,12 @@ public class SpellVector extends SpellObject implements ISpellVariable<SpellVect
 	
 	private static final String NBT_VECTOR = "vector";
 
-	public SpellVector() {
+	public SpellVector(World world) {
+		super(world);
 	}
 
 	private SpellVector(SpellVector vector) {
+		super(vector);
 		this.vector = vector.vector;
 	}
 

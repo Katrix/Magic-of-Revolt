@@ -12,6 +12,7 @@ import katrix.magicOfRevolt.spell.ICopyable;
 import katrix.magicOfRevolt.spell.ISpellVariable;
 import katrix.magicOfRevolt.spell.object.SpellObject;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 
 public class SpellInt extends SpellObject implements ISpellVariable<SpellInt, SpellInt>, ICopyable<SpellInt> {
 
@@ -19,10 +20,12 @@ public class SpellInt extends SpellObject implements ISpellVariable<SpellInt, Sp
 	
 	private static final String NBT_INT = "int";
 
-	public SpellInt() {
+	public SpellInt(World world) {
+		super(world);
 	}
 
 	private SpellInt(SpellInt spellInt) {
+		super(spellInt);
 		this.spellInt = spellInt.spellInt;
 	}
 

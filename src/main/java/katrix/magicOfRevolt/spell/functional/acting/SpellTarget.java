@@ -13,9 +13,14 @@ import katrix.magicOfRevolt.spell.SpellRegistry;
 import katrix.magicOfRevolt.spell.functional.SpellFunctional;
 import katrix.magicOfRevolt.spell.object.SpellObject;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 
 public abstract class SpellTarget<T extends SpellObject> extends SpellFunctional {
 	
+	public SpellTarget(World world) {
+		super(world);
+	}
+
 	protected T target;
 	private static final int TARGET_INDEX = 0;
 	
@@ -41,6 +46,6 @@ public abstract class SpellTarget<T extends SpellObject> extends SpellFunctional
 	@Override
     public void deserializeNBT(NBTTagCompound tag) {
     	super.deserializeNBT(tag);
-    	target = (T)SpellRegistry.createSpellFromNBT(tag.getCompoundTag(NBT_TARGET));
+    	target = (T)SpellRegistry.createSpellFromNBT(tag.getCompoundTag(NBT_TARGET), world);
 	}
 }

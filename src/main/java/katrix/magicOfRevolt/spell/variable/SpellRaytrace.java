@@ -16,9 +16,14 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagDouble;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.Vec3;
+import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 
 public class SpellRaytrace extends Spell implements ISpellVariable<SpellRaytrace, SpellMOP> {
+
+	public SpellRaytrace(World world) {
+		super(world);
+	}
 
 	private Vec3 vec1;
 	private Vec3 vec2;
@@ -32,7 +37,7 @@ public class SpellRaytrace extends Spell implements ISpellVariable<SpellRaytrace
 	public SpellMOP getVariable() {
 		Vec3 tempVec1 = new Vec3(vec1.xCoord, vec1.yCoord, vec1.zCoord);
 		Vec3 tempVec2 = new Vec3(vec2.xCoord, vec2.yCoord, vec2.zCoord);
-		return new SpellMOP().setMOP(world.rayTraceBlocks(tempVec1, tempVec2, false, false, true));
+		return new SpellMOP(world).setMOP(world.rayTraceBlocks(tempVec1, tempVec2, false, false, true));
 	}
 
 	public void setInput1(ISpellVariable<?, SpellVector> vec1) {

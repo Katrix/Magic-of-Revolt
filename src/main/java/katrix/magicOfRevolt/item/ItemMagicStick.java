@@ -37,35 +37,35 @@ public class ItemMagicStick extends ItemRevoltBase {
 		//BlockPos blockPos = new BlockPos(pos.getX(), pos.getY(), pos.getZ()).offset(side);
 		//world.setBlockState(blockPos, RevoltBlock.magicCircle.getDefaultState());
 		
-		SpellBlockPos spellPos = new SpellBlockPos();
+		SpellBlockPos spellPos = new SpellBlockPos(world);
 		spellPos.setPos(pos);
 		
-		SpellFloat spellFloat = new SpellFloat();
+		SpellFloat spellFloat = new SpellFloat(world);
 		spellFloat.setFloat(3F);
 		
-		SpellExplosion explode = new SpellExplosion();
+		SpellExplosion explode = new SpellExplosion(world);
 		explode.setStrength(spellFloat).setTarget(spellPos);
 		
 		/*
-		SpellLiving living = new SpellLiving();
+		SpellLiving living = new SpellLiving(world);
 		living.setEntity(player);
 		
-		SpellVectorFromLook vector = new SpellVectorFromLook();
+		SpellVectorFromLook vector = new SpellVectorFromLook(world);
 		vector.setLiving(living);
 		
-		SpellEntity entity = new SpellEntity();
+		SpellEntity entity = new SpellEntity(world);
 		entity.setEntity(player);
 		
-		SpellAddMotion motion = new SpellAddMotion();
+		SpellAddMotion motion = new SpellAddMotion(world);
 		motion.setMotion(vector).setTarget(entity);
 		*/
 		
-		SpellOutput output = new SpellOutput();
+		SpellOutput output = new SpellOutput(world);
 		//output.setInputNo(0, motion);
 		output.setInputNo(1, explode);
 		
 		NBTTagCompound tag = output.serializeNBT();
-		Spell output1 = SpellRegistry.createSpellFromNBT(tag);
+		Spell output1 = SpellRegistry.createSpellFromNBT(tag, world);
 		
 		if(!world.isRemote) {
 			LogHelper.info(tag);

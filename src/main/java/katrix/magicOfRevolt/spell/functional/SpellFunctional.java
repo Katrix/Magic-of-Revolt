@@ -9,10 +9,11 @@
 package katrix.magicOfRevolt.spell.functional;
 
 import katrix.magicOfRevolt.spell.Spell;
-import katrix.magicOfRevolt.spell.object.SpellObject;
+import net.minecraft.world.World;
 
 public abstract class SpellFunctional extends Spell {
-	
-	public abstract SpellObject execute();
 
+	public SpellFunctional(World world) {
+		super(world);
+	}
 }

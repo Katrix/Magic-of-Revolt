@@ -10,12 +10,15 @@ package katrix.magicOfRevolt.spell.functional.acting;
 
 import katrix.magicOfRevolt.spell.ISpellVariable;
 import katrix.magicOfRevolt.spell.object.SpellLiving;
-import katrix.magicOfRevolt.spell.object.SpellObject;
 import katrix.magicOfRevolt.spell.object.primitive.SpellInt;
-import katrix.magicOfRevolt.spell.object.primitive.SpellVoid;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 
 public class SpellSetFire extends SpellTarget<SpellLiving> {
+
+	public SpellSetFire(World world) {
+		super(world);
+	}
 
 	private int duration;
 	private static final int DURATION_INDEX = 1;
@@ -23,14 +26,13 @@ public class SpellSetFire extends SpellTarget<SpellLiving> {
 	private static final String NBT_DURATION = "duration";
 
 	@Override
-	public SpellObject execute() {
+	public void execute() {
 		if (target != null && duration != 0) {
 			target.getLiving().setFire(duration);
 		}
 		else {
 			fizzleParameters();
 		}
-		return SpellVoid.spell;
 	}
 
 	public void setDuration(ISpellVariable<?, SpellInt> duration) {

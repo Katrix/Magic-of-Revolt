@@ -10,24 +10,26 @@ package katrix.magicOfRevolt.spell.functional.acting;
 
 import katrix.magicOfRevolt.spell.ISpellVariable;
 import katrix.magicOfRevolt.spell.object.SpellBlockPos;
-import katrix.magicOfRevolt.spell.object.SpellObject;
 import katrix.magicOfRevolt.spell.object.primitive.SpellFloat;
-import katrix.magicOfRevolt.spell.object.primitive.SpellVoid;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
+import net.minecraft.world.World;
 
 public class SpellExplosion extends SpellTarget<SpellBlockPos> {
 	
+	public SpellExplosion(World world) {
+		super(world);
+	}
+
 	protected float strength;
 	private static final int STRENGTH_INDEX = 1;
 	
 	private static final String NBT_STRENGTH = "strength";
 
 	@Override
-	public SpellObject execute() {
+	public void execute() {
 		BlockPos pos = target.getPos();
 		world.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), strength, false);
-		return SpellVoid.spell;
 	}
 
 	public SpellExplosion setStrength(ISpellVariable<?, SpellFloat> strength) {

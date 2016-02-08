@@ -11,15 +11,18 @@ package katrix.magicOfRevolt.spell.object;
 import katrix.magicOfRevolt.spell.ICopyable;
 import katrix.magicOfRevolt.spell.ISpellVariable;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.World;
 
 public class SpellMOP extends SpellObject implements ISpellVariable<SpellMOP, SpellMOP>, ICopyable<SpellMOP> {
 
 	private MovingObjectPosition mop;
 
-	public SpellMOP() {
+	public SpellMOP(World world) {
+		super(world);
 	}
 
 	private SpellMOP(SpellMOP vector) {
+		super(vector);
 		mop = vector.mop;
 	}
 

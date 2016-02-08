@@ -13,6 +13,7 @@ import katrix.magicOfRevolt.spell.ISpellVariable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 
 public class SpellEntity extends SpellObject implements ISpellVariable<SpellEntity, SpellEntity>, ICopyable<SpellEntity> {
 
@@ -20,10 +21,12 @@ public class SpellEntity extends SpellObject implements ISpellVariable<SpellEnti
 	
 	private static final String NBT_ENTITY = "entity";
 
-	public SpellEntity() {
+	public SpellEntity(World world) {
+		super(world);
 	}
 
 	private SpellEntity(SpellEntity entity) {
+		super(entity);
 		this.entity = entity.entity;
 	}
 

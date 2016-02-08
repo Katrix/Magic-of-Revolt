@@ -12,11 +12,14 @@ import katrix.magicOfRevolt.spell.ISpellVariable;
 import katrix.magicOfRevolt.spell.SpellRegistry;
 import katrix.magicOfRevolt.spell.object.SpellBlockPos;
 import katrix.magicOfRevolt.spell.object.SpellIBlockState;
-import katrix.magicOfRevolt.spell.object.SpellObject;
-import katrix.magicOfRevolt.spell.object.primitive.SpellVoid;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 
 public class SpellSetBlock extends SpellTarget<SpellBlockPos> {
+
+	public SpellSetBlock(World world) {
+		super(world);
+	}
 
 	protected SpellIBlockState state;
 	private static final int STATE_INDEX = 1;
@@ -24,7 +27,7 @@ public class SpellSetBlock extends SpellTarget<SpellBlockPos> {
 	private static final String NBT_STATE = "state";
 
 	@Override
-	public SpellObject execute() {
+	public void execute() {
 		if (target != null && state != null) {
 			world.setBlockState(target.getPos(), state.getBlockState());
 		}
@@ -32,7 +35,6 @@ public class SpellSetBlock extends SpellTarget<SpellBlockPos> {
 			fizzleParameters();
 		}
 
-		return SpellVoid.spell;
 	}
 
 	public void setState(ISpellVariable<?, SpellIBlockState> state) {
@@ -50,6 +52,6 @@ public class SpellSetBlock extends SpellTarget<SpellBlockPos> {
 	@Override
     public void deserializeNBT(NBTTagCompound tag) {
     	super.deserializeNBT(tag);
-    	state = (SpellIBlockState)SpellRegistry.createSpellFromNBT(tag.getCompoundTag(NBT_STATE));
+    	state = (SpellIBlockState)SpellRegistry.createSpellFromNBT(tag.getCompoundTag(NBT_STATE), world);
 	}
 }

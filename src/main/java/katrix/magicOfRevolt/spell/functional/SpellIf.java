@@ -10,13 +10,16 @@ package katrix.magicOfRevolt.spell.functional;
 
 import katrix.magicOfRevolt.spell.ISpellVariable;
 import katrix.magicOfRevolt.spell.SpellRegistry;
-import katrix.magicOfRevolt.spell.object.SpellObject;
 import katrix.magicOfRevolt.spell.object.primitive.SpellBoolean;
-import katrix.magicOfRevolt.spell.object.primitive.SpellVoid;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 
 public class SpellIf extends SpellFunctional {
 	
+	public SpellIf(World world) {
+		super(world);
+	}
+
 	private SpellFunctional spell1;
 	private SpellFunctional spell2;
 	private boolean condition;
@@ -29,14 +32,13 @@ public class SpellIf extends SpellFunctional {
 	public static final String NBT_CONDITION = "condition";
 
 	@Override
-	public SpellObject execute() {
+	public void execute() {
 		if(condition) {
 			spell1.execute();
 		}
 		else if(spell2 != null) {
 			spell2.execute();
 		}
-		return SpellVoid.spell;
 	}
 	
 	public SpellIf setSpell1(SpellFunctional spell) {
@@ -69,8 +71,8 @@ public class SpellIf extends SpellFunctional {
 	@Override
     public void deserializeNBT(NBTTagCompound tag) {
     	super.deserializeNBT(tag);
-    	spell1 = (SpellFunctional)SpellRegistry.createSpellFromNBT(tag.getCompoundTag(NBT_SPELL1));
-    	spell2 = (SpellFunctional)SpellRegistry.createSpellFromNBT(tag.getCompoundTag(NBT_SPELL2));
+    	spell1 = (SpellFunctional)SpellRegistry.createSpellFromNBT(tag.getCompoundTag(NBT_SPELL1), world);
+    	spell2 = (SpellFunctional)SpellRegistry.createSpellFromNBT(tag.getCompoundTag(NBT_SPELL2), world);
     	condition = tag.getBoolean(NBT_CONDITION);
 	}
 }

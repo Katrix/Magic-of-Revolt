@@ -9,12 +9,14 @@
 package katrix.magicOfRevolt.spell;
 
 import katrix.magicOfRevolt.spell.object.primitive.SpellVoid;
+import net.minecraft.world.World;
 
 public class SpellOutput extends Spell {
 
 	private static final int AMOUNT = 6;
 
-	public SpellOutput() {
+	public SpellOutput(World world) {
+		super(world);
 		for (int i = 0; i < AMOUNT; i++) {
 			setInput(i, SpellVoid.spell);
 		}

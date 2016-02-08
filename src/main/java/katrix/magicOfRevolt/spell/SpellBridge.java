@@ -2,8 +2,13 @@ package katrix.magicOfRevolt.spell;
 
 import katrix.magicOfRevolt.spell.object.SpellObject;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 
 public class SpellBridge extends Spell implements ISpellVariable<SpellBridge, SpellObject> {
+
+	public SpellBridge(World world) {
+		super(world);
+	}
 
 	private SpellObject bridgeObject;
 	private static final int BRIDGE_INDEX = 0;
@@ -35,6 +40,6 @@ public class SpellBridge extends Spell implements ISpellVariable<SpellBridge, Sp
 	@Override
     public void deserializeNBT(NBTTagCompound tag) {
     	super.deserializeNBT(tag);
-    	bridgeObject = (SpellObject)SpellRegistry.createSpellFromNBT(tag.getCompoundTag(NBT_OBJECT));
+    	bridgeObject = (SpellObject)SpellRegistry.createSpellFromNBT(tag.getCompoundTag(NBT_OBJECT), world);
 	}
 }

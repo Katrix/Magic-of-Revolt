@@ -10,28 +10,30 @@ package katrix.magicOfRevolt.spell.functional.acting;
 
 import katrix.magicOfRevolt.spell.ISpellVariable;
 import katrix.magicOfRevolt.spell.object.SpellEntity;
-import katrix.magicOfRevolt.spell.object.SpellObject;
 import katrix.magicOfRevolt.spell.object.SpellVector;
-import katrix.magicOfRevolt.spell.object.primitive.SpellVoid;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagDouble;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.Vec3;
+import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 
 public class SpellAddMotion extends SpellTarget<SpellEntity> {
 	
+	public SpellAddMotion(World world) {
+		super(world);
+	}
+
 	protected Vec3 vector;
 	private static final int VECTOR_INDEX = 1;
 	
 	private static final String NBT_MOTION = "motion";
 
 	@Override
-	public SpellObject execute() {
+	public void execute() {
 		Entity entity = target.getEntity();
 		entity.addVelocity(vector.xCoord, vector.yCoord, vector.zCoord);
-		return SpellVoid.spell;
 	}
 
 	public SpellAddMotion setMotion(ISpellVariable<?, SpellVector> vector) {

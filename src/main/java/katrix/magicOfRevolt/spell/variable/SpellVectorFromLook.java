@@ -15,9 +15,14 @@ import katrix.magicOfRevolt.spell.object.SpellVector;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 
 public class SpellVectorFromLook extends Spell implements ISpellVariable<SpellVectorFromLook, SpellVector>{
 	
+	public SpellVectorFromLook(World world) {
+		super(world);
+	}
+
 	private EntityLivingBase living;
 	private static final int LIVING_INDEX = 0;
 	
@@ -25,7 +30,7 @@ public class SpellVectorFromLook extends Spell implements ISpellVariable<SpellVe
 
 	@Override
 	public SpellVector getVariable() {
-		return new SpellVector().setVector(living.getLookVec());
+		return new SpellVector(world).setVector(living.getLookVec());
 	}
 	
 	public SpellVectorFromLook setLiving(ISpellVariable<?, SpellLiving> living) {

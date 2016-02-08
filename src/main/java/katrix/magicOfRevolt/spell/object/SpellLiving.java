@@ -13,6 +13,7 @@ import katrix.magicOfRevolt.spell.ISpellVariable;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 
 public class SpellLiving extends SpellObject implements ISpellVariable<SpellLiving, SpellLiving>, ICopyable<SpellLiving> {
 
@@ -20,10 +21,12 @@ public class SpellLiving extends SpellObject implements ISpellVariable<SpellLivi
 	
 	private static final String NBT_LIVING = "living";
 
-	public SpellLiving() {
+	public SpellLiving(World world) {
+		super(world);
 	}
 
 	private SpellLiving(SpellLiving living) {
+		super(living);
 		this.living = living.living;
 	}
 

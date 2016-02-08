@@ -9,7 +9,15 @@
 package katrix.magicOfRevolt.spell.object;
 
 import katrix.magicOfRevolt.spell.Spell;
+import net.minecraft.world.World;
 
 public abstract class SpellObject extends Spell {
 
+	public SpellObject(World world) {
+		super(world);
+	}
+	
+	protected SpellObject(SpellObject object) {
+		super(object);
+	}
 }

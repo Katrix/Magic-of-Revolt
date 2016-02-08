@@ -14,6 +14,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagDouble;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 
 public class SpellBlockPos extends SpellObject implements ISpellVariable<SpellBlockPos, SpellBlockPos>, ICopyable<SpellBlockPos> {
@@ -22,10 +23,12 @@ public class SpellBlockPos extends SpellObject implements ISpellVariable<SpellBl
 	
 	private static final String NBT_POS = "pos";
 
-	public SpellBlockPos() {
+	public SpellBlockPos(World world) {
+		super(world);
 	}
 
 	private SpellBlockPos(SpellBlockPos pos) {
+		super(pos);
 		this.pos = pos.pos;
 	}
 

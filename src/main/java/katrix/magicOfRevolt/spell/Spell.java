@@ -19,7 +19,6 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
@@ -34,17 +33,34 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 
 	private Map<Integer, Spell> inputs = new HashMap<>();
 	protected World world;
-
+	public int ticksUpdated = 0;
+	
 	public static final String NBT_INPUTS = "inputs";
 	public static final String NBT_KEY = "key";
 	public static final String NBT_VALUE = "value";
 	public static final String NBT_ID = "id";
 
-	public Spell() {
+	public Spell(World world) {
+		this.world = world;
 	}
 
 	protected Spell(Spell spell) {
 		inputs = spell.inputs;
+		world = spell.world;
+		ticksUpdated = spell.ticksUpdated;
+	}
+	
+	public void onUpdate() {
+		ticksUpdated++;
+		if(ticksUpdated > getWarmup()) {
+			execute();
+		}
+	}
+	
+	public void execute() {
+		for(Spell spell : getInputs()) {
+			spell.onUpdate();
+		}
 	}
 
 	public void fizzle(String reason) {
@@ -86,11 +102,6 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 
 	public List<Integer> getKeys() {
 		return ImmutableList.copyOf(inputs.keySet());
-	}
-
-	public Spell setWorld(World world) {
-		this.world = world;
-		return this;
 	}
 
 	protected void setInput(int index, Spell spell) {
@@ -135,10 +146,7 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 
 	@Override
 	public World getEntityWorld() {
-		if (world != null)
-			return world;
-		else
-			return MinecraftServer.getServer().getEntityWorld();
+		return world;
 	}
 
 	@Override
@@ -184,7 +192,7 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 		for (int i = 0; i < inputs.tagCount(); i++) {
 			NBTTagCompound entry = inputs.getCompoundTagAt(i);
 			NBTTagCompound value = entry.getCompoundTag(NBT_VALUE);
-			Spell spell = SpellRegistry.createSpellFromNBT(value);
+			Spell spell = SpellRegistry.createSpellFromNBT(value, world);
 			this.inputs.put(entry.getInteger(NBT_KEY), spell);
 		}
 	}

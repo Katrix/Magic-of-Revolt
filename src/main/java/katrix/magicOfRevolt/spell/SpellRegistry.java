@@ -18,6 +18,7 @@ import com.google.common.collect.ListMultimap;
 import katrix.magicOfRevolt.helper.LogHelper;
 import katrix.magicOfRevolt.spell.object.primitive.SpellVoid;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.common.ModContainer;
@@ -66,7 +67,7 @@ public class SpellRegistry {
 		spellRegistrations.put(container, entry);
 	}
 
-	public static Spell createSpellByName(String spellName) {
+	public static Spell createSpellByName(String spellName, World world) {
 		if (spellName.equals(SpellVoid.spellName))
 			return SpellVoid.spell;
 
@@ -75,7 +76,7 @@ public class SpellRegistry {
 			Class<? extends Spell> clazz = instance().classStringMap.inverse().get(spellName);
 
 			if (clazz != null) {
-				spell = clazz.newInstance();
+				spell = clazz.getConstructor(World.class).newInstance(world);
 			}
 		}
 		catch (Exception exception) {
@@ -85,7 +86,7 @@ public class SpellRegistry {
 		return spell;
 	}
 
-	public static Spell createSpellFromNBT(NBTTagCompound tag) {
+	public static Spell createSpellFromNBT(NBTTagCompound tag, World world) {
 		String spellId = tag.getString(Spell.NBT_ID);
 		if (spellId.equals(SpellVoid.spellName))
 			return SpellVoid.spell;
@@ -96,7 +97,7 @@ public class SpellRegistry {
 			clazz = instance().classStringMap.inverse().get(spellId);
 
 			if (clazz != null) {
-				spell = clazz.newInstance();
+				spell = clazz.getConstructor(World.class).newInstance(world);
 			}
 		}
 		catch (Exception exception) {

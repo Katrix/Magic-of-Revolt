@@ -12,6 +12,7 @@ import katrix.magicOfRevolt.spell.ICopyable;
 import katrix.magicOfRevolt.spell.ISpellVariable;
 import katrix.magicOfRevolt.spell.object.SpellObject;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 
 public class SpellBoolean extends SpellObject implements ISpellVariable<SpellBoolean, SpellBoolean>, ICopyable<SpellBoolean> {
 
@@ -19,10 +20,12 @@ public class SpellBoolean extends SpellObject implements ISpellVariable<SpellBoo
 	
 	private static final String NBT_BOOLEAN = "boolean";
 
-	public SpellBoolean() {
+	public SpellBoolean(World world) {
+		super(world);
 	}
 
 	private SpellBoolean(SpellBoolean spellBoolean) {
+		super(spellBoolean);
 		this.spellBoolean = spellBoolean.spellBoolean;
 	}
 

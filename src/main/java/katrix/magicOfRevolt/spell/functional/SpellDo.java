@@ -10,13 +10,16 @@ package katrix.magicOfRevolt.spell.functional;
 
 import katrix.magicOfRevolt.spell.ISpellVariable;
 import katrix.magicOfRevolt.spell.SpellRegistry;
-import katrix.magicOfRevolt.spell.object.SpellObject;
 import katrix.magicOfRevolt.spell.object.primitive.SpellBoolean;
-import katrix.magicOfRevolt.spell.object.primitive.SpellVoid;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 
 public class SpellDo extends SpellFunctional {
 	
+	public SpellDo(World world) {
+		super(world);
+	}
+
 	private SpellFunctional spell;
 	private boolean condition;
 	private static final int SPELL_INDEX = 0;
@@ -28,7 +31,7 @@ public class SpellDo extends SpellFunctional {
 	private int limit = 0;
 
 	@Override
-	public SpellObject execute() {
+	public void execute() {
 		do {
 			spell.execute();
 			limit++;
@@ -37,7 +40,6 @@ public class SpellDo extends SpellFunctional {
 		if(limit >= 1000) {
 			fizzle("infiniteLoop");
 		}
-		return SpellVoid.spell;
 	}
 	
 	public SpellDo setSpell1(SpellFunctional spell) {
@@ -63,7 +65,7 @@ public class SpellDo extends SpellFunctional {
 	@Override
     public void deserializeNBT(NBTTagCompound tag) {
     	super.deserializeNBT(tag);
-    	spell = (SpellFunctional)SpellRegistry.createSpellFromNBT(tag.getCompoundTag(NBT_SPELL));
+    	spell = (SpellFunctional)SpellRegistry.createSpellFromNBT(tag.getCompoundTag(NBT_SPELL), world);
     	condition = tag.getBoolean(NBT_CONDITION);
 	}
 }

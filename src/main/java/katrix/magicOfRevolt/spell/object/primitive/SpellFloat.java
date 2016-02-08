@@ -12,6 +12,7 @@ import katrix.magicOfRevolt.spell.ICopyable;
 import katrix.magicOfRevolt.spell.ISpellVariable;
 import katrix.magicOfRevolt.spell.object.SpellObject;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 
 public class SpellFloat extends SpellObject implements ISpellVariable<SpellFloat, SpellFloat>, ICopyable<SpellFloat> {
 
@@ -19,10 +20,12 @@ public class SpellFloat extends SpellObject implements ISpellVariable<SpellFloat
 	
 	private static final String NBT_FLOAT = "float";
 
-	public SpellFloat() {
+	public SpellFloat(World world) {
+		super(world);
 	}
 
 	private SpellFloat(SpellFloat spellFloat) {
+		super(spellFloat);
 		this.spellFloat = spellFloat.spellFloat;
 	}
 

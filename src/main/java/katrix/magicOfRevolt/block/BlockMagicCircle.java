@@ -44,28 +44,28 @@ public class BlockMagicCircle extends BlockRevoltBase implements ITileEntityProv
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ) {
 		List<Spell> list = new ArrayList<>();
 		
-		SpellBlockPos spellPos = new SpellBlockPos();
+		SpellBlockPos spellPos = new SpellBlockPos(world);
 		spellPos.setPos(pos);
 		
-		SpellFloat spellFloat = new SpellFloat();
+		SpellFloat spellFloat = new SpellFloat(world);
 		spellFloat.setFloat(3F);
 		
-		SpellExplosion explode = new SpellExplosion();
+		SpellExplosion explode = new SpellExplosion(world);
 		explode.setStrength(spellFloat).setTarget(spellPos);
 		
-		SpellLiving living = new SpellLiving();
+		SpellLiving living = new SpellLiving(world);
 		living.setLiving(player);
 		
-		SpellVectorFromLook vector = new SpellVectorFromLook();
+		SpellVectorFromLook vector = new SpellVectorFromLook(world);
 		vector.setLiving(living);
 		
-		SpellEntity entity = new SpellEntity();
+		SpellEntity entity = new SpellEntity(world);
 		entity.setEntity(player);
 		
-		SpellAddMotion motion = new SpellAddMotion();
+		SpellAddMotion motion = new SpellAddMotion(world);
 		motion.setMotion(vector).setTarget(entity);
 		
-		SpellOutput output = new SpellOutput();
+		SpellOutput output = new SpellOutput(world);
 		output.setInputNo(0, explode);
 		output.setInputNo(1, motion);
 		
@@ -77,10 +77,6 @@ public class BlockMagicCircle extends BlockRevoltBase implements ITileEntityProv
 		list.add(entity);
 		list.add(vector);
 		list.add(living);
-		
-		for(Spell spell : list) {
-			spell.setWorld(world);
-		}
 		
 		for(Spell spell : list) {
 			if(spell instanceof SpellOutput) {

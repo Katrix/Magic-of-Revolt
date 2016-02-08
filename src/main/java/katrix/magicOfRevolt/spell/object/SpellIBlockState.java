@@ -11,15 +11,18 @@ package katrix.magicOfRevolt.spell.object;
 import katrix.magicOfRevolt.spell.ICopyable;
 import katrix.magicOfRevolt.spell.ISpellVariable;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.world.World;
 
 public class SpellIBlockState extends SpellObject implements ISpellVariable<SpellIBlockState, SpellIBlockState>, ICopyable<SpellIBlockState> {
 
 	private IBlockState state;
 
-	public SpellIBlockState() {
+	public SpellIBlockState(World world) {
+		super(world);
 	}
 
 	private SpellIBlockState(SpellIBlockState state) {
+		super(state);
 		this.state = state.state;
 	}
 
