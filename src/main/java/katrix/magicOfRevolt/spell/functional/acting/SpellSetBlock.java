@@ -34,7 +34,7 @@ public class SpellSetBlock extends SpellTarget<SpellBlockPos> {
 		else {
 			fizzleParameters();
 		}
-
+		executed = true;
 	}
 
 	public void setState(ISpellVariable<?, SpellIBlockState> state) {

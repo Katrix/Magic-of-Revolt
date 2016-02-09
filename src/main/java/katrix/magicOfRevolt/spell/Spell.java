@@ -14,6 +14,7 @@ import java.util.Map;
 
 import com.google.common.collect.ImmutableList;
 
+import katrix.magicOfRevolt.helper.LogHelper;
 import net.minecraft.command.CommandResultStats.Type;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.Entity;
@@ -34,6 +35,8 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 	private Map<Integer, Spell> inputs = new HashMap<>();
 	protected World world;
 	public int ticksUpdated = 0;
+	protected boolean executed;
+	protected ISpellActivator activator;
 	
 	public static final String NBT_INPUTS = "inputs";
 	public static final String NBT_KEY = "key";
@@ -57,10 +60,21 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 		}
 	}
 	
+	public boolean isFinished() {
+		for(Spell spell : getInputs()) {
+			if(!spell.isFinished() || !spell.executed) {
+				LogHelper.info(SpellRegistry.getStringFromClass(spell.getClass()) + " " + spell.executed);
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	public void execute() {
 		for(Spell spell : getInputs()) {
 			spell.onUpdate();
 		}
+		executed = true;
 	}
 
 	public void fizzle(String reason) {
@@ -110,6 +124,10 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 
 	public String getSpellName() {
 		return "spell";
+	}
+	
+	public void setActivator(ISpellActivator activator) {
+		this.activator = activator;
 	}
 
 	@Override

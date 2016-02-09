@@ -30,6 +30,7 @@ public class SpellExplosion extends SpellTarget<SpellBlockPos> {
 	public void execute() {
 		BlockPos pos = target.getPos();
 		world.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), strength, false);
+		executed = true;
 	}
 
 	public SpellExplosion setStrength(ISpellVariable<?, SpellFloat> strength) {

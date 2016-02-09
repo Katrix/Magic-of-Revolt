@@ -33,6 +33,7 @@ public class SpellSetFire extends SpellTarget<SpellLiving> {
 		else {
 			fizzleParameters();
 		}
+		executed = true;
 	}
 
 	public void setDuration(ISpellVariable<?, SpellInt> duration) {

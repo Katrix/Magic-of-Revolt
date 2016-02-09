@@ -20,4 +20,9 @@ public abstract class SpellObject extends Spell {
 	protected SpellObject(SpellObject object) {
 		super(object);
 	}
+	
+	@Override
+	public void execute() {
+		executed = true;
+	}
 }

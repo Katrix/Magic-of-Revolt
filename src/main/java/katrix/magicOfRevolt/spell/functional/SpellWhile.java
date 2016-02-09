@@ -40,6 +40,7 @@ public class SpellWhile extends SpellFunctional {
 		if(limit >= 1000) {
 			fizzle("infiniteLoop");
 		}
+		executed = true;
 	}
 	
 	public SpellWhile setSpell1(SpellFunctional spell) {

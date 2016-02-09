@@ -21,6 +21,15 @@ public class SpellOutput extends Spell {
 			setInput(i, SpellVoid.spell);
 		}
 	}
+	
+	@Override
+	public void onUpdate() {
+		super.onUpdate();
+		
+		if(isFinished()) {
+			activator.disable();
+		}
+	}
 
 	public Spell getInputNo(int index) {
 		if (index > AMOUNT)

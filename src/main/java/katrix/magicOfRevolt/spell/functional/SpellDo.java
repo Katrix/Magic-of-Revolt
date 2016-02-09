@@ -40,6 +40,7 @@ public class SpellDo extends SpellFunctional {
 		if(limit >= 1000) {
 			fizzle("infiniteLoop");
 		}
+		executed =true;
 	}
 	
 	public SpellDo setSpell1(SpellFunctional spell) {

@@ -34,6 +34,7 @@ public class SpellAddMotion extends SpellTarget<SpellEntity> {
 	public void execute() {
 		Entity entity = target.getEntity();
 		entity.addVelocity(vector.xCoord, vector.yCoord, vector.zCoord);
+		executed = true;
 	}
 
 	public SpellAddMotion setMotion(ISpellVariable<?, SpellVector> vector) {

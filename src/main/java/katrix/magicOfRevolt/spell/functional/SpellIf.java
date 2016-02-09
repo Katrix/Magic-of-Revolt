@@ -39,6 +39,7 @@ public class SpellIf extends SpellFunctional {
 		else if(spell2 != null) {
 			spell2.execute();
 		}
+		executed = true;
 	}
 	
 	public SpellIf setSpell1(SpellFunctional spell) {

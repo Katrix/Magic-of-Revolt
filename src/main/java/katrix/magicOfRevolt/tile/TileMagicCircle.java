@@ -28,6 +28,7 @@ public class TileMagicCircle extends TileEntity implements ITickable, ISpellActi
 	@Override
 	public void setSpell(Spell spell) {
 		this.spell = spell;
+		this.spell.setActivator(this);
 	}
 	
 	@Override
