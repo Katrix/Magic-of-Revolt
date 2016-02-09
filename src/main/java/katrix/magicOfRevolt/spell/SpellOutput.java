@@ -26,7 +26,7 @@ public class SpellOutput extends Spell {
 	public void onUpdate() {
 		super.onUpdate();
 		
-		if(isFinished()) {
+		if(isWarmupComplete()) {
 			activator.disable();
 		}
 	}

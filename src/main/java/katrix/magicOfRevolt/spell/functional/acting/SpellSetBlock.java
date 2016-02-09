@@ -28,13 +28,13 @@ public class SpellSetBlock extends SpellTarget<SpellBlockPos> {
 
 	@Override
 	public void execute() {
+		super.execute();
 		if (target != null && state != null) {
 			world.setBlockState(target.getPos(), state.getBlockState());
 		}
 		else {
 			fizzleParameters();
 		}
-		executed = true;
 	}
 
 	public void setState(ISpellVariable<?, SpellIBlockState> state) {

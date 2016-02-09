@@ -33,13 +33,14 @@ public class SpellIf extends SpellFunctional {
 
 	@Override
 	public void execute() {
+		super.execute();
 		if(condition) {
 			spell1.execute();
 		}
 		else if(spell2 != null) {
 			spell2.execute();
 		}
-		executed = true;
+		warmupDone = true;
 	}
 	
 	public SpellIf setSpell1(SpellFunctional spell) {

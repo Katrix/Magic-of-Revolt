@@ -27,13 +27,14 @@ public class SpellSetFire extends SpellTarget<SpellLiving> {
 
 	@Override
 	public void execute() {
+		super.execute();
 		if (target != null && duration != 0) {
 			target.getLiving().setFire(duration);
 		}
 		else {
 			fizzleParameters();
 		}
-		executed = true;
+		warmupDone = true;
 	}
 
 	public void setDuration(ISpellVariable<?, SpellInt> duration) {

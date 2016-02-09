@@ -28,9 +28,11 @@ public class SpellExplosion extends SpellTarget<SpellBlockPos> {
 
 	@Override
 	public void execute() {
+		super.execute();
 		BlockPos pos = target.getPos();
-		world.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), strength, false);
-		executed = true;
+		if(!world.isRemote) {
+			world.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), strength, false);
+		}
 	}
 
 	public SpellExplosion setStrength(ISpellVariable<?, SpellFloat> strength) {

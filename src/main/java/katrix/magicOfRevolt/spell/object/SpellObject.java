@@ -22,7 +22,7 @@ public abstract class SpellObject extends Spell {
 	}
 	
 	@Override
-	public void execute() {
-		executed = true;
+	public void updateChild() {
+		warmupDone = true; //Objects don't have children
 	}
 }

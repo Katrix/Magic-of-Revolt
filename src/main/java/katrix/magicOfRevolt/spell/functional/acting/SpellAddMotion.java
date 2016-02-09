@@ -12,9 +12,12 @@ import katrix.magicOfRevolt.spell.ISpellVariable;
 import katrix.magicOfRevolt.spell.object.SpellEntity;
 import katrix.magicOfRevolt.spell.object.SpellVector;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagDouble;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.play.server.S12PacketEntityVelocity;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
@@ -32,9 +35,17 @@ public class SpellAddMotion extends SpellTarget<SpellEntity> {
 
 	@Override
 	public void execute() {
-		Entity entity = target.getEntity();
-		entity.addVelocity(vector.xCoord, vector.yCoord, vector.zCoord);
-		executed = true;
+		super.execute();
+		if(!world.isRemote) {
+			Entity entity = target.getEntity();
+			entity.addVelocity(vector.xCoord, vector.yCoord, vector.zCoord);
+			entity.posX += vector.xCoord;
+			entity.posY += vector.yCoord;
+			entity.posZ += vector.zCoord;
+			if(entity instanceof EntityPlayer) {
+				((EntityPlayerMP)entity).playerNetServerHandler.sendPacket(new S12PacketEntityVelocity(entity));
+			}
+		}
 	}
 
 	public SpellAddMotion setMotion(ISpellVariable<?, SpellVector> vector) {

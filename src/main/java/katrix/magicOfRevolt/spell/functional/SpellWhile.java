@@ -32,6 +32,7 @@ public class SpellWhile extends SpellFunctional {
 
 	@Override
 	public void execute() {
+		super.execute();
 		while(condition && limit < 1000) {
 			spell.execute();
 			limit++;
@@ -40,7 +41,7 @@ public class SpellWhile extends SpellFunctional {
 		if(limit >= 1000) {
 			fizzle("infiniteLoop");
 		}
-		executed = true;
+		warmupDone = true;
 	}
 	
 	public SpellWhile setSpell1(SpellFunctional spell) {

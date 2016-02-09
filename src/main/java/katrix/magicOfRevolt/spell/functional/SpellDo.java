@@ -32,6 +32,7 @@ public class SpellDo extends SpellFunctional {
 
 	@Override
 	public void execute() {
+		super.execute();
 		do {
 			spell.execute();
 			limit++;
@@ -40,7 +41,7 @@ public class SpellDo extends SpellFunctional {
 		if(limit >= 1000) {
 			fizzle("infiniteLoop");
 		}
-		executed =true;
+		warmupDone =true;
 	}
 	
 	public SpellDo setSpell1(SpellFunctional spell) {
