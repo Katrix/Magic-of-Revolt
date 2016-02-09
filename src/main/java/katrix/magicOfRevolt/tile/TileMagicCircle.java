@@ -15,6 +15,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
 public class TileMagicCircle extends TileEntity implements ITickable, ISpellActivator {
@@ -50,5 +51,11 @@ public class TileMagicCircle extends TileEntity implements ITickable, ISpellActi
 	@Override
 	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate) {
 		return oldState.getBlock() != newSate.getBlock();
+	}
+
+	@Override
+	public Vec3 getPosistion() {
+		BlockPos pos = getPos();
+		return new Vec3(pos.getX(), pos.getY(), pos.getZ());
 	}
 }

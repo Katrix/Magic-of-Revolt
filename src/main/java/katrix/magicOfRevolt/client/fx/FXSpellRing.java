@@ -6,18 +6,14 @@
  * Magic of Revolt is Open Source and distributed under the
  * Botania license: https://github.com/Katrix-/Magic-of-Revolt/blob/master/LICENSE.md
  */
-package katrix.magicOfRevolt.spell;
+package katrix.magicOfRevolt.client.fx;
 
-import net.minecraft.util.Vec3;
+import katrix.magicOfRevolt.spell.Spell;
+import net.minecraft.world.World;
 
-public interface ISpellActivator {
-	
-	public void activate();
-	
-	public void disable();
-	
-	public void setSpell(Spell spell);
-	
-	public Vec3 getPosistion();
+public class FXSpellRing extends FXSpell {
 
+	protected FXSpellRing(World worldIn, double posXIn, double posYIn, double posZIn, Spell spell) {
+		super(worldIn, posXIn, posYIn, posZIn, spell);
+	}
 }

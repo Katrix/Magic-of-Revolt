@@ -51,7 +51,11 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 	protected Spell(Spell spell) {
 		inputs = spell.inputs;
 		world = spell.world;
+		activator = spell.activator;
 		ticksUpdated = spell.ticksUpdated;
+		ticksExecuted = spell.ticksExecuted;
+		warmupDone = spell.warmupDone;
+		executeDone = spell.executeDone;
 	}
 
 	public void onUpdate() {
@@ -89,11 +93,20 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 	public void execute() {
 		ticksExecuted++;
 		executeDone = true;
+		renderParticle();
+	}
+	
+	//TODO: Change to abstract once I have particles set up
+	public void renderParticle() {
+		
 	}
 
 	public void fizzle(String reason) {
 		IChatComponent message = new ChatComponentTranslation("spell.fizzle." + reason, new Object[0]);
 		addChatMessage(message);
+		int mindCost = getMindCost();
+		Vec3 pos = activator.getPosistion();
+		world.createExplosion(null, pos.xCoord, pos.yCoord, pos.zCoord, mindCost /20F, mindCost > 100 ? true : false);
 	}
 
 	public void fizzleParameters() {
@@ -137,7 +150,7 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 	}
 
 	public String getSpellName() {
-		return "spell";
+		return SpellRegistry.getStringFromClass(this.getClass());
 	}
 
 	public void setActivator(ISpellActivator activator) {
@@ -227,5 +240,11 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 			Spell spell = SpellRegistry.createSpellFromNBT(value, world);
 			this.inputs.put(entry.getInteger(NBT_KEY), spell);
 		}
+	}
+	
+	@Override
+	public String toString() {
+		return "Spell [getSpellName()=" + getSpellName() + ", world=" + world + ", activator=" + activator + ", ticksUpdated=" + ticksUpdated + ", ticksExecuted=" + ticksExecuted + ", warmupDone="
+				+ warmupDone + ", executeDone=" + executeDone + ", getWarmup()=" + getWarmup() + ", getMindCost()=" + getMindCost() + "]";
 	}
 }
