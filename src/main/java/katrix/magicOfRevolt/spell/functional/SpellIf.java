@@ -9,6 +9,8 @@
 package katrix.magicOfRevolt.spell.functional;
 
 import katrix.magicOfRevolt.spell.ISpellVariable;
+import katrix.magicOfRevolt.spell.Spell;
+import katrix.magicOfRevolt.spell.SpellDummy;
 import katrix.magicOfRevolt.spell.SpellRegistry;
 import katrix.magicOfRevolt.spell.object.primitive.SpellBoolean;
 import net.minecraft.nbt.NBTTagCompound;
@@ -16,65 +18,29 @@ import net.minecraft.world.World;
 
 public class SpellIf extends SpellFunctional {
 	
+	private static final String SPELL1_NAME = "spell1";
+	private static final String SPELL2_NAME = "spell2";
+	private static final String CONDITION_NAME = "condition";
+	
 	public SpellIf(World world) {
 		super(world);
+		setInput(SPELL1_NAME, new SpellDummy(world), Side.UP_RIGHT);
+		setInput(SPELL2_NAME, new SpellDummy(world), Side.DOWN_RIGHT);
+		setInput(CONDITION_NAME, new SpellDummy(world), Side.RIGHT);
 	}
-
-	private SpellFunctional spell1;
-	private SpellFunctional spell2;
-	private boolean condition;
-	private static final int SPELL1_INDEX = 0;
-	private static final int SPELL2_INDEX = 1;
-	private static final int CONDITION_INDEX = 2;
 	
-	public static final String NBT_SPELL1 = "spell1";
-	public static final String NBT_SPELL2 = "spell2";
-	public static final String NBT_CONDITION = "condition";
-
 	@Override
 	public void execute() {
 		super.execute();
+		boolean condition = ((ISpellVariable<?, SpellBoolean>)getInput(CONDITION_NAME)).getVariable().getBoolean();
+		Spell spell1 = getInput(SPELL1_NAME);
+		Spell spell2 = getInput(SPELL2_NAME);
 		if(condition) {
 			spell1.execute();
 		}
-		else if(spell2 != null) {
+		else {
 			spell2.execute();
 		}
-		warmupDone = true;
-	}
-	
-	public SpellIf setSpell1(SpellFunctional spell) {
-		this.spell1 = spell;
-		setInput(SPELL1_INDEX, spell);
-		return this;
-	}
-	
-	public SpellIf setSpell2(SpellFunctional spell) {
-		this.spell2 = spell;
-		setInput(SPELL2_INDEX, spell);
-		return this;
-	}
-	
-	public SpellIf setCondition(ISpellVariable<?, SpellBoolean> condition) {
-		this.condition = condition.getVariable().getBoolean();
-		setInput(CONDITION_INDEX, condition.getSpell());
-		return this;
-	}
-	
-	@Override
-    public NBTTagCompound serializeNBT() {
-    	NBTTagCompound tag = super.serializeNBT();
-    	tag.setTag(NBT_SPELL1, spell1.serializeNBT());
-    	tag.setTag(NBT_SPELL2, spell2.serializeNBT());
-    	tag.setBoolean(NBT_CONDITION, condition);
-		return tag;
-	}
-    
-	@Override
-    public void deserializeNBT(NBTTagCompound tag) {
-    	super.deserializeNBT(tag);
-    	spell1 = (SpellFunctional)SpellRegistry.createSpellFromNBT(tag.getCompoundTag(NBT_SPELL1), world);
-    	spell2 = (SpellFunctional)SpellRegistry.createSpellFromNBT(tag.getCompoundTag(NBT_SPELL2), world);
-    	condition = tag.getBoolean(NBT_CONDITION);
+		executeDone = true;
 	}
 }

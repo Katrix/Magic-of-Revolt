@@ -10,22 +10,9 @@ package katrix.magicOfRevolt.spell;
 
 import net.minecraft.world.World;
 
-public class SpellOutput extends Spell {
+public class SpellDummy extends Spell {
 
-	public SpellOutput(World world) {
+	public SpellDummy(World world) {
 		super(world);
-		Side[] sides = Side.values();
-		for (int i = 0; i < sides.length; i++) {
-			setInput("input" + i, new SpellDummy(world), sides[i]);
-		}
-	}
-	
-	@Override
-	public void onUpdate() {
-		super.onUpdate();
-		
-		if(isExecuteComplete()) {
-			activator.disable();
-		}
 	}
 }

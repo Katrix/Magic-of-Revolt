@@ -1,45 +1,32 @@
+/**
+ * This class was created by <Katrix>. It's distributed as
+ * part of the Magic of Revolt Mod. Get the Source Code in github:
+ * https://github.com/Katrix-/Magic-of-Revolt
+ *
+ * Magic of Revolt is Open Source and distributed under the
+ * Botania license: https://github.com/Katrix-/Magic-of-Revolt/blob/master/LICENSE.md
+ */
 package katrix.magicOfRevolt.spell;
 
 import katrix.magicOfRevolt.spell.object.SpellObject;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 public class SpellBridge extends Spell implements ISpellVariable<SpellBridge, SpellObject> {
 
+	private static final String BRIDGE_NAME = "bridge";
+	
 	public SpellBridge(World world) {
 		super(world);
-	}
-
-	private SpellObject bridgeObject;
-	private static final int BRIDGE_INDEX = 0;
-	
-	public static final String NBT_OBJECT = "bridgeObject";
-
-	public void setBridgeObject(ISpellVariable<?, SpellObject> bridgeObject) {
-		this.bridgeObject = bridgeObject.getVariable();
-		setInput(BRIDGE_INDEX, bridgeObject.getSpell());
+		setInput(BRIDGE_NAME, new SpellDummy(world), Side.UP_RIGHT);
 	}
 	
 	@Override
 	public SpellObject getVariable() {
-		return bridgeObject;
+		return (SpellObject)getInput(BRIDGE_NAME);
 	}
 
 	@Override
 	public SpellBridge getSpell() {
 		return this;
-	}
-	
-	@Override
-    public NBTTagCompound serializeNBT() {
-    	NBTTagCompound tag = super.serializeNBT();
-    	tag.setTag(NBT_OBJECT, bridgeObject.serializeNBT());
-		return tag;
-	}
-    
-	@Override
-    public void deserializeNBT(NBTTagCompound tag) {
-    	super.deserializeNBT(tag);
-    	bridgeObject = (SpellObject)SpellRegistry.createSpellFromNBT(tag.getCompoundTag(NBT_OBJECT), world);
 	}
 }

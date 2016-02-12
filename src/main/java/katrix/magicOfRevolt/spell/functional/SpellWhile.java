@@ -9,9 +9,8 @@
 package katrix.magicOfRevolt.spell.functional;
 
 import katrix.magicOfRevolt.spell.ISpellVariable;
-import katrix.magicOfRevolt.spell.SpellRegistry;
+import katrix.magicOfRevolt.spell.Spell;
 import katrix.magicOfRevolt.spell.object.primitive.SpellBoolean;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 public class SpellWhile extends SpellFunctional {
@@ -20,19 +19,17 @@ public class SpellWhile extends SpellFunctional {
 		super(world);
 	}
 
-	private SpellFunctional spell;
-	private boolean condition;
-	private static final int SPELL_INDEX = 0;
-	private static final int CONDITION_INDEX = 1;
-	
-	public static final String NBT_SPELL = "spell";
-	public static final String NBT_CONDITION = "condition";
+	private static final String SPELL_NAME = "spell";
+	private static final String CONDITION_NAME = "condition";
 	
 	private int limit = 0;
 
 	@Override
 	public void execute() {
 		super.execute();
+		Spell spell = getInput(SPELL_NAME);
+		boolean condition = ((ISpellVariable<?, SpellBoolean>)getInput(CONDITION_NAME)).getVariable().getBoolean();
+		
 		while(condition && limit < 1000) {
 			spell.execute();
 			limit++;
@@ -42,32 +39,5 @@ public class SpellWhile extends SpellFunctional {
 			fizzle("infiniteLoop");
 		}
 		warmupDone = true;
-	}
-	
-	public SpellWhile setSpell1(SpellFunctional spell) {
-		this.spell = spell;
-		setInput(SPELL_INDEX, spell);
-		return this;
-	}
-	
-	public SpellWhile setCondition(ISpellVariable<?, SpellBoolean> condition) {
-		this.condition = condition.getVariable().getBoolean();
-		setInput(CONDITION_INDEX, condition.getSpell());
-		return this;
-	}
-	
-	@Override
-    public NBTTagCompound serializeNBT() {
-    	NBTTagCompound tag = super.serializeNBT();
-    	tag.setTag(NBT_SPELL, spell.serializeNBT());
-    	tag.setBoolean(NBT_CONDITION, condition);
-		return tag;
-	}
-    
-	@Override
-    public void deserializeNBT(NBTTagCompound tag) {
-    	super.deserializeNBT(tag);
-    	spell = (SpellFunctional)SpellRegistry.createSpellFromNBT(tag.getCompoundTag(NBT_SPELL), world);
-    	condition = tag.getBoolean(NBT_CONDITION);
 	}
 }
