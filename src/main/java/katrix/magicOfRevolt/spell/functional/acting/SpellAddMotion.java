@@ -9,35 +9,31 @@
 package katrix.magicOfRevolt.spell.functional.acting;
 
 import katrix.magicOfRevolt.spell.ISpellVariable;
+import katrix.magicOfRevolt.spell.SpellDummy;
 import katrix.magicOfRevolt.spell.object.SpellEntity;
 import katrix.magicOfRevolt.spell.object.SpellVector;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagDouble;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.play.server.S12PacketEntityVelocity;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.Constants;
 
 public class SpellAddMotion extends SpellTarget<SpellEntity> {
 	
+	public static final int VECTOR_INDEX = 0;
+	
 	public SpellAddMotion(World world) {
 		super(world);
+		setInput(new SpellDummy(world), Side.RIGHT, VECTOR_INDEX);
 	}
-
-	protected Vec3 vector;
-	private static final int VECTOR_INDEX = 1;
 	
-	private static final String NBT_MOTION = "motion";
-
 	@Override
 	public void execute() {
 		super.execute();
 		if(!world.isRemote) {
-			Entity entity = target.getEntity();
+			Entity entity = getTarget().getVariable().getEntity();
+			Vec3 vector = ((ISpellVariable<?, SpellVector>)getInput(VECTOR_INDEX)).getVariable().getVector();
 			entity.addVelocity(vector.xCoord, vector.yCoord, vector.zCoord);
 			entity.posX += vector.xCoord;
 			entity.posY += vector.yCoord;
@@ -46,29 +42,5 @@ public class SpellAddMotion extends SpellTarget<SpellEntity> {
 				((EntityPlayerMP)entity).playerNetServerHandler.sendPacket(new S12PacketEntityVelocity(entity));
 			}
 		}
-	}
-
-	public SpellAddMotion setMotion(ISpellVariable<?, SpellVector> vector) {
-		this.vector = vector.getVariable().getVector();
-		setInput(VECTOR_INDEX, vector.getSpell());
-		return this;
-	}
-	
-	@Override
-    public NBTTagCompound serializeNBT() {
-    	NBTTagCompound tag = super.serializeNBT();
-    	NBTTagList list = new NBTTagList();
-    	list.appendTag(new NBTTagDouble(vector.xCoord));
-    	list.appendTag(new NBTTagDouble(vector.yCoord));
-    	list.appendTag(new NBTTagDouble(vector.zCoord));
-    	tag.setTag(NBT_MOTION, list);
-		return tag;
-	}
-    
-	@Override
-    public void deserializeNBT(NBTTagCompound tag) {
-    	super.deserializeNBT(tag);
-    	NBTTagList list = tag.getTagList(NBT_MOTION, Constants.NBT.TAG_DOUBLE);
-    	vector = new Vec3(list.getDoubleAt(0), list.getDoubleAt(1), list.getDoubleAt(2));
 	}
 }

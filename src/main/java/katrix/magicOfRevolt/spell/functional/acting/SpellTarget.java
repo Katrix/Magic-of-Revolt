@@ -9,43 +9,21 @@
 package katrix.magicOfRevolt.spell.functional.acting;
 
 import katrix.magicOfRevolt.spell.ISpellVariable;
-import katrix.magicOfRevolt.spell.SpellRegistry;
+import katrix.magicOfRevolt.spell.SpellDummy;
 import katrix.magicOfRevolt.spell.functional.SpellFunctional;
 import katrix.magicOfRevolt.spell.object.SpellObject;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 public abstract class SpellTarget<T extends SpellObject> extends SpellFunctional {
 	
+	public static final int TARGET_INDEX = 0;
+	
 	public SpellTarget(World world) {
 		super(world);
-	}
-
-	protected T target;
-	private static final int TARGET_INDEX = 0;
-	
-	private static final String NBT_TARGET = "target";
-	
-	public T getTarget() {
-		return target;
-	}
-
-	public SpellTarget<T> setTarget(ISpellVariable<?, T> target) {
-		this.target = target.getVariable();
-		setInput(TARGET_INDEX, target.getSpell());
-		return this;
+		setInput(new SpellDummy(world), Side.UP_RIGHT, TARGET_INDEX);
 	}
 	
-	@Override
-    public NBTTagCompound serializeNBT() {
-    	NBTTagCompound tag = super.serializeNBT();
-    	tag.setTag(NBT_TARGET, target.serializeNBT());
-		return tag;
-	}
-    
-	@Override
-    public void deserializeNBT(NBTTagCompound tag) {
-    	super.deserializeNBT(tag);
-    	target = (T)SpellRegistry.createSpellFromNBT(tag.getCompoundTag(NBT_TARGET), world);
+	protected ISpellVariable<?, T> getTarget() {
+		return (ISpellVariable<?, T>)getInput(TARGET_INDEX);
 	}
 }

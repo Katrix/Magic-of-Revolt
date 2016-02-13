@@ -18,23 +18,23 @@ import net.minecraft.world.World;
 
 public class SpellIf extends SpellFunctional {
 	
-	private static final String SPELL1_NAME = "spell1";
-	private static final String SPELL2_NAME = "spell2";
-	private static final String CONDITION_NAME = "condition";
+	private static final int SPELL1_INDEX = 0;
+	private static final int SPELL2_INDEX = 1;
+	private static final int CONDITION_INDEX = 2;
 	
 	public SpellIf(World world) {
 		super(world);
-		setInput(SPELL1_NAME, new SpellDummy(world), Side.UP_RIGHT);
-		setInput(SPELL2_NAME, new SpellDummy(world), Side.DOWN_RIGHT);
-		setInput(CONDITION_NAME, new SpellDummy(world), Side.RIGHT);
+		setInput(new SpellDummy(world), Side.UP_RIGHT, SPELL1_INDEX);
+		setInput(new SpellDummy(world), Side.DOWN_RIGHT, SPELL2_INDEX);
+		setInput(new SpellDummy(world), Side.RIGHT, CONDITION_INDEX);
 	}
 	
 	@Override
 	public void execute() {
 		super.execute();
-		boolean condition = ((ISpellVariable<?, SpellBoolean>)getInput(CONDITION_NAME)).getVariable().getBoolean();
-		Spell spell1 = getInput(SPELL1_NAME);
-		Spell spell2 = getInput(SPELL2_NAME);
+		boolean condition = ((ISpellVariable<?, SpellBoolean>)getInput(CONDITION_INDEX)).getVariable().getBoolean();
+		Spell spell1 = getInput(SPELL1_INDEX);
+		Spell spell2 = getInput(SPELL2_INDEX);
 		if(condition) {
 			spell1.execute();
 		}

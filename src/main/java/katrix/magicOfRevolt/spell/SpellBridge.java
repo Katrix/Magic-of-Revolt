@@ -13,16 +13,16 @@ import net.minecraft.world.World;
 
 public class SpellBridge extends Spell implements ISpellVariable<SpellBridge, SpellObject> {
 
-	private static final String BRIDGE_NAME = "bridge";
+	private static final int BRIDGE_INDEX = 0;
 	
 	public SpellBridge(World world) {
 		super(world);
-		setInput(BRIDGE_NAME, new SpellDummy(world), Side.UP_RIGHT);
+		setInput(new SpellDummy(world), Side.UP_RIGHT, BRIDGE_INDEX);
 	}
 	
 	@Override
 	public SpellObject getVariable() {
-		return (SpellObject)getInput(BRIDGE_NAME);
+		return (SpellObject)getInput(BRIDGE_INDEX);
 	}
 
 	@Override

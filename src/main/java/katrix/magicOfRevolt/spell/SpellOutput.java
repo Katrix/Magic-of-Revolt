@@ -16,7 +16,7 @@ public class SpellOutput extends Spell {
 		super(world);
 		Side[] sides = Side.values();
 		for (int i = 0; i < sides.length; i++) {
-			setInput("input" + i, new SpellDummy(world), sides[i]);
+			setInput(new SpellDummy(world), sides[i], i);
 		}
 	}
 	

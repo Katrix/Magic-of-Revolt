@@ -9,9 +9,11 @@
 package katrix.magicOfRevolt.block;
 
 import katrix.magicOfRevolt.lib.LibBlockName;
+import katrix.magicOfRevolt.spell.Spell;
 import katrix.magicOfRevolt.spell.SpellOutput;
 import katrix.magicOfRevolt.spell.functional.acting.SpellAddMotion;
 import katrix.magicOfRevolt.spell.functional.acting.SpellExplosion;
+import katrix.magicOfRevolt.spell.functional.acting.SpellTarget;
 import katrix.magicOfRevolt.spell.object.SpellBlockPos;
 import katrix.magicOfRevolt.spell.object.SpellEntity;
 import katrix.magicOfRevolt.spell.object.SpellLiving;
@@ -48,23 +50,22 @@ public class BlockMagicCircle extends BlockRevoltBase implements ITileEntityProv
 			spellFloat.setFloat(3F);
 			
 			SpellExplosion explode = new SpellExplosion(world);
-			explode.setStrength(spellFloat).setTarget(spellPos);
+			explode.setInput(spellFloat, Spell.Side.LEFT, SpellExplosion.STRENGTH_INDEX).setInput(spellPos, Spell.Side.DOWN_LEFT, SpellTarget.TARGET_INDEX);
 			
 			SpellLiving living = new SpellLiving(world);
 			living.setLiving(player);
 			
 			SpellVectorFromLook vector = new SpellVectorFromLook(world);
-			vector.setLiving(living);
+			vector.setInput(living, Spell.Side.LEFT, SpellVectorFromLook.LIVING_INDEX);
 			
 			SpellEntity entity = new SpellEntity(world);
 			entity.setEntity(player);
 			
 			SpellAddMotion motion = new SpellAddMotion(world);
-			motion.setMotion(vector).setTarget(entity);
+			motion.setInput(vector, Spell.Side.LEFT, SpellAddMotion.VECTOR_INDEX).setInput(entity, Spell.Side.UP_LEFT, SpellTarget.TARGET_INDEX);
 			
 			SpellOutput output = new SpellOutput(world);
-			output.setInputNo(0, explode);
-			output.setInputNo(1, motion);
+			output.setInput(explode, Spell.Side.LEFT, 1).setInput(motion, Spell.Side.DOWN_RIGHT, 4);
 			
 			getTile(world, pos).setSpell(output);
 		}

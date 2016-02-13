@@ -8,6 +8,7 @@
  */
 package katrix.magicOfRevolt.item;
 
+import katrix.magicOfRevolt.block.RevoltBlock;
 import katrix.magicOfRevolt.helper.LogHelper;
 import katrix.magicOfRevolt.lib.LibItemName;
 import katrix.magicOfRevolt.spell.Spell;
@@ -34,9 +35,10 @@ public class ItemMagicStick extends ItemRevoltBase {
 
 	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
-		//BlockPos blockPos = new BlockPos(pos.getX(), pos.getY(), pos.getZ()).offset(side);
-		//world.setBlockState(blockPos, RevoltBlock.magicCircle.getDefaultState());
+		BlockPos blockPos = new BlockPos(pos.getX(), pos.getY(), pos.getZ()).offset(side);
+		world.setBlockState(blockPos, RevoltBlock.magicCircle.getDefaultState());
 		
+		/*
 		SpellBlockPos spellPos = new SpellBlockPos(world);
 		spellPos.setPos(pos);
 		
@@ -46,7 +48,6 @@ public class ItemMagicStick extends ItemRevoltBase {
 		SpellExplosion explode = new SpellExplosion(world);
 		explode.setStrength(spellFloat).setTarget(spellPos);
 		
-		/*
 		SpellLiving living = new SpellLiving(world);
 		living.setEntity(player);
 		
@@ -58,7 +59,6 @@ public class ItemMagicStick extends ItemRevoltBase {
 		
 		SpellAddMotion motion = new SpellAddMotion(world);
 		motion.setMotion(vector).setTarget(entity);
-		*/
 		
 		SpellOutput output = new SpellOutput(world);
 		//output.setInputNo(0, motion);
@@ -71,6 +71,7 @@ public class ItemMagicStick extends ItemRevoltBase {
 			LogHelper.info(tag);
 			LogHelper.info(output1.serializeNBT());
 		}
+		*/
 		
 		return super.onItemUse(stack, player, world, pos, side, hitX, hitY, hitZ);
 	}

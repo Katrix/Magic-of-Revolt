@@ -9,49 +9,31 @@
 package katrix.magicOfRevolt.spell.functional.acting;
 
 import katrix.magicOfRevolt.spell.ISpellVariable;
+import katrix.magicOfRevolt.spell.SpellDummy;
 import katrix.magicOfRevolt.spell.object.SpellLiving;
 import katrix.magicOfRevolt.spell.object.primitive.SpellInt;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.world.World;
 
 public class SpellSetFire extends SpellTarget<SpellLiving> {
+	
+	private static final int DURATION_INDEX = 1;
 
 	public SpellSetFire(World world) {
 		super(world);
+		setInput(new SpellDummy(world), Side.RIGHT, DURATION_INDEX);
 	}
-
-	private int duration;
-	private static final int DURATION_INDEX = 1;
-	
-	private static final String NBT_DURATION = "duration";
 
 	@Override
 	public void execute() {
 		super.execute();
+		EntityLivingBase target = getTarget().getVariable().getLiving();
+		int duration = ((ISpellVariable<?, SpellInt>)getInput(DURATION_INDEX)).getVariable().getInteger();
 		if (target != null && duration != 0) {
-			target.getLiving().setFire(duration);
+			target.setFire(duration);
 		}
 		else {
 			fizzleParameters();
 		}
-		warmupDone = true;
-	}
-
-	public void setDuration(ISpellVariable<?, SpellInt> duration) {
-		this.duration = duration.getVariable().getInteger();
-		setInput(DURATION_INDEX, duration.getSpell());
-	}
-	
-	@Override
-    public NBTTagCompound serializeNBT() {
-    	NBTTagCompound tag = super.serializeNBT();
-    	tag.setInteger(NBT_DURATION, duration);
-		return tag;
-	}
-    
-	@Override
-    public void deserializeNBT(NBTTagCompound tag) {
-    	super.deserializeNBT(tag);
-    	duration = tag.getInteger(NBT_DURATION);
 	}
 }

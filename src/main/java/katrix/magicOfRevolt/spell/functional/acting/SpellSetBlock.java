@@ -9,49 +9,32 @@
 package katrix.magicOfRevolt.spell.functional.acting;
 
 import katrix.magicOfRevolt.spell.ISpellVariable;
-import katrix.magicOfRevolt.spell.SpellRegistry;
+import katrix.magicOfRevolt.spell.SpellDummy;
 import katrix.magicOfRevolt.spell.object.SpellBlockPos;
 import katrix.magicOfRevolt.spell.object.SpellIBlockState;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 public class SpellSetBlock extends SpellTarget<SpellBlockPos> {
 
-	public SpellSetBlock(World world) {
-		super(world);
-	}
-
-	protected SpellIBlockState state;
 	private static final int STATE_INDEX = 1;
 	
-	private static final String NBT_STATE = "state";
+	public SpellSetBlock(World world) {
+		super(world);
+		setInput(new SpellDummy(world), Side.RIGHT, STATE_INDEX);
+	}
 
 	@Override
 	public void execute() {
 		super.execute();
+		BlockPos target = getTarget().getVariable().getPos();
+		IBlockState state = ((ISpellVariable<?, SpellIBlockState>)getInput(STATE_INDEX)).getVariable().getBlockState();
 		if (target != null && state != null) {
-			world.setBlockState(target.getPos(), state.getBlockState());
+			world.setBlockState(target, state);
 		}
 		else {
 			fizzleParameters();
 		}
-	}
-
-	public void setState(ISpellVariable<?, SpellIBlockState> state) {
-		this.state = state.getVariable();
-		setInput(STATE_INDEX, state.getSpell());
-	}
-	
-	@Override
-    public NBTTagCompound serializeNBT() {
-    	NBTTagCompound tag = super.serializeNBT();
-    	tag.setTag(NBT_STATE, state.serializeNBT());
-		return tag;
-	}
-    
-	@Override
-    public void deserializeNBT(NBTTagCompound tag) {
-    	super.deserializeNBT(tag);
-    	state = (SpellIBlockState)SpellRegistry.createSpellFromNBT(tag.getCompoundTag(NBT_STATE), world);
 	}
 }

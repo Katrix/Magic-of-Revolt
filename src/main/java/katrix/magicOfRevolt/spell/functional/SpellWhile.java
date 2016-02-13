@@ -15,20 +15,20 @@ import net.minecraft.world.World;
 
 public class SpellWhile extends SpellFunctional {
 	
+	private static final int SPELL_INDEX = 0;
+	private static final int CONDITION_INDEX = 1;
+	
 	public SpellWhile(World world) {
 		super(world);
 	}
 
-	private static final String SPELL_NAME = "spell";
-	private static final String CONDITION_NAME = "condition";
-	
 	private int limit = 0;
 
 	@Override
 	public void execute() {
 		super.execute();
-		Spell spell = getInput(SPELL_NAME);
-		boolean condition = ((ISpellVariable<?, SpellBoolean>)getInput(CONDITION_NAME)).getVariable().getBoolean();
+		Spell spell = getInput(SPELL_INDEX);
+		boolean condition = ((ISpellVariable<?, SpellBoolean>)getInput(CONDITION_INDEX)).getVariable().getBoolean();
 		
 		while(condition && limit < 1000) {
 			spell.execute();
