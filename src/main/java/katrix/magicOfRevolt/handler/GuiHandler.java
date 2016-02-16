@@ -8,7 +8,7 @@
  */
 package katrix.magicOfRevolt.handler;
 
-import katrix.magicOfRevolt.client.gui.GuiSpellslingerCreation;
+import katrix.magicOfRevolt.client.gui.GuiSpellCreation;
 import katrix.magicOfRevolt.lib.LibGuiID;
 import katrix.magicOfRevolt.tile.TileMagicCircle;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,7 +22,7 @@ public class GuiHandler implements IGuiHandler {
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 		switch (ID) {
 			case LibGuiID.SPELLSLINGER_CREATION: {
-				return new GuiSpellslingerCreation((TileMagicCircle)world.getTileEntity(new BlockPos(x, y, z)));
+				return new GuiSpellCreation(((TileMagicCircle)world.getTileEntity(new BlockPos(x, y, z))).getSpell());
 			}
 			default:
 				return null;

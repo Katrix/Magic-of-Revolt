@@ -8,15 +8,16 @@
  */
 package katrix.magicOfRevolt.client.gui;
 
-import katrix.magicOfRevolt.tile.TileMagicCircle;
+import katrix.magicOfRevolt.spell.SpellHexagon;
 import net.minecraft.client.gui.GuiScreen;
 
-public class GuiSpellslingerCreation extends GuiScreen {
+public class GuiSpellCreation extends GuiScreen {
 
-	private TileMagicCircle circle;
+	private SpellHexagon parent;
 
-	public GuiSpellslingerCreation(TileMagicCircle circle) {
-		setCircle(circle);
+	public GuiSpellCreation(SpellHexagon parent) {
+		this.
+		setParent(parent);
 	}
 
 	@Override
@@ -24,11 +25,11 @@ public class GuiSpellslingerCreation extends GuiScreen {
 		return false;
 	}
 
-	public TileMagicCircle getCircle() {
-		return circle;
+	public SpellHexagon getParent() {
+		return parent;
 	}
 
-	public void setCircle(TileMagicCircle circle) {
-		this.circle = circle;
+	public void setParent(SpellHexagon parent) {
+		this.parent = parent;
 	}
 }

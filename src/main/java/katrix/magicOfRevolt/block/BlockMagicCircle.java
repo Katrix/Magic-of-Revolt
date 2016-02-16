@@ -67,7 +67,7 @@ public class BlockMagicCircle extends BlockRevoltBase implements ITileEntityProv
 			SpellOutput output = new SpellOutput(world);
 			output.setInput(explode, Spell.Side.LEFT, 1).setInput(motion, Spell.Side.DOWN_RIGHT, 4);
 			
-			getTile(world, pos).setSpell(output);
+			getTile(world, pos).setSpellHex(output);
 		}
 		
 		//player.openGui(MagicOfRevolt.instance, LibGuiID.SPELLSLINGER_CREATION, world, pos.getX(), pos.getY(), pos.getZ());

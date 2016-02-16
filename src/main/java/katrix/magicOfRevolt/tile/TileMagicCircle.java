@@ -9,8 +9,7 @@
 package katrix.magicOfRevolt.tile;
 
 import katrix.magicOfRevolt.spell.ISpellActivator;
-import katrix.magicOfRevolt.spell.Spell;
-import katrix.magicOfRevolt.spell.object.primitive.SpellVoid;
+import katrix.magicOfRevolt.spell.SpellHexagon;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
@@ -20,16 +19,20 @@ import net.minecraft.world.World;
 
 public class TileMagicCircle extends TileEntity implements ITickable, ISpellActivator {
 	
-	private Spell spell = SpellVoid.spell;
+	private SpellHexagon spell;
 	private boolean active;
 
 	public TileMagicCircle() {
 	}
 	
 	@Override
-	public void setSpell(Spell spell) {
+	public void setSpellHex(SpellHexagon spell) {
 		this.spell = spell;
 		this.spell.setActivator(this);
+	}
+	
+	public SpellHexagon getSpell() {
+		return spell;
 	}
 	
 	@Override

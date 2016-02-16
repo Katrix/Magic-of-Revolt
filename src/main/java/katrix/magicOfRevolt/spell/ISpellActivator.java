@@ -16,7 +16,7 @@ public interface ISpellActivator {
 	
 	public void disable();
 	
-	public void setSpell(Spell spell);
+	public void setSpellHex(SpellHexagon spell);
 	
 	public Vec3 getPosistion();
 
