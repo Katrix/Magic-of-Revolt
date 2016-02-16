@@ -16,6 +16,7 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableList;
 
+import katrix.magicOfRevolt.spell.object.SpellObject;
 import net.minecraft.command.CommandResultStats.Type;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.Entity;
@@ -162,6 +163,18 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 	}
 
 	public Spell setInput(Spell spell, Side side, int index) {
+		if(inputIndexes.containsKey(index)) {
+			Side oldSide = inputIndexes.get(index);
+			inputIndexes.remove(index);
+			inputs.remove(oldSide);
+		}
+		
+		if(inputs.containsKey(side)) {
+			int oldIndex = inputIndexes.inverse().get(side);
+			inputIndexes.remove(oldIndex);
+			inputs.remove(side);
+		}
+		
 		inputs.put(side, spell);
 		inputIndexes.put(index, side);
 		return this;
@@ -180,6 +193,10 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 		inputs.put(newSide, spell);
 		inputIndexes.put(index, newSide);
 		return this;
+	}
+	
+	public <T extends SpellObject> T getVariable(Class<T> type, int index) {
+		return ((ISpellVariable<?, T>)getInput(index)).getVariable();
 	}
 
 	public String getSpellName() {

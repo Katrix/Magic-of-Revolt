@@ -8,12 +8,9 @@
  */
 package katrix.magicOfRevolt.spell.functional;
 
-import katrix.magicOfRevolt.spell.ISpellVariable;
 import katrix.magicOfRevolt.spell.Spell;
 import katrix.magicOfRevolt.spell.SpellDummy;
-import katrix.magicOfRevolt.spell.SpellRegistry;
 import katrix.magicOfRevolt.spell.object.primitive.SpellBoolean;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 public class SpellIf extends SpellFunctional {
@@ -32,7 +29,7 @@ public class SpellIf extends SpellFunctional {
 	@Override
 	public void execute() {
 		super.execute();
-		boolean condition = ((ISpellVariable<?, SpellBoolean>)getInput(CONDITION_INDEX)).getVariable().getBoolean();
+		boolean condition = getVariable(SpellBoolean.class, CONDITION_INDEX).getBoolean();
 		Spell spell1 = getInput(SPELL1_INDEX);
 		Spell spell2 = getInput(SPELL2_INDEX);
 		if(condition) {

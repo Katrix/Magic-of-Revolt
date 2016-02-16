@@ -28,8 +28,8 @@ public class SpellVectorMultiply extends Spell implements ISpellVariable<SpellVe
 
 	@Override
 	public SpellVector getVariable() {
-		Vec3 vec1 = ((ISpellVariable<?, SpellVector>)getInput(VEC1_INDEX)).getVariable().getVector();
-		Vec3 vec2 = ((ISpellVariable<?, SpellVector>)getInput(VEC2_INDEX)).getVariable().getVector();
+		Vec3 vec1 = getVariable(SpellVector.class, VEC1_INDEX).getVector();
+		Vec3 vec2 = getVariable(SpellVector.class, VEC2_INDEX).getVector();
 		return new SpellVector(world).setVector(new Vec3(vec1.xCoord * vec2.xCoord, vec1.yCoord * vec2.yCoord, vec1.zCoord * vec2.zCoord));
 	}
 

@@ -8,7 +8,6 @@
  */
 package katrix.magicOfRevolt.spell.functional.acting;
 
-import katrix.magicOfRevolt.spell.ISpellVariable;
 import katrix.magicOfRevolt.spell.SpellDummy;
 import katrix.magicOfRevolt.spell.object.SpellLiving;
 import katrix.magicOfRevolt.spell.object.primitive.SpellInt;
@@ -28,7 +27,7 @@ public class SpellSetFire extends SpellTarget<SpellLiving> {
 	public void execute() {
 		super.execute();
 		EntityLivingBase target = getTarget().getVariable().getLiving();
-		int duration = ((ISpellVariable<?, SpellInt>)getInput(DURATION_INDEX)).getVariable().getInteger();
+		int duration = getVariable(SpellInt.class, DURATION_INDEX).getInteger();
 		if (target != null && duration != 0) {
 			target.setFire(duration);
 		}

@@ -8,7 +8,6 @@
  */
 package katrix.magicOfRevolt.spell.functional;
 
-import katrix.magicOfRevolt.spell.ISpellVariable;
 import katrix.magicOfRevolt.spell.Spell;
 import katrix.magicOfRevolt.spell.object.primitive.SpellBoolean;
 import net.minecraft.world.World;
@@ -28,7 +27,7 @@ public class SpellDo extends SpellFunctional {
 	public void execute() {
 		super.execute();
 		Spell spell = getInput(SPELL_INDEX);
-		boolean condition = ((ISpellVariable<?, SpellBoolean>)getInput(CONDITION_INDEX)).getVariable().getBoolean();
+		boolean condition = getVariable(SpellBoolean.class, CONDITION_INDEX).getBoolean();
 		
 		do {
 			spell.execute();

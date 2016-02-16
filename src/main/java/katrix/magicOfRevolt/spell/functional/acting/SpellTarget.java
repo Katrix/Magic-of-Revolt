@@ -23,7 +23,7 @@ public abstract class SpellTarget<T extends SpellObject> extends SpellFunctional
 		setInput(new SpellDummy(world), Side.UP_RIGHT, TARGET_INDEX);
 	}
 	
-	protected ISpellVariable<?, T> getTarget() {
-		return (ISpellVariable<?, T>)getInput(TARGET_INDEX);
+	protected T getTarget() {
+		return ((ISpellVariable<?, T>)getInput(TARGET_INDEX)).getVariable();
 	}
 }

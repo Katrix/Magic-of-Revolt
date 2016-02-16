@@ -8,7 +8,6 @@
  */
 package katrix.magicOfRevolt.spell.functional.acting;
 
-import katrix.magicOfRevolt.spell.ISpellVariable;
 import katrix.magicOfRevolt.spell.SpellDummy;
 import katrix.magicOfRevolt.spell.object.SpellBlockPos;
 import katrix.magicOfRevolt.spell.object.SpellIBlockState;
@@ -29,7 +28,7 @@ public class SpellSetBlock extends SpellTarget<SpellBlockPos> {
 	public void execute() {
 		super.execute();
 		BlockPos target = getTarget().getVariable().getPos();
-		IBlockState state = ((ISpellVariable<?, SpellIBlockState>)getInput(STATE_INDEX)).getVariable().getBlockState();
+		IBlockState state = getVariable(SpellIBlockState.class, STATE_INDEX).getBlockState();
 		if (target != null && state != null) {
 			world.setBlockState(target, state);
 		}

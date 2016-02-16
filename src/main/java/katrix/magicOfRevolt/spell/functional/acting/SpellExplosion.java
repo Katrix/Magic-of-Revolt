@@ -8,7 +8,6 @@
  */
 package katrix.magicOfRevolt.spell.functional.acting;
 
-import katrix.magicOfRevolt.spell.ISpellVariable;
 import katrix.magicOfRevolt.spell.SpellDummy;
 import katrix.magicOfRevolt.spell.object.SpellBlockPos;
 import katrix.magicOfRevolt.spell.object.primitive.SpellFloat;
@@ -27,8 +26,8 @@ public class SpellExplosion extends SpellTarget<SpellBlockPos> {
 	@Override
 	public void execute() {
 		super.execute();
-		BlockPos pos = getTarget().getVariable().getPos();
-		float strength = ((ISpellVariable<?, SpellFloat>)getInput(STRENGTH_INDEX)).getVariable().getFloat();
+		BlockPos pos = getTarget().getPos();
+		float strength = getVariable(SpellFloat.class, STRENGTH_INDEX).getFloat();
 		if(!world.isRemote) {
 			world.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), strength, false);
 		}

@@ -29,8 +29,8 @@ public class SpellRaytrace extends Spell implements ISpellVariable<SpellRaytrace
 
 	@Override
 	public SpellMOP getVariable() {
-		Vec3 vec1 = ((ISpellVariable<?, SpellVector>)getInput(VEC1_INDEX)).getVariable().getVector();
-		Vec3 vec2 = ((ISpellVariable<?, SpellVector>)getInput(VEC2_INDEX)).getVariable().getVector();
+		Vec3 vec1 = getVariable(SpellVector.class, VEC1_INDEX).getVector();
+		Vec3 vec2 = getVariable(SpellVector.class, VEC2_INDEX).getVector();
 		Vec3 tempVec1 = new Vec3(vec1.xCoord, vec1.yCoord, vec1.zCoord);
 		Vec3 tempVec2 = new Vec3(vec2.xCoord, vec2.yCoord, vec2.zCoord);
 		return new SpellMOP(world).setMOP(world.rayTraceBlocks(tempVec1, tempVec2, false, false, true));
