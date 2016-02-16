@@ -27,7 +27,7 @@ public class SpellVectorFromLook extends Spell implements ISpellVariable<SpellVe
 
 	@Override
 	public SpellVector getVariable() {
-		EntityLivingBase living = getVariable(SpellLiving.class, LIVING_INDEX).getLiving();
+		EntityLivingBase living = this.<SpellLiving>getVariable(LIVING_INDEX).getLiving();
 		return new SpellVector(world).setVector(living.getLookVec());
 	}
 

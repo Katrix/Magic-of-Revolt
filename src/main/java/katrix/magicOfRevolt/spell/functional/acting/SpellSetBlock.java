@@ -28,7 +28,7 @@ public class SpellSetBlock extends SpellTarget<SpellBlockPos> {
 	public void execute() {
 		super.execute();
 		BlockPos target = getTarget().getVariable().getPos();
-		IBlockState state = getVariable(SpellIBlockState.class, STATE_INDEX).getBlockState();
+		IBlockState state = this.<SpellIBlockState>getVariable(STATE_INDEX).getBlockState();
 		if (target != null && state != null) {
 			world.setBlockState(target, state);
 		}

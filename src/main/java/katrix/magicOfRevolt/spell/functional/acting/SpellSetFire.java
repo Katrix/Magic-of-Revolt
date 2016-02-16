@@ -27,7 +27,7 @@ public class SpellSetFire extends SpellTarget<SpellLiving> {
 	public void execute() {
 		super.execute();
 		EntityLivingBase target = getTarget().getVariable().getLiving();
-		int duration = getVariable(SpellInt.class, DURATION_INDEX).getInteger();
+		int duration = this.<SpellInt>getVariable(DURATION_INDEX).getInteger();
 		if (target != null && duration != 0) {
 			target.setFire(duration);
 		}

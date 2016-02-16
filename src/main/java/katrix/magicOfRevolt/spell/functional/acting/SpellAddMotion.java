@@ -32,7 +32,7 @@ public class SpellAddMotion extends SpellTarget<SpellEntity> {
 		super.execute();
 		if (!world.isRemote) {
 			Entity entity = getTarget().getEntity();
-			Vec3 vector = getVariable(SpellVector.class, VECTOR_INDEX).getVector();
+			Vec3 vector = this.<SpellVector>getVariable(VECTOR_INDEX).getVector();
 			entity.addVelocity(vector.xCoord, vector.yCoord, vector.zCoord);
 			entity.posX += vector.xCoord;
 			entity.posY += vector.yCoord;

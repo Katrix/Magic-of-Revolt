@@ -27,7 +27,7 @@ public class SpellDo extends SpellFunctional {
 	public void execute() {
 		super.execute();
 		Spell spell = getInput(SPELL_INDEX);
-		boolean condition = getVariable(SpellBoolean.class, CONDITION_INDEX).getBoolean();
+		boolean condition = this.<SpellBoolean>getVariable(CONDITION_INDEX).getBoolean();
 		
 		do {
 			spell.execute();

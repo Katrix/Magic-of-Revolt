@@ -27,7 +27,7 @@ public class SpellExplosion extends SpellTarget<SpellBlockPos> {
 	public void execute() {
 		super.execute();
 		BlockPos pos = getTarget().getPos();
-		float strength = getVariable(SpellFloat.class, STRENGTH_INDEX).getFloat();
+		float strength = this.<SpellFloat>getVariable(STRENGTH_INDEX).getFloat();
 		if(!world.isRemote) {
 			world.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), strength, false);
 		}

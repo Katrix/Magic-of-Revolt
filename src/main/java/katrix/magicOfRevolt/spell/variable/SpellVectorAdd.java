@@ -28,8 +28,8 @@ public class SpellVectorAdd extends Spell implements ISpellVariable<SpellVectorA
 
 	@Override
 	public SpellVector getVariable() {
-		Vec3 vec1 = getVariable(SpellVector.class, VEC1_INDEX).getVector();
-		Vec3 vec2 = getVariable(SpellVector.class, VEC2_INDEX).getVector();
+		Vec3 vec1 = this.<SpellVector>getVariable(VEC1_INDEX).getVector();
+		Vec3 vec2 = this.<SpellVector>getVariable(VEC2_INDEX).getVector();
 		return new SpellVector(world).setVector(vec1.add(vec2));
 	}
 

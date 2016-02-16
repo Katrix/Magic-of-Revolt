@@ -195,7 +195,7 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 		return this;
 	}
 	
-	public <T extends SpellObject> T getVariable(Class<T> type, int index) {
+	public <T extends SpellObject> T getVariable(int index) {
 		return ((ISpellVariable<?, T>)getInput(index)).getVariable();
 	}
 

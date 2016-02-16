@@ -21,6 +21,6 @@ public class SpellContinousExecute extends Spell {
 	}
 	
 	public boolean isExecuteComplete() {
-		return getVariable(SpellBoolean.class, CONDITION_INDEX).getBoolean();
+		return this.<SpellBoolean>getVariable(CONDITION_INDEX).getBoolean();
 	}
 }
