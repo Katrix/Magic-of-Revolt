@@ -8,6 +8,7 @@
  */
 package katrix.magicOfRevolt.spell;
 
+import katrix.magicOfRevolt.spell.container.ISpellContainer;
 import net.minecraft.util.Vec3;
 
 public interface ISpellActivator {
@@ -16,7 +17,7 @@ public interface ISpellActivator {
 	
 	public void disable();
 	
-	public void setSpellHex(SpellHexagon spell);
+	public void setSpellContainer(ISpellContainer container);
 	
 	public Vec3 getPosistion();
 

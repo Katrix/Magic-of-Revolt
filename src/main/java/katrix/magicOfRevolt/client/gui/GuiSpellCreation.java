@@ -8,15 +8,14 @@
  */
 package katrix.magicOfRevolt.client.gui;
 
-import katrix.magicOfRevolt.spell.SpellHexagon;
+import katrix.magicOfRevolt.spell.container.SpellContainerHexagon;
 import net.minecraft.client.gui.GuiScreen;
 
 public class GuiSpellCreation extends GuiScreen {
 
-	private SpellHexagon parent;
+	private SpellContainerHexagon parent;
 
-	public GuiSpellCreation(SpellHexagon parent) {
-		this.
+	public GuiSpellCreation(SpellContainerHexagon parent) {
 		setParent(parent);
 	}
 
@@ -25,11 +24,11 @@ public class GuiSpellCreation extends GuiScreen {
 		return false;
 	}
 
-	public SpellHexagon getParent() {
+	public SpellContainerHexagon getParent() {
 		return parent;
 	}
 
-	public void setParent(SpellHexagon parent) {
+	public void setParent(SpellContainerHexagon parent) {
 		this.parent = parent;
 	}
 }

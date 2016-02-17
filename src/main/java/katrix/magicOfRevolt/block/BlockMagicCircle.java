@@ -9,8 +9,8 @@
 package katrix.magicOfRevolt.block;
 
 import katrix.magicOfRevolt.lib.LibBlockName;
-import katrix.magicOfRevolt.spell.SpellHexagon;
 import katrix.magicOfRevolt.spell.SpellOutput;
+import katrix.magicOfRevolt.spell.container.SpellContainerHexagon;
 import katrix.magicOfRevolt.spell.functional.acting.SpellAddMotion;
 import katrix.magicOfRevolt.spell.functional.acting.SpellExplosion;
 import katrix.magicOfRevolt.spell.functional.acting.SpellTarget;
@@ -67,10 +67,10 @@ public class BlockMagicCircle extends BlockRevoltBase implements ITileEntityProv
 			SpellOutput output = new SpellOutput(world);
 			output.setInput(explode, 1).setInput(motion, 4);
 			
-			SpellHexagon hex = new SpellHexagon(world);
-			hex.setInput(output, 2);
+			SpellContainerHexagon hex = new SpellContainerHexagon();
+			hex.setSpellAtPoint(output, 3, 5);
 			
-			getTile(world, pos).setSpellHex(hex);
+			getTile(world, pos).setSpellContainer(hex);
 		}
 		
 		//player.openGui(MagicOfRevolt.instance, LibGuiID.SPELLSLINGER_CREATION, world, pos.getX(), pos.getY(), pos.getZ());

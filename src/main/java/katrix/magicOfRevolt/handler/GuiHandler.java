@@ -22,7 +22,7 @@ public class GuiHandler implements IGuiHandler {
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 		switch (ID) {
 			case LibGuiID.SPELLSLINGER_CREATION: {
-				return new GuiSpellCreation(((TileMagicCircle)world.getTileEntity(new BlockPos(x, y, z))).getSpell());
+				return new GuiSpellCreation(((TileMagicCircle)world.getTileEntity(new BlockPos(x, y, z))).getContainer());
 			}
 			default:
 				return null;

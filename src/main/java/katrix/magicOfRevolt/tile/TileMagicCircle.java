@@ -8,8 +8,12 @@
  */
 package katrix.magicOfRevolt.tile;
 
+import java.util.List;
+
 import katrix.magicOfRevolt.spell.ISpellActivator;
-import katrix.magicOfRevolt.spell.SpellHexagon;
+import katrix.magicOfRevolt.spell.Spell;
+import katrix.magicOfRevolt.spell.SpellOutput;
+import katrix.magicOfRevolt.spell.container.ISpellContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
@@ -19,25 +23,29 @@ import net.minecraft.world.World;
 
 public class TileMagicCircle extends TileEntity implements ITickable, ISpellActivator {
 	
-	private SpellHexagon spell;
+	private ISpellContainer container;
+	private List<SpellOutput> compiled;
 	private boolean active;
 
 	public TileMagicCircle() {
 	}
 	
 	@Override
-	public void setSpellHex(SpellHexagon spell) {
-		this.spell = spell;
-		this.spell.setActivator(this);
+	public void setSpellContainer(ISpellContainer spell) {
+		this.container = spell;
 	}
 	
-	public SpellHexagon getSpell() {
-		return spell;
+	public ISpellContainer getContainer() {
+		return container;
 	}
 	
 	@Override
 	public void activate() {
 		active = true;
+		compiled = container.compile();
+		for(Spell spell : compiled) {
+			spell.setActivator(this);
+		}
 	}
 	
 	public void disable() {
@@ -47,7 +55,9 @@ public class TileMagicCircle extends TileEntity implements ITickable, ISpellActi
 	@Override
 	public void update() {
 		if(active) {
-			spell.onUpdate();
+			for(Spell spell: compiled) {
+				spell.onUpdate();
+			}
 		}
 	}
 	
