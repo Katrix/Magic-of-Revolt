@@ -17,7 +17,7 @@ public class SpellContinousExecute extends Spell {
 
 	public SpellContinousExecute(World world) {
 		super(world);
-		setInput(new SpellDummy(world), Side.UP_RIGHT, CONDITION_INDEX);
+		setInput(new SpellDummy(world), CONDITION_INDEX);
 	}
 	
 	public boolean isExecuteComplete() {

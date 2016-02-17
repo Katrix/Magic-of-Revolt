@@ -21,7 +21,7 @@ public class SpellSetBlock extends SpellTarget<SpellBlockPos> {
 	
 	public SpellSetBlock(World world) {
 		super(world);
-		setInput(new SpellDummy(world), Side.RIGHT, STATE_INDEX);
+		setInput(new SpellDummy(world), STATE_INDEX);
 	}
 
 	@Override

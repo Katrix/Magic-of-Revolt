@@ -24,7 +24,7 @@ public class SpellAddMotion extends SpellTarget<SpellEntity> {
 
 	public SpellAddMotion(World world) {
 		super(world);
-		setInput(new SpellDummy(world), Side.RIGHT, VECTOR_INDEX);
+		setInput(new SpellDummy(world), VECTOR_INDEX);
 	}
 
 	@Override

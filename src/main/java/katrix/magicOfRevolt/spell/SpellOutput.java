@@ -11,12 +11,13 @@ package katrix.magicOfRevolt.spell;
 import net.minecraft.world.World;
 
 public class SpellOutput extends Spell {
+	
+	public int limit = 6;
 
 	public SpellOutput(World world) {
 		super(world);
-		Side[] sides = Side.values();
-		for (int i = 0; i < sides.length; i++) {
-			setInput(new SpellDummy(world), sides[i], i);
+		for (int i = 0; i < limit; i++) {
+			setInput(new SpellDummy(world), i);
 		}
 	}
 	

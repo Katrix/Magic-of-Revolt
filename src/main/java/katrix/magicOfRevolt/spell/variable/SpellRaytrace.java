@@ -23,8 +23,8 @@ public class SpellRaytrace extends Spell implements ISpellVariable<SpellRaytrace
 
 	public SpellRaytrace(World world) {
 		super(world);
-		setInput(new SpellDummy(world), Side.UP_RIGHT, VEC1_INDEX);
-		setInput(new SpellDummy(world), Side.RIGHT, VEC2_INDEX);
+		setInput(new SpellDummy(world), VEC1_INDEX);
+		setInput(new SpellDummy(world), VEC2_INDEX);
 	}
 
 	@Override

@@ -21,9 +21,9 @@ public class SpellIf extends SpellFunctional {
 	
 	public SpellIf(World world) {
 		super(world);
-		setInput(new SpellDummy(world), Side.UP_RIGHT, SPELL1_INDEX);
-		setInput(new SpellDummy(world), Side.DOWN_RIGHT, SPELL2_INDEX);
-		setInput(new SpellDummy(world), Side.RIGHT, CONDITION_INDEX);
+		setInput(new SpellDummy(world), SPELL1_INDEX);
+		setInput(new SpellDummy(world), SPELL2_INDEX);
+		setInput(new SpellDummy(world), CONDITION_INDEX);
 	}
 	
 	@Override

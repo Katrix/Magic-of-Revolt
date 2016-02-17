@@ -22,7 +22,7 @@ public class SpellVectorFromLook extends Spell implements ISpellVariable<SpellVe
 	
 	public SpellVectorFromLook(World world) {
 		super(world);
-		setInput(new SpellDummy(world), Side.UP_RIGHT, LIVING_INDEX);
+		setInput(new SpellDummy(world), LIVING_INDEX);
 	}
 
 	@Override

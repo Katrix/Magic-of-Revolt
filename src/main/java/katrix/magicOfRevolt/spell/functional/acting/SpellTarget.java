@@ -20,7 +20,7 @@ public abstract class SpellTarget<T extends SpellObject> extends SpellFunctional
 	
 	public SpellTarget(World world) {
 		super(world);
-		setInput(new SpellDummy(world), Side.UP_RIGHT, TARGET_INDEX);
+		setInput(new SpellDummy(world), TARGET_INDEX);
 	}
 	
 	protected T getTarget() {

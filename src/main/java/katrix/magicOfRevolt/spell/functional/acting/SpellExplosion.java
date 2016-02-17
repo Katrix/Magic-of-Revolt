@@ -20,7 +20,7 @@ public class SpellExplosion extends SpellTarget<SpellBlockPos> {
 	
 	public SpellExplosion(World world) {
 		super(world);
-		setInput(new SpellDummy(world), Side.RIGHT, STRENGTH_INDEX);
+		setInput(new SpellDummy(world), STRENGTH_INDEX);
 	}
 
 	@Override

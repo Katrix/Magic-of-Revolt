@@ -17,7 +17,7 @@ public class SpellBridge extends Spell implements ISpellVariable<SpellBridge, Sp
 	
 	public SpellBridge(World world) {
 		super(world);
-		setInput(new SpellDummy(world), Side.UP_RIGHT, BRIDGE_INDEX);
+		setInput(new SpellDummy(world), BRIDGE_INDEX);
 	}
 	
 	@Override

@@ -12,8 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableList;
 
 import katrix.magicOfRevolt.spell.object.SpellObject;
@@ -34,8 +32,7 @@ import net.minecraftforge.common.util.INBTSerializable;
 
 public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCompound> {
 
-	private Map<Side, Spell> inputs = new HashMap<>();
-	private BiMap<Integer, Side> inputIndexes = HashBiMap.create();
+	private Map<Integer, Spell> inputs = new HashMap<>();
 	protected World world;
 	protected ISpellActivator activator;
 	public int ticksUpdated = 0;
@@ -44,8 +41,7 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 	protected boolean executeDone;
 
 	public static final String NBT_INPUTS = "inputs";
-	public static final String NBT_INDEX_INPUT = "inputName";
-	public static final String NBT_SIDE = "key";
+	public static final String NBT_KEY = "key";
 	public static final String NBT_VALUE = "value";
 	public static final String NBT_ID = "id";
 
@@ -154,45 +150,21 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 		return ImmutableList.copyOf(inputs.values());
 	}
 
-	public List<Side> getInputKeys() {
+	public List<Integer> getInputKeys() {
 		return ImmutableList.copyOf(inputs.keySet());
 	}
 	
-	public List<Integer> getInputIndexes() {
-		return ImmutableList.copyOf(inputIndexes.keySet());
-	}
-
-	public Spell setInput(Spell spell, Side side, int index) {
-		if(inputIndexes.containsKey(index)) {
-			Side oldSide = inputIndexes.get(index);
-			inputIndexes.remove(index);
-			inputs.remove(oldSide);
+	public Spell setInput(Spell spell, int index) {
+		if(inputs.containsKey(index)) {
+			inputs.remove(index);
 		}
 		
-		if(inputs.containsKey(side)) {
-			int oldIndex = inputIndexes.inverse().get(side);
-			inputIndexes.remove(oldIndex);
-			inputs.remove(side);
-		}
-		
-		inputs.put(side, spell);
-		inputIndexes.put(index, side);
+		inputs.put(index, spell);
 		return this;
 	}
 	
 	public Spell getInput(int index) {
-		Side side = inputIndexes.get(index);
-		return inputs.get(side);
-	}
-	
-	public Spell changeInputSide(Side oldSide, Side newSide) {
-		Spell spell = inputs.get(oldSide);
-		int index = inputIndexes.inverse().get(oldSide);
-		inputIndexes.remove(index);
-		inputs.remove(oldSide);
-		inputs.put(newSide, spell);
-		inputIndexes.put(index, newSide);
-		return this;
+		return inputs.get(index);
 	}
 	
 	public <T extends SpellObject> T getVariable(int index) {
@@ -263,18 +235,15 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 		NBTTagCompound tag = new NBTTagCompound();
 
 		List<Spell> inputValues = getInputs();
-		List<Side> inputKey = getInputKeys();
-		List<Integer> inputIndexes = getInputIndexes();
+		List<Integer> inputKey = getInputKeys();
 		NBTTagList inputs = new NBTTagList();
 
 		for (int i = 0; i < inputValues.size(); i++) {
 			Spell spell = inputValues.get(i);
-			String key = inputKey.get(i).name();
-			int index = inputIndexes.get(i);
+			int key = inputKey.get(i);
 			NBTTagCompound entry = new NBTTagCompound();
 
-			entry.setString(NBT_SIDE, key);
-			entry.setInteger(NBT_INDEX_INPUT, index);
+			entry.setInteger(NBT_KEY, key);
 			entry.setTag(NBT_VALUE, spell.serializeNBT());
 			inputs.appendTag(entry);
 		}
@@ -291,10 +260,8 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 			NBTTagCompound entry = inputs.getCompoundTagAt(i);
 			NBTTagCompound value = entry.getCompoundTag(NBT_VALUE);
 			Spell spell = SpellRegistry.createSpellFromNBT(value, world);
-			Side side = Side.valueOf(entry.getString(NBT_SIDE));
-			int index = entry.getInteger(NBT_INDEX_INPUT);
-			this.inputs.put(side, spell);
-			this.inputIndexes.put(index, side);
+			int index = entry.getInteger(NBT_KEY);
+			this.inputs.put(index, spell);
 		}
 	}
 	
@@ -302,9 +269,5 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 	public String toString() {
 		return "Spell [getSpellName()=" + getSpellName() + ", world=" + world + ", activator=" + activator + ", ticksUpdated=" + ticksUpdated + ", ticksExecuted=" + ticksExecuted + ", warmupDone="
 				+ warmupDone + ", executeDone=" + executeDone + ", getWarmup()=" + getWarmup() + ", getMindCost()=" + getMindCost() + "]";
-	}
-	
-	public enum Side {
-		UP_RIGHT, RIGHT, DOWN_RIGHT, DOWN_LEFT, LEFT, UP_LEFT
 	}
 }

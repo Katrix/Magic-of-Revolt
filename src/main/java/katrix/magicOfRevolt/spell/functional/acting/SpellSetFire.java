@@ -20,7 +20,7 @@ public class SpellSetFire extends SpellTarget<SpellLiving> {
 
 	public SpellSetFire(World world) {
 		super(world);
-		setInput(new SpellDummy(world), Side.RIGHT, DURATION_INDEX);
+		setInput(new SpellDummy(world), DURATION_INDEX);
 	}
 
 	@Override
