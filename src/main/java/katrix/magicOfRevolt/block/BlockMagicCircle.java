@@ -8,7 +8,9 @@
  */
 package katrix.magicOfRevolt.block;
 
+import katrix.magicOfRevolt.MagicOfRevolt;
 import katrix.magicOfRevolt.lib.LibBlockName;
+import katrix.magicOfRevolt.lib.LibGuiID;
 import katrix.magicOfRevolt.spell.SpellOutput;
 import katrix.magicOfRevolt.spell.container.SpellContainerHexagon;
 import katrix.magicOfRevolt.spell.functional.acting.SpellAddMotion;
@@ -39,6 +41,7 @@ public class BlockMagicCircle extends BlockRevoltBase implements ITileEntityProv
 
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ) {
+		/*
 		if(player.isSneaking()) {
 			getTile(world, pos).activate();
 		}
@@ -72,8 +75,9 @@ public class BlockMagicCircle extends BlockRevoltBase implements ITileEntityProv
 			
 			getTile(world, pos).setSpellContainer(hex);
 		}
+		*/
 		
-		//player.openGui(MagicOfRevolt.instance, LibGuiID.SPELLSLINGER_CREATION, world, pos.getX(), pos.getY(), pos.getZ());
+		player.openGui(MagicOfRevolt.instance, LibGuiID.SPELLSLINGER_CREATION, world, pos.getX(), pos.getY(), pos.getZ());
 		return true;
 	}
 	
