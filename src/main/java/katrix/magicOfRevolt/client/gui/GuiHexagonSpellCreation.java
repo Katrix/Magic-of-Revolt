@@ -8,7 +8,7 @@
  */
 package katrix.magicOfRevolt.client.gui;
 
-import katrix.magicOfRevolt.client.gui.button.GuiButtonHex;
+import katrix.magicOfRevolt.client.gui.button.GuiButtonNgon;
 import katrix.magicOfRevolt.spell.container.SpellContainerHexagon;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -21,11 +21,11 @@ public class GuiHexagonSpellCreation extends GuiScreen {
 		setParent(parent);
 		this.parent = parent;
 	}
-	
+
 	@Override
 	public void initGui() {
 		super.initGui();
-		buttonList.add(new GuiButtonHex(0, 100, 100, 100, ""));
+		buttonList.add(new GuiButtonNgon(0, 100, 100, 100, ""));
 		buttonList.add(new GuiButton(1, 200, 200, "TEST"));
 	}
 
