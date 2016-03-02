@@ -11,6 +11,7 @@ package katrix.magicOfRevolt.spell;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import com.google.common.collect.ImmutableList;
 
@@ -144,6 +145,21 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 			total += spell.getWarmup();
 		}
 		return total;
+	}
+	
+	public void forEachChildSpell(Consumer<Spell> consumer) {
+		consumer.accept(this);
+		for (Spell spell : getInputs()) {
+			spell.forEachChildSpell(consumer);
+		}
+	}
+	
+	public void setActivatorTree(ISpellActivator activator) {
+		forEachChildSpell(spell -> spell.setActivator(activator));
+	}
+	
+	public void cancelSpell() {
+		forEachChildSpell(spell -> spell.executeDone = true);
 	}
 
 	public List<Spell> getInputs() {
