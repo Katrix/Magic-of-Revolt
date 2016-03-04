@@ -10,6 +10,6 @@ package katrix.magicOfRevolt.spell;
 
 public interface ICopyable<T extends Object> {
 
-	public T copy();
+	T copy();
 
 }

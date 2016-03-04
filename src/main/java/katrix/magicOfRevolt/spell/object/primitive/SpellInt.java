@@ -16,9 +16,9 @@ import net.minecraft.world.World;
 
 public class SpellInt extends SpellObject implements ISpellVariable<SpellInt, SpellInt>, ICopyable<SpellInt> {
 
-	private int spellInt;
-	
 	private static final String NBT_INT = "int";
+	
+	private int spellInt;
 
 	public SpellInt(World world) {
 		super(world);

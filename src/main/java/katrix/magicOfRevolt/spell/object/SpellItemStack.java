@@ -16,9 +16,9 @@ import net.minecraft.world.World;
 
 public class SpellItemStack extends SpellObject implements ISpellVariable<SpellItemStack, SpellItemStack>, ICopyable<SpellItemStack> {
 
-	private ItemStack stack;
-	
 	private static final String NBT_STACK = "stack";
+	
+	private ItemStack stack;
 
 	public SpellItemStack(World world) {
 		super(world);

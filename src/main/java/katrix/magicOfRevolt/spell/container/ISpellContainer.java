@@ -16,6 +16,6 @@ import net.minecraftforge.common.util.INBTSerializable;
 
 public interface ISpellContainer extends INBTSerializable<NBTTagCompound> {
 
-	public List<SpellOutput> compile();
+	List<SpellOutput> compile();
 
 }

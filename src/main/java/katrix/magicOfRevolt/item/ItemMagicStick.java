@@ -9,18 +9,10 @@
 package katrix.magicOfRevolt.item;
 
 import katrix.magicOfRevolt.block.RevoltBlock;
-import katrix.magicOfRevolt.helper.LogHelper;
 import katrix.magicOfRevolt.lib.LibItemName;
-import katrix.magicOfRevolt.spell.Spell;
-import katrix.magicOfRevolt.spell.SpellOutput;
-import katrix.magicOfRevolt.spell.SpellRegistry;
-import katrix.magicOfRevolt.spell.functional.acting.SpellExplosion;
-import katrix.magicOfRevolt.spell.object.SpellBlockPos;
-import katrix.magicOfRevolt.spell.object.primitive.SpellFloat;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;

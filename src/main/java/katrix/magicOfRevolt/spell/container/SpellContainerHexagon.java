@@ -61,7 +61,7 @@ public class SpellContainerHexagon implements ISpellContainer {
 		List<SpellOutput> list = new ArrayList<>();
 
 		for (int x = 0; x < spellArray.length; x++) {
-			for (int y = 0; y < spellArray[x].length; x++) {
+			for (int y = 0; y < spellArray[x].length; y++) {
 				HexagonSpellPiece hex = getHexAtPoint(x, y);
 				Map<Side, Integer> connections = hex.getConnections();
 				Set<Side> sides = connections.keySet();
@@ -130,7 +130,7 @@ public class SpellContainerHexagon implements ISpellContainer {
 		private int y;
 
 
-		private Side(int x, int y) {
+		Side(int x, int y) {
 			this.x = x;
 			this.y = y;
 		}

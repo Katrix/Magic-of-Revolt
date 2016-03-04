@@ -17,9 +17,9 @@ import net.minecraft.world.World;
 
 public class SpellLiving extends SpellObject implements ISpellVariable<SpellLiving, SpellLiving>, ICopyable<SpellLiving> {
 
-	private EntityLivingBase living;
-	
 	private static final String NBT_LIVING = "living";
+	
+	private EntityLivingBase living;
 
 	public SpellLiving(World world) {
 		super(world);

@@ -16,9 +16,9 @@ import net.minecraft.world.World;
 
 public class SpellByte extends SpellObject implements ISpellVariable<SpellByte, SpellByte>, ICopyable<SpellByte> {
 
-	private byte spellByte;
-	
 	private static final String NBT_BYTE = "byte";
+	
+	private byte spellByte;
 
 	public SpellByte(World world) {
 		super(world);

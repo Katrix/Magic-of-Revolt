@@ -16,9 +16,9 @@ import net.minecraft.world.World;
 
 public class SpellShort extends SpellObject implements ISpellVariable<SpellShort, SpellShort>, ICopyable<SpellShort> {
 
-	private short spellShort;
-	
 	private static final String NBT_SHORT = "short";
+	
+	private short spellShort;
 
 	public SpellShort(World world) {
 		super(world);

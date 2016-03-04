@@ -33,19 +33,22 @@ import net.minecraftforge.common.util.INBTSerializable;
 
 public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCompound> {
 
-	private Map<Integer, Spell> inputs = new HashMap<>();
-	protected World world;
-	protected ISpellActivator activator;
-	public int ticksUpdated = 0;
-	public int ticksExecuted = 0;
-	protected boolean warmupDone;
-	protected boolean executeDone;
-
 	public static final String NBT_INPUTS = "inputs";
 	public static final String NBT_KEY = "key";
 	public static final String NBT_VALUE = "value";
 	public static final String NBT_ID = "id";
+	
+	public int ticksUpdated = 0;
+	public int ticksExecuted = 0;
+	
+	protected World world;
+	protected ISpellActivator activator;
+	
+	protected boolean warmupDone;
+	protected boolean executeDone;
 
+	private Map<Integer, Spell> inputs = new HashMap<>();
+	
 	public Spell(World world) {
 		this.world = world;
 	}

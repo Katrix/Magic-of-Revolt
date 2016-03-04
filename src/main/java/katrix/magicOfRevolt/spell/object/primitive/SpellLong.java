@@ -16,9 +16,9 @@ import net.minecraft.world.World;
 
 public class SpellLong extends SpellObject implements ISpellVariable<SpellLong, SpellLong>, ICopyable<SpellLong> {
 
-	private long spellLong;
-	
 	private static final String NBT_LONG = "long";
+	
+	private long spellLong;
 
 	public SpellLong(World world) {
 		super(world);

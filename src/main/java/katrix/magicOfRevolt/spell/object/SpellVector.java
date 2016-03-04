@@ -19,9 +19,9 @@ import net.minecraftforge.common.util.Constants;
 
 public class SpellVector extends SpellObject implements ISpellVariable<SpellVector, SpellVector>, ICopyable<SpellVector> {
 
-	private Vec3 vector;
-	
 	private static final String NBT_VECTOR = "vector";
+	
+	private Vec3 vector;
 
 	public SpellVector(World world) {
 		super(world);

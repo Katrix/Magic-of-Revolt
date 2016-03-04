@@ -19,9 +19,9 @@ import net.minecraftforge.common.util.Constants;
 
 public class SpellBlockPos extends SpellObject implements ISpellVariable<SpellBlockPos, SpellBlockPos>, ICopyable<SpellBlockPos> {
 
-	private BlockPos pos;
-	
 	private static final String NBT_POS = "pos";
+	
+	private BlockPos pos;
 
 	public SpellBlockPos(World world) {
 		super(world);

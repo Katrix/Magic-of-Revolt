@@ -16,9 +16,9 @@ import net.minecraft.world.World;
 
 public class SpellFloat extends SpellObject implements ISpellVariable<SpellFloat, SpellFloat>, ICopyable<SpellFloat> {
 
-	private float spellFloat;
-	
 	private static final String NBT_FLOAT = "float";
+	
+	private float spellFloat;
 
 	public SpellFloat(World world) {
 		super(world);

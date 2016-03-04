@@ -16,7 +16,7 @@ import katrix.magicOfRevolt.spell.object.SpellVector;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.world.World;
 
-public class SpellVectorFromLook extends Spell implements ISpellVariable<SpellVectorFromLook, SpellVector>{
+public class SpellVectorFromLook extends Spell implements ISpellVariable<SpellVectorFromLook, SpellVector> {
 	
 	public static final int LIVING_INDEX = 0;
 	

@@ -13,12 +13,12 @@ import net.minecraft.util.Vec3;
 
 public interface ISpellActivator {
 	
-	public void activate();
+	void activate();
 	
-	public void disable();
+	void disable();
 	
-	public void setSpellContainer(ISpellContainer container);
+	void setSpellContainer(ISpellContainer container);
 	
-	public Vec3 getPosistion();
+	Vec3 getPosistion();
 
 }

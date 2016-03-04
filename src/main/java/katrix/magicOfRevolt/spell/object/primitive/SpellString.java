@@ -17,9 +17,9 @@ import net.minecraft.world.World;
 //Yes, I know that a String is technically not a primitive, but I still put it here for convenience sake.
 public class SpellString extends SpellObject implements ISpellVariable<SpellString, SpellString>, ICopyable<SpellString> {
 
-	private String string;
-	
 	private static final String NBT_STRING = "string";
+	
+	private String string;
 
 	public SpellString(World world) {
 		super(world);

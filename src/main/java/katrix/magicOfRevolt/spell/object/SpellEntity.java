@@ -17,9 +17,9 @@ import net.minecraft.world.World;
 
 public class SpellEntity extends SpellObject implements ISpellVariable<SpellEntity, SpellEntity>, ICopyable<SpellEntity> {
 
-	private Entity entity;
-	
 	private static final String NBT_ENTITY = "entity";
+	
+	private Entity entity;
 
 	public SpellEntity(World world) {
 		super(world);

@@ -26,7 +26,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class GuiButtonNgon extends GuiButton {
 
-	protected static final ResourceLocation buttonTextures = new ResourceLocation(LibMod.MODID.toLowerCase(), "textures/gui/hexagon.png");
+	protected static final ResourceLocation BUTTON_TEXTURE = new ResourceLocation(LibMod.MODID.toLowerCase(), "textures/gui/hexagon.png");
 	public final int cornerNum;
 	protected Polygon ngon;
 
@@ -48,10 +48,11 @@ public class GuiButtonNgon extends GuiButton {
 	public void drawButton(Minecraft mc, int mouseX, int mouseY) {
 		if (visible) {
 			FontRenderer fontrenderer = mc.fontRendererObj;
-			mc.getTextureManager().bindTexture(buttonTextures);
+			mc.getTextureManager().bindTexture(BUTTON_TEXTURE);
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 			hovered = mouseOver(mouseX, mouseY);
-			getHoverState(hovered);
+			@SuppressWarnings("unused")
+			int hover = getHoverState(hovered);
 			GlStateManager.enableBlend();
 			GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
 			GlStateManager.blendFunc(770, 771);

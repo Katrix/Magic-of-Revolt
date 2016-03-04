@@ -16,9 +16,9 @@ import net.minecraft.world.World;
 
 public class SpellDouble extends SpellObject implements ISpellVariable<SpellDouble, SpellDouble>, ICopyable<SpellDouble> {
 
-	private double spellDouble;
-	
 	private static final String NBT_DOUBLE = "double";
+	
+	private double spellDouble;
 
 	public SpellDouble(World world) {
 		super(world);

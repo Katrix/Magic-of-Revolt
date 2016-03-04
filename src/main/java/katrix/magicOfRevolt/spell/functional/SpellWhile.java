@@ -17,11 +17,11 @@ public class SpellWhile extends SpellFunctional {
 	private static final int SPELL_INDEX = 0;
 	private static final int CONDITION_INDEX = 1;
 	
+	private int limit = 0;
+	
 	public SpellWhile(World world) {
 		super(world);
 	}
-
-	private int limit = 0;
 
 	@Override
 	public void execute() {

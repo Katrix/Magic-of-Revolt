@@ -16,9 +16,9 @@ import net.minecraft.world.World;
 
 public class SpellBoolean extends SpellObject implements ISpellVariable<SpellBoolean, SpellBoolean>, ICopyable<SpellBoolean> {
 
-	private boolean spellBoolean;
-	
 	private static final String NBT_BOOLEAN = "boolean";
+	
+	private boolean spellBoolean;
 
 	public SpellBoolean(World world) {
 		super(world);
