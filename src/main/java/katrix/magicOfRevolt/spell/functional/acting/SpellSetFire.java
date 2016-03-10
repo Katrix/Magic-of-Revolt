@@ -9,6 +9,7 @@
 package katrix.magicOfRevolt.spell.functional.acting;
 
 import katrix.magicOfRevolt.spell.SpellDummy;
+import katrix.magicOfRevolt.spell.SpellException;
 import katrix.magicOfRevolt.spell.object.SpellLiving;
 import katrix.magicOfRevolt.spell.object.primitive.SpellInt;
 import net.minecraft.entity.EntityLivingBase;
@@ -24,7 +25,7 @@ public class SpellSetFire extends SpellTarget<SpellLiving> {
 	}
 
 	@Override
-	public void execute() {
+	public void execute() throws SpellException {
 		super.execute();
 		EntityLivingBase target = getTarget().getVariable().getLiving();
 		int duration = this.<SpellInt>getVariable(DURATION_INDEX).getInteger();
@@ -32,7 +33,7 @@ public class SpellSetFire extends SpellTarget<SpellLiving> {
 			target.setFire(duration);
 		}
 		else {
-			fizzleParameters();
+			throw new SpellException(SpellException.MISSING_ARGUMENTS);
 		}
 	}
 }

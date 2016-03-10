@@ -9,6 +9,7 @@
 package katrix.magicOfRevolt.spell.functional.acting;
 
 import katrix.magicOfRevolt.spell.SpellDummy;
+import katrix.magicOfRevolt.spell.SpellException;
 import katrix.magicOfRevolt.spell.object.SpellEntity;
 import katrix.magicOfRevolt.spell.object.SpellVector;
 import net.minecraft.entity.Entity;
@@ -28,7 +29,7 @@ public class SpellAddMotion extends SpellTarget<SpellEntity> {
 	}
 
 	@Override
-	public void execute() {
+	public void execute() throws SpellException {
 		super.execute();
 		if (!world.isRemote) {
 			Entity entity = getTarget().getEntity();

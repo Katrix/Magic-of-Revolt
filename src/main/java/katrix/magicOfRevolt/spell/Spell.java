@@ -23,7 +23,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
@@ -71,8 +70,19 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 			warmupDone = true;
 		}
 
-		if (isWarmupComplete() && !executeDone) {
-			execute();
+		if (isWarmupComplete() && !isExecuteComplete()) {
+			try {
+				execute();
+			}
+			catch (SpellException e) {
+				activator.disable();
+				//activator.getPlayer().sendMessage("spell.exception." + e.getMessage());
+				if(e.getexplosion()) {
+					Vec3 pos = activator.getPosistion();
+					int cost = getTotalMindCost();
+					world.createExplosion(null, pos.xCoord, pos.yCoord, pos.zCoord, 20F / cost, cost > 100 ? true : false);
+				}
+			}
 		}
 	}
 
@@ -103,7 +113,7 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 		return true;
 	}
 
-	public void execute() {
+	public void execute() throws SpellException {
 		ticksExecuted++;
 		executeDone = true;
 		renderParticle();
@@ -112,18 +122,6 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 	//TODO: Change to abstract once I have particles set up
 	public void renderParticle() {
 		
-	}
-
-	public void fizzle(String reason) {
-		IChatComponent message = new ChatComponentTranslation("spell.fizzle." + reason, new Object[0]);
-		addChatMessage(message);
-		int mindCost = getMindCost();
-		Vec3 pos = activator.getPosistion();
-		world.createExplosion(null, pos.xCoord, pos.yCoord, pos.zCoord, mindCost /20F, mindCost > 100 ? true : false);
-	}
-
-	public void fizzleParameters() {
-		fizzle("parameters");
 	}
 
 	public int getWarmup() {
@@ -186,8 +184,16 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 		return inputs.get(index);
 	}
 	
-	public <T extends SpellObject> T getVariable(int index) {
-		return ((ISpellVariable<?, T>)getInput(index)).getVariable();
+	@SuppressWarnings("unchecked")
+	protected <T extends SpellObject> T getVariable(int index) throws SpellException {
+		T var;
+		try {
+			var = ((ISpellVariable<?, T>)getInput(index)).getVariable();
+		}
+		catch (Exception e) {
+			throw new SpellException(SpellException.CAST_ERROR, e);
+		}
+		return var;
 	}
 
 	public String getSpellName() {

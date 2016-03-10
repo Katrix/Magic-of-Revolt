@@ -12,7 +12,7 @@ import katrix.magicOfRevolt.spell.object.SpellObject;
 
 public interface ISpellVariable<T extends Spell, V extends SpellObject> {
 	
-	V getVariable();
+	V getVariable() throws SpellException;
 	
 	T getSpell();
 	

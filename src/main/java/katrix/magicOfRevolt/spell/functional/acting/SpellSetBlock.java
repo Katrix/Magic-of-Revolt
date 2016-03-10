@@ -9,6 +9,7 @@
 package katrix.magicOfRevolt.spell.functional.acting;
 
 import katrix.magicOfRevolt.spell.SpellDummy;
+import katrix.magicOfRevolt.spell.SpellException;
 import katrix.magicOfRevolt.spell.object.SpellBlockPos;
 import katrix.magicOfRevolt.spell.object.SpellIBlockState;
 import net.minecraft.block.state.IBlockState;
@@ -25,7 +26,7 @@ public class SpellSetBlock extends SpellTarget<SpellBlockPos> {
 	}
 
 	@Override
-	public void execute() {
+	public void execute() throws SpellException {
 		super.execute();
 		BlockPos target = getTarget().getVariable().getPos();
 		IBlockState state = this.<SpellIBlockState>getVariable(STATE_INDEX).getBlockState();
@@ -33,7 +34,7 @@ public class SpellSetBlock extends SpellTarget<SpellBlockPos> {
 			world.setBlockState(target, state);
 		}
 		else {
-			fizzleParameters();
+			throw new SpellException(SpellException.MISSING_ARGUMENTS);
 		}
 	}
 }

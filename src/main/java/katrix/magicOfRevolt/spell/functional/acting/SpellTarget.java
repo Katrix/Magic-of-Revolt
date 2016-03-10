@@ -8,8 +8,8 @@
  */
 package katrix.magicOfRevolt.spell.functional.acting;
 
-import katrix.magicOfRevolt.spell.ISpellVariable;
 import katrix.magicOfRevolt.spell.SpellDummy;
+import katrix.magicOfRevolt.spell.SpellException;
 import katrix.magicOfRevolt.spell.functional.SpellFunctional;
 import katrix.magicOfRevolt.spell.object.SpellObject;
 import net.minecraft.world.World;
@@ -23,7 +23,7 @@ public abstract class SpellTarget<T extends SpellObject> extends SpellFunctional
 		setInput(new SpellDummy(world), TARGET_INDEX);
 	}
 	
-	protected T getTarget() {
-		return ((ISpellVariable<?, T>)getInput(TARGET_INDEX)).getVariable();
+	protected T getTarget() throws SpellException {
+		return this.<T>getVariable(TARGET_INDEX);
 	}
 }

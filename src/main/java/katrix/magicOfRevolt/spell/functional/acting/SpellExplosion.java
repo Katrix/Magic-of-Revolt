@@ -9,6 +9,7 @@
 package katrix.magicOfRevolt.spell.functional.acting;
 
 import katrix.magicOfRevolt.spell.SpellDummy;
+import katrix.magicOfRevolt.spell.SpellException;
 import katrix.magicOfRevolt.spell.object.SpellBlockPos;
 import katrix.magicOfRevolt.spell.object.primitive.SpellFloat;
 import net.minecraft.util.BlockPos;
@@ -24,7 +25,7 @@ public class SpellExplosion extends SpellTarget<SpellBlockPos> {
 	}
 
 	@Override
-	public void execute() {
+	public void execute() throws SpellException {
 		super.execute();
 		BlockPos pos = getTarget().getPos();
 		float strength = this.<SpellFloat>getVariable(STRENGTH_INDEX).getFloat();

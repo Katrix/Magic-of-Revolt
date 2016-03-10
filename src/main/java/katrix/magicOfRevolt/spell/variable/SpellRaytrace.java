@@ -11,6 +11,7 @@ package katrix.magicOfRevolt.spell.variable;
 import katrix.magicOfRevolt.spell.ISpellVariable;
 import katrix.magicOfRevolt.spell.Spell;
 import katrix.magicOfRevolt.spell.SpellDummy;
+import katrix.magicOfRevolt.spell.SpellException;
 import katrix.magicOfRevolt.spell.object.SpellMOP;
 import katrix.magicOfRevolt.spell.object.SpellVector;
 import net.minecraft.util.Vec3;
@@ -28,7 +29,7 @@ public class SpellRaytrace extends Spell implements ISpellVariable<SpellRaytrace
 	}
 
 	@Override
-	public SpellMOP getVariable() {
+	public SpellMOP getVariable() throws SpellException {
 		Vec3 vec1 = this.<SpellVector>getVariable(VEC1_INDEX).getVector();
 		Vec3 vec2 = this.<SpellVector>getVariable(VEC2_INDEX).getVector();
 		Vec3 tempVec1 = new Vec3(vec1.xCoord, vec1.yCoord, vec1.zCoord);

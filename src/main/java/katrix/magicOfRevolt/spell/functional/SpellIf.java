@@ -10,6 +10,7 @@ package katrix.magicOfRevolt.spell.functional;
 
 import katrix.magicOfRevolt.spell.Spell;
 import katrix.magicOfRevolt.spell.SpellDummy;
+import katrix.magicOfRevolt.spell.SpellException;
 import katrix.magicOfRevolt.spell.object.primitive.SpellBoolean;
 import net.minecraft.world.World;
 
@@ -27,7 +28,7 @@ public class SpellIf extends SpellFunctional {
 	}
 	
 	@Override
-	public void execute() {
+	public void execute() throws SpellException {
 		super.execute();
 		boolean condition = this.<SpellBoolean>getVariable(CONDITION_INDEX).getBoolean();
 		Spell spell1 = getInput(SPELL1_INDEX);

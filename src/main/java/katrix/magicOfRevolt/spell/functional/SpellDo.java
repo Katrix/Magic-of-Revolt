@@ -9,6 +9,7 @@
 package katrix.magicOfRevolt.spell.functional;
 
 import katrix.magicOfRevolt.spell.Spell;
+import katrix.magicOfRevolt.spell.SpellException;
 import katrix.magicOfRevolt.spell.object.primitive.SpellBoolean;
 import net.minecraft.world.World;
 
@@ -24,7 +25,7 @@ public class SpellDo extends SpellFunctional {
 	}
 
 	@Override
-	public void execute() {
+	public void execute() throws SpellException {
 		super.execute();
 		Spell spell = getInput(SPELL_INDEX);
 		boolean condition = this.<SpellBoolean>getVariable(CONDITION_INDEX).getBoolean();
@@ -35,7 +36,7 @@ public class SpellDo extends SpellFunctional {
 		} while (condition && limit < 1000);
 		
 		if(limit >= 1000) {
-			fizzle("infiniteLoop");
+			throw new SpellException(SpellException.INFINITE_LOOP, true, 2);
 		}
 		warmupDone =true;
 	}
