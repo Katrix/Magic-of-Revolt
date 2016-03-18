@@ -12,11 +12,12 @@ import katrix.magicOfRevolt.spell.ISpellVariable;
 import katrix.magicOfRevolt.spell.object.SpellObject;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 //Not really a primitive. Used where you would normally use void or null. A real null is uses to specify that a input was never set.
 public final class SpellVoid extends SpellObject implements ISpellVariable<SpellVoid, SpellVoid> {
 
-	public static final SpellVoid VOID = new SpellVoid(null); //FIXME: Need to find static way to access entity world
+	public static final SpellVoid VOID = new SpellVoid(FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld()); //FIXME: Need to find static way to access entity world
 	public static final String SPELL_NAME = "magicOfRevolt:void";
 
 	private SpellVoid(World world) {

@@ -33,11 +33,11 @@ group= "katrix.magicOfRevolt"
 archivesBaseName = "magicOfRevolt"
 
 minecraft {
-    version = config.mc_version + "-" + config.forge_version
+    version = config.mc_version + "-" + config.forge_version + "-" + config.mc_version
 	if (file('../run1.9').exists()) {
 		runDir = "../run1.9"
 	} else {
-		runDir = "run1.9"
+		runDir = "run"
 	}
     
     // the mappings can be changed at any time, and must be in the following format.
