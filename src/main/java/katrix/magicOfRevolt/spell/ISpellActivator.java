@@ -9,7 +9,7 @@
 package katrix.magicOfRevolt.spell;
 
 import katrix.magicOfRevolt.spell.container.ISpellContainer;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.math.Vec3d;
 
 public interface ISpellActivator {
 	
@@ -19,6 +19,6 @@ public interface ISpellActivator {
 	
 	void setSpellContainer(ISpellContainer container);
 	
-	Vec3 getPosistion();
+	Vec3d getPosistion();
 
 }

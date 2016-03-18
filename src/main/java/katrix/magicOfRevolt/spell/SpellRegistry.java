@@ -68,8 +68,8 @@ public class SpellRegistry {
 	}
 
 	public static Spell createSpellByName(String spellName, World world) {
-		if (spellName.equals(SpellVoid.spellName))
-			return SpellVoid.spell;
+		if (spellName.equals(SpellVoid.SPELL_NAME))
+			return SpellVoid.VOID;
 
 		Spell spell = null;
 		try {
@@ -88,8 +88,8 @@ public class SpellRegistry {
 
 	public static Spell createSpellFromNBT(NBTTagCompound tag, World world) {
 		String spellId = tag.getString(Spell.NBT_ID);
-		if (spellId.equals(SpellVoid.spellName))
-			return SpellVoid.spell;
+		if (spellId.equals(SpellVoid.SPELL_NAME))
+			return SpellVoid.VOID;
 		
 		Spell spell = null;
 		Class<? extends Spell> clazz = null;

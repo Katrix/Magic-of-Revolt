@@ -12,7 +12,7 @@ import katrix.magicOfRevolt.spell.SpellDummy;
 import katrix.magicOfRevolt.spell.SpellException;
 import katrix.magicOfRevolt.spell.object.SpellBlockPos;
 import katrix.magicOfRevolt.spell.object.primitive.SpellFloat;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class SpellExplosion extends SpellTarget<SpellBlockPos> {

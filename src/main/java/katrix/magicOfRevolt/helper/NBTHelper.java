@@ -15,10 +15,10 @@ import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagDouble;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 
@@ -27,10 +27,10 @@ public class NBTHelper {
 	public static final String NBT_BLOCKPOS = "blockPos";
 	public static final String NBT_VECTOR = "vector";
 	public static final String NBT_FACING = "facing";
-	public static final String NBT_MOP_TYPE_OF_HIT = "typeOfHit";
+	public static final String NBT_RAY_TYPE_OF_HIT = "typeOfHit";
 	public static final String NBT_UUID = "uuid";
 
-	public static void setVector(NBTTagCompound tag, String tagName, Vec3 vector) {
+	public static void setVector(NBTTagCompound tag, String tagName, Vec3d vector) {
 		NBTTagList list = new NBTTagList();
 		list.appendTag(new NBTTagDouble(vector.xCoord));
 		list.appendTag(new NBTTagDouble(vector.yCoord));
@@ -38,9 +38,9 @@ public class NBTHelper {
 		tag.setTag(tagName, list);
 	}
 
-	public static Vec3 getVector(NBTTagCompound tag, String tagName) {
+	public static Vec3d getVector(NBTTagCompound tag, String tagName) {
 		NBTTagList list = tag.getTagList(tagName, Constants.NBT.TAG_DOUBLE);
-		return new Vec3(list.getDoubleAt(0), list.getDoubleAt(1), list.getDoubleAt(2));
+		return new Vec3d(list.getDoubleAt(0), list.getDoubleAt(1), list.getDoubleAt(2));
 	}
 
 	public static void setBlockPos(NBTTagCompound tag, String tagName, BlockPos pos) {
@@ -56,31 +56,31 @@ public class NBTHelper {
 		return new BlockPos(list.getDoubleAt(0), list.getDoubleAt(1), list.getDoubleAt(2));
 	}
 
-	public static void setMOP(NBTTagCompound tag, String tagName, MovingObjectPosition mop) {
-		switch (mop.typeOfHit) {
+	public static void setRay(NBTTagCompound tag, String tagName, RayTraceResult ray) {
+		switch (ray.typeOfHit) {
 			case BLOCK:
-				tag.setInteger(NBT_MOP_TYPE_OF_HIT, 0);
-				setBlockPos(tag, NBT_BLOCKPOS, mop.getBlockPos());
-				tag.setInteger("sideHit", mop.sideHit.getIndex());
-				setVector(tag, NBT_VECTOR, mop.hitVec);
+				tag.setInteger(NBT_RAY_TYPE_OF_HIT, 0);
+				setBlockPos(tag, NBT_BLOCKPOS, ray.getBlockPos());
+				tag.setInteger("sideHit", ray.sideHit.getIndex());
+				setVector(tag, NBT_VECTOR, ray.hitVec);
 				break;
 			case ENTITY:
-				setEntityByUUID(tag, NBT_UUID, mop.entityHit);
-				setVector(tag, NBT_VECTOR, mop.hitVec);
+				setEntityByUUID(tag, NBT_UUID, ray.entityHit);
+				setVector(tag, NBT_VECTOR, ray.hitVec);
 				break;
 			default:
 				break;
 		}
 	}
 
-	public static MovingObjectPosition getMOP(NBTTagCompound tag, String tagName, World world) {
-		switch (tag.getInteger(NBT_MOP_TYPE_OF_HIT)) {
+	public static RayTraceResult getRay(NBTTagCompound tag, String tagName, World world) {
+		switch (tag.getInteger(NBT_RAY_TYPE_OF_HIT)) {
 			case 0:
-				return new MovingObjectPosition(getVector(tag, NBT_VECTOR), EnumFacing.getFront(tag.getInteger(NBT_FACING)), getBlockPos(tag, NBT_BLOCKPOS));
+				return new RayTraceResult(getVector(tag, NBT_VECTOR), EnumFacing.getFront(tag.getInteger(NBT_FACING)), getBlockPos(tag, NBT_BLOCKPOS));
 			case 1:
 				Entity entity = getEntityByUUID(tag, NBT_UUID, world);
 				if (entity != null)
-					return new MovingObjectPosition(entity, getVector(tag, NBT_VECTOR));
+					return new RayTraceResult(entity, getVector(tag, NBT_VECTOR));
 				else
 					return null;
 			default:

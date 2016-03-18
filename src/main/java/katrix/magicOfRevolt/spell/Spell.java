@@ -21,11 +21,12 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.IChatComponent;
-import net.minecraft.util.StatCollector;
-import net.minecraft.util.Vec3;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.INBTSerializable;
@@ -78,7 +79,7 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 				activator.disable();
 				//activator.getPlayer().sendMessage("spell.exception." + e.getMessage());
 				if(e.getexplosion()) {
-					Vec3 pos = activator.getPosistion();
+					Vec3d pos = activator.getPosistion();
 					int cost = getTotalMindCost();
 					world.createExplosion(null, pos.xCoord, pos.yCoord, pos.zCoord, 20F / cost, cost > 100 ? true : false);
 				}
@@ -206,19 +207,19 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 
 	@Override
 	public String getName() {
-		return StatCollector.translateToLocal("spell." + getSpellName() + ".name");
+		return I18n.translateToLocal("spell." + getSpellName() + ".name");
 	}
 
 	@Override
-	public IChatComponent getDisplayName() {
-		ChatComponentText chatcomponenttext = new ChatComponentText(getName());
+	public ITextComponent getDisplayName() {
+		ITextComponent chatcomponenttext = new TextComponentString(getName());
 		//chatcomponenttext.getChatStyle().setChatHoverEvent(this.getHoverEvent());
 		//chatcomponenttext.getChatStyle().setInsertion(this.getUniqueID().toString());
 		return chatcomponenttext;
 	}
 
 	@Override
-	public void addChatMessage(IChatComponent component) {
+	public void addChatMessage(ITextComponent component) {
 	}
 
 	@Override
@@ -232,8 +233,8 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 	}
 
 	@Override
-	public Vec3 getPositionVector() {
-		return new Vec3(0D, 0D, 0D);
+	public Vec3d getPositionVector() {
+		return new Vec3d(0D, 0D, 0D);
 	}
 
 	@Override
@@ -253,6 +254,11 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 
 	@Override
 	public void setCommandStat(Type type, int amount) {
+	}
+	
+	@Override
+	public MinecraftServer getServer() {
+		return world.getMinecraftServer();
 	}
 
 	@Override

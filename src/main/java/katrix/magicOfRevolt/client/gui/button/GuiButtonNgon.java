@@ -20,7 +20,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 
@@ -54,8 +54,8 @@ public class GuiButtonNgon extends GuiButton {
 			@SuppressWarnings("unused")
 			int hover = getHoverState(hovered);
 			GlStateManager.enableBlend();
-			GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
-			GlStateManager.blendFunc(770, 771);
+			GlStateManager.tryBlendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
+			GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 			//drawNGon(0xFFFFFFFF);
 			drawTexturedNGon(0, 0);
 
@@ -88,15 +88,15 @@ public class GuiButtonNgon extends GuiButton {
 		GlStateManager.color(r, g, b, a);
 
 		Tessellator tes = Tessellator.getInstance();
-		WorldRenderer wr = tes.getWorldRenderer();
+		VertexBuffer vb = tes.getBuffer();
 
-		wr.begin(GL11.GL_TRIANGLE_FAN, DefaultVertexFormats.POSITION_COLOR);
+		vb.begin(GL11.GL_TRIANGLE_FAN, DefaultVertexFormats.POSITION_COLOR);
 		for (PathIterator path = ngon.getPathIterator(null); !path.isDone(); path.next()) {
 			float[] coords = new float[6];
 			path.currentSegment(coords);
 			int x = (int)coords[0];
 			int y = (int)coords[1];
-			wr.pos(x, y, zLevel).color(r, g, b, a).endVertex();
+			vb.pos(x, y, zLevel).color(r, g, b, a).endVertex();
 		}
 		tes.draw();
 
@@ -109,15 +109,15 @@ public class GuiButtonNgon extends GuiButton {
 		float fy = 1F / height;
 
 		Tessellator tes = Tessellator.getInstance();
-		WorldRenderer wr = tes.getWorldRenderer();
+		VertexBuffer vb = tes.getBuffer();
 
-		wr.begin(GL11.GL_TRIANGLE_FAN, DefaultVertexFormats.POSITION_TEX);
+		vb.begin(GL11.GL_TRIANGLE_FAN, DefaultVertexFormats.POSITION_TEX);
 		for (PathIterator path = ngon.getPathIterator(null); !path.isDone(); path.next()) {
 			float[] coords = new float[6];
 			path.currentSegment(coords);
 			int x = (int)coords[0];
 			int y = (int)coords[1];
-			wr.pos(x, y, zLevel).tex((x - xPosition + u) * fx, (y - yPosition + v) * fy).endVertex();
+			vb.pos(x, y, zLevel).tex((x - xPosition + u) * fx, (y - yPosition + v) * fy).endVertex();
 		}
 		tes.draw();
 	}

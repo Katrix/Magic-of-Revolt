@@ -13,7 +13,7 @@ import katrix.magicOfRevolt.lib.LibGuiID;
 import katrix.magicOfRevolt.spell.container.SpellContainerHexagon;
 import katrix.magicOfRevolt.tile.TileMagicCircle;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 

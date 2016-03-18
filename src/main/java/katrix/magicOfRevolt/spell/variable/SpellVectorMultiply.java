@@ -13,7 +13,7 @@ import katrix.magicOfRevolt.spell.Spell;
 import katrix.magicOfRevolt.spell.SpellDummy;
 import katrix.magicOfRevolt.spell.SpellException;
 import katrix.magicOfRevolt.spell.object.SpellVector;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class SpellVectorMultiply extends Spell implements ISpellVariable<SpellVectorMultiply, SpellVector> {
@@ -29,9 +29,9 @@ public class SpellVectorMultiply extends Spell implements ISpellVariable<SpellVe
 
 	@Override
 	public SpellVector getVariable() throws SpellException {
-		Vec3 vec1 = this.<SpellVector>getVariable(VEC1_INDEX).getVector();
-		Vec3 vec2 = this.<SpellVector>getVariable(VEC2_INDEX).getVector();
-		return new SpellVector(world).setVector(new Vec3(vec1.xCoord * vec2.xCoord, vec1.yCoord * vec2.yCoord, vec1.zCoord * vec2.zCoord));
+		Vec3d vec1 = this.<SpellVector>getVariable(VEC1_INDEX).getVector();
+		Vec3d vec2 = this.<SpellVector>getVariable(VEC2_INDEX).getVector();
+		return new SpellVector(world).setVector(new Vec3d(vec1.xCoord * vec2.xCoord, vec1.yCoord * vec2.yCoord, vec1.zCoord * vec2.zCoord));
 	}
 
 	@Override

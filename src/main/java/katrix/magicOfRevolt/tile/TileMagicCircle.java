@@ -16,9 +16,9 @@ import katrix.magicOfRevolt.spell.SpellOutput;
 import katrix.magicOfRevolt.spell.container.ISpellContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class TileMagicCircle extends TileEntity implements ITickable, ISpellActivator {
@@ -67,8 +67,8 @@ public class TileMagicCircle extends TileEntity implements ITickable, ISpellActi
 	}
 
 	@Override
-	public Vec3 getPosistion() {
+	public Vec3d getPosistion() {
 		BlockPos pos = getPos();
-		return new Vec3(pos.getX(), pos.getY(), pos.getZ());
+		return new Vec3d(pos.getX(), pos.getY(), pos.getZ());
 	}
 }

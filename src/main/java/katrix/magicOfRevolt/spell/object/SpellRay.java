@@ -10,43 +10,43 @@ package katrix.magicOfRevolt.spell.object;
 
 import katrix.magicOfRevolt.spell.ICopyable;
 import katrix.magicOfRevolt.spell.ISpellVariable;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public class SpellMOP extends SpellObject implements ISpellVariable<SpellMOP, SpellMOP>, ICopyable<SpellMOP> {
+public class SpellRay extends SpellObject implements ISpellVariable<SpellRay, SpellRay>, ICopyable<SpellRay> {
 
-	private MovingObjectPosition mop;
+	private RayTraceResult ray;
 
-	public SpellMOP(World world) {
+	public SpellRay(World world) {
 		super(world);
 	}
 
-	private SpellMOP(SpellMOP vector) {
+	private SpellRay(SpellRay vector) {
 		super(vector);
-		mop = vector.mop;
+		ray = vector.ray;
 	}
 
 	@Override
-	public SpellMOP copy() {
-		return new SpellMOP(this);
+	public SpellRay copy() {
+		return new SpellRay(this);
 	}
 
-	public MovingObjectPosition getMOP() {
-		return mop;
+	public RayTraceResult getRay() {
+		return ray;
 	}
 
-	public SpellMOP setMOP(MovingObjectPosition mop) {
-		this.mop = mop;
+	public SpellRay setRay(RayTraceResult ray) {
+		this.ray = ray;
 		return this;
 	}
 
 	@Override
-	public SpellMOP getVariable() {
+	public SpellRay getVariable() {
 		return this;
 	}
 
 	@Override
-	public SpellMOP getSpell() {
+	public SpellRay getSpell() {
 		return this;
 	}
 }

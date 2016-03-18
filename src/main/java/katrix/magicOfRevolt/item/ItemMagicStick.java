@@ -13,8 +13,10 @@ import katrix.magicOfRevolt.lib.LibItemName;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class ItemMagicStick extends ItemRevoltBase {
@@ -24,10 +26,11 @@ public class ItemMagicStick extends ItemRevoltBase {
 		setCreativeTab(CreativeTabs.tabTools);
 		setUnlocalizedName(LibItemName.MAGIC_STICK);
 	}
-
+	
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
-		BlockPos blockPos = new BlockPos(pos.getX(), pos.getY(), pos.getZ()).offset(side);
+    public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+    {
+		BlockPos blockPos = new BlockPos(pos.getX(), pos.getY(), pos.getZ()).offset(facing);
 		world.setBlockState(blockPos, RevoltBlock.magicCircle.getDefaultState());
 		
 		/*
@@ -65,6 +68,6 @@ public class ItemMagicStick extends ItemRevoltBase {
 		}
 		*/
 		
-		return super.onItemUse(stack, player, world, pos, side, hitX, hitY, hitZ);
-	}
+        return super.onItemUse(stack, player, world, pos, hand, facing, hitX, hitY, hitZ);
+    }
 }

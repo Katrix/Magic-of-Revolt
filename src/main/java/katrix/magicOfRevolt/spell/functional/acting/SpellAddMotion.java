@@ -15,8 +15,8 @@ import katrix.magicOfRevolt.spell.object.SpellVector;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.network.play.server.S12PacketEntityVelocity;
-import net.minecraft.util.Vec3;
+import net.minecraft.network.play.server.SPacketEntityVelocity;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class SpellAddMotion extends SpellTarget<SpellEntity> {
@@ -33,13 +33,13 @@ public class SpellAddMotion extends SpellTarget<SpellEntity> {
 		super.execute();
 		if (!world.isRemote) {
 			Entity entity = getTarget().getEntity();
-			Vec3 vector = this.<SpellVector>getVariable(VECTOR_INDEX).getVector();
+			Vec3d vector = this.<SpellVector>getVariable(VECTOR_INDEX).getVector();
 			entity.addVelocity(vector.xCoord, vector.yCoord, vector.zCoord);
 			entity.posX += vector.xCoord;
 			entity.posY += vector.yCoord;
 			entity.posZ += vector.zCoord;
 			if (entity instanceof EntityPlayer) {
-				((EntityPlayerMP)entity).playerNetServerHandler.sendPacket(new S12PacketEntityVelocity(entity));
+				((EntityPlayerMP)entity).playerNetServerHandler.sendPacket(new SPacketEntityVelocity(entity));
 			}
 		}
 	}
