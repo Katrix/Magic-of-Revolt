@@ -6,24 +6,29 @@
  * Magic of Revolt is Open Source and distributed under the
  * Botania license: https://github.com/Katrix-/Magic-of-Revolt/blob/master/LICENSE.md
  */
-package katrix.magicOfRevolt.spell;
+package katrix.magicOfRevolt.spell.compiler.hexagon;
 
-import net.minecraft.world.World;
+public enum HexagonSide {
+	UP_RIGHT(1, -1),
+	RIGHT(1, 0),
+	DOWN_RIGHT(0, 1),
+	DOWN_LEFT(-1, 1),
+	LEFT(-1, 0),
+	UP_LEFT(0, -1);
 
-public class SpellDummy extends Spell {
+	private int x;
+	private int y;
 
-	public SpellDummy(World world) {
-		super(world);
-		executeDone = true;
+	HexagonSide(int x, int y) {
+		this.x = x;
+		this.y = y;
 	}
 
-	@Override
-	public boolean isWarmupComplete() {
-		return true;
+	public int getX() {
+		return x;
 	}
 
-	@Override
-	public boolean isExecuteComplete() {
-		return true;
+	public int getY() {
+		return y;
 	}
 }

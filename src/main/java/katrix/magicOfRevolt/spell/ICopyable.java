@@ -8,7 +8,7 @@
  */
 package katrix.magicOfRevolt.spell;
 
-public interface ICopyable<T extends Object> {
+public interface ICopyable<T> {
 
 	T copy();
 

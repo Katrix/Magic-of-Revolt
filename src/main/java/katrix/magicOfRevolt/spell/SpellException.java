@@ -12,10 +12,10 @@ public class SpellException extends Exception {
 		super(arg0);
 	}
 	
-	public SpellException(String arg0, boolean explosion, float strengh) {
+	public SpellException(String arg0, boolean explosion, float strength) {
 		super(arg0);
 		this.explosion = explosion;
-		this.strength = strengh;
+		this.strength = strength;
 	}
 	
 	public SpellException(String arg0, Throwable cause) {
@@ -28,7 +28,7 @@ public class SpellException extends Exception {
 		this.strength = strength;
 	}
 	
-	public boolean getexplosion() {
+	public boolean getExplosion() {
 		return explosion;
 	}
 	

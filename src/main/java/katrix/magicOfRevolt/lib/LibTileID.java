@@ -11,6 +11,6 @@ package katrix.magicOfRevolt.lib;
 
 public class LibTileID {
 
-	public static final String magicCircle = "magicCircle";
+	public static final String MAGIC_CIRCLE = "MAGIC_CIRCLE";
 
 }

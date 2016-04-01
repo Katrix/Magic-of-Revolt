@@ -11,6 +11,15 @@ package katrix.magicOfRevolt.block;
 import katrix.magicOfRevolt.MagicOfRevolt;
 import katrix.magicOfRevolt.lib.LibBlockName;
 import katrix.magicOfRevolt.lib.LibGuiID;
+import katrix.magicOfRevolt.spell.SpellOutput;
+import katrix.magicOfRevolt.spell.functional.acting.SpellAddMotion;
+import katrix.magicOfRevolt.spell.functional.acting.SpellExplosion;
+import katrix.magicOfRevolt.spell.functional.acting.SpellTarget;
+import katrix.magicOfRevolt.spell.object.SpellBlockPos;
+import katrix.magicOfRevolt.spell.object.SpellEntity;
+import katrix.magicOfRevolt.spell.object.SpellLiving;
+import katrix.magicOfRevolt.spell.object.primitive.SpellFloat;
+import katrix.magicOfRevolt.spell.variable.SpellVectorFromLook;
 import katrix.magicOfRevolt.tile.TileMagicCircle;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -35,42 +44,37 @@ public class BlockMagicCircle extends BlockRevoltBase implements ITileEntityProv
 
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
-		/*
 		if(player.isSneaking()) {
 			getTile(world, pos).activate();
 		}
 		else {
 			SpellBlockPos spellPos = new SpellBlockPos(world);
 			spellPos.setPos(pos);
-			
+
 			SpellFloat spellFloat = new SpellFloat(world);
 			spellFloat.setFloat(3F);
-			
+
 			SpellExplosion explode = new SpellExplosion(world);
 			explode.setInput(spellFloat, SpellExplosion.STRENGTH_INDEX).setInput(spellPos, SpellTarget.TARGET_INDEX);
-			
+
 			SpellLiving living = new SpellLiving(world);
 			living.setLiving(player);
-			
+
 			SpellVectorFromLook vector = new SpellVectorFromLook(world);
 			vector.setInput(living, SpellVectorFromLook.LIVING_INDEX);
-			
+
 			SpellEntity entity = new SpellEntity(world);
 			entity.setEntity(player);
-			
+
 			SpellAddMotion motion = new SpellAddMotion(world);
 			motion.setInput(vector, SpellAddMotion.VECTOR_INDEX).setInput(entity, SpellTarget.TARGET_INDEX);
-			
+
 			SpellOutput output = new SpellOutput(world);
 			output.setInput(explode, 1).setInput(motion, 4);
-			
-			SpellContainerHexagon hex = new SpellContainerHexagon();
-			hex.setSpellAtPoint(output, 3, 5);
-			
-			getTile(world, pos).setSpellContainer(hex);
+
+			getTile(world, pos).setSpellAtPoint(output, 2, 3);
 		}
-		*/
-		
+
 		player.openGui(MagicOfRevolt.instance, LibGuiID.SPELLSLINGER_CREATION, world, pos.getX(), pos.getY(), pos.getZ());
 		return true;
 	}
@@ -86,8 +90,7 @@ public class BlockMagicCircle extends BlockRevoltBase implements ITileEntityProv
 	
 	@Override
     @SideOnly(Side.CLIENT)
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState worldIn, World pos, BlockPos state)
-    {
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState worldIn, World pos, BlockPos state) {
         return worldIn.getBoundingBox(pos, state).offset(state);
     }
 }

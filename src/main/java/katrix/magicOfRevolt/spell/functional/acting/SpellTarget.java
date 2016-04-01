@@ -24,6 +24,6 @@ public abstract class SpellTarget<T extends SpellObject> extends SpellFunctional
 	}
 	
 	protected T getTarget() throws SpellException {
-		return this.<T>getVariable(TARGET_INDEX);
+		return this.getVariable(TARGET_INDEX);
 	}
 }

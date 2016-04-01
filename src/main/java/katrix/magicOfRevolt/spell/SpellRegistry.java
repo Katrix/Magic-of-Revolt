@@ -130,7 +130,7 @@ public class SpellRegistry {
 		return instance().classStringMap.inverse().get(name);
 	}
 
-	public class SpellRegistration {
+	public static class SpellRegistration {
 
 		private Class<? extends Spell> clazz;
 		private ModContainer container;

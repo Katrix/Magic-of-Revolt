@@ -39,7 +39,7 @@ public class GuiButtonNgon extends GuiButton {
 	}
 
 	public GuiButtonNgon(int buttonId, int x, int y, int sizeX, int sizeY, int corners, String buttonText) {
-		super(buttonId, x, y, sizeX, sizeX, buttonText);
+		super(buttonId, x, y, sizeX, sizeY, buttonText);
 		cornerNum = corners;
 		ngon = getNGon();
 	}
@@ -51,12 +51,9 @@ public class GuiButtonNgon extends GuiButton {
 			mc.getTextureManager().bindTexture(BUTTON_TEXTURE);
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 			hovered = mouseOver(mouseX, mouseY);
-			@SuppressWarnings("unused")
-			int hover = getHoverState(hovered);
 			GlStateManager.enableBlend();
 			GlStateManager.tryBlendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
 			GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-			//drawNGon(0xFFFFFFFF);
 			drawTexturedNGon(0, 0);
 
 			mouseDragged(mc, mouseX, mouseY);
@@ -152,10 +149,10 @@ public class GuiButtonNgon extends GuiButton {
 
 		for (int i = 0; i < cornerNum; i++) {
 			double angle = 2F * Math.PI * (i + orientationAngle) / cornerNum * -1;
-			int offsetX = (int)(width / 2 * Math.cos(angle));
-			int offsetY = (int)(height / 2 * Math.sin(angle));
-			int cornerX = center.x + offsetX;
-			int cornerY = center.y + offsetY;
+			double offsetX = width / 2 * Math.cos(angle);
+			double offsetY = height / 2 * Math.sin(angle);
+			int cornerX = (int)(center.x + offsetX);
+			int cornerY = (int)(center.y + offsetY);
 			ngon.addPoint(cornerX, cornerY);
 		}
 

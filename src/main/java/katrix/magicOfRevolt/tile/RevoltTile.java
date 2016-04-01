@@ -14,6 +14,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class RevoltTile {
 
 	public static void preInit() {
-		GameRegistry.registerTileEntity(TileMagicCircle.class, LibTileID.magicCircle);
+		GameRegistry.registerTileEntity(TileMagicCircle.class, LibTileID.MAGIC_CIRCLE);
 	}
 }

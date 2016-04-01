@@ -10,9 +10,10 @@ package katrix.magicOfRevolt;
 
 import katrix.magicOfRevolt.block.RevoltBlock;
 import katrix.magicOfRevolt.handler.ConfigHandler;
-import katrix.magicOfRevolt.handler.GuiHandler;
+import katrix.magicOfRevolt.net.GuiHandler;
 import katrix.magicOfRevolt.item.RevoltItem;
 import katrix.magicOfRevolt.lib.LibMod;
+import katrix.magicOfRevolt.net.PacketHandler;
 import katrix.magicOfRevolt.tile.RevoltTile;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -40,6 +41,7 @@ public class MagicOfRevolt {
 		RevoltTile.preInit();
 		proxy.registerModels();
 		proxy.registerSpells();
+		PacketHandler.preInit();
 	}
 
 	@EventHandler

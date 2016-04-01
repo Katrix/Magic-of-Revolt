@@ -6,12 +6,11 @@
  * Magic of Revolt is Open Source and distributed under the
  * Botania license: https://github.com/Katrix-/Magic-of-Revolt/blob/master/LICENSE.md
  */
-package katrix.magicOfRevolt.handler;
+package katrix.magicOfRevolt.net;
 
 import katrix.magicOfRevolt.client.gui.GuiHexagonSpellCreation;
+import katrix.magicOfRevolt.container.ContainerHexagonSpellCreation;
 import katrix.magicOfRevolt.lib.LibGuiID;
-import katrix.magicOfRevolt.spell.container.SpellContainerHexagon;
-import katrix.magicOfRevolt.tile.TileMagicCircle;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -21,9 +20,9 @@ public class GuiHandler implements IGuiHandler {
 
 	@Override
 	public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
-		switch (id) {
+		switch(id) {
 			case LibGuiID.SPELLSLINGER_CREATION: {
-				return new GuiHexagonSpellCreation((SpellContainerHexagon)((TileMagicCircle)world.getTileEntity(new BlockPos(x, y, z))).getContainer());
+				return new GuiHexagonSpellCreation(player, world, new BlockPos(x, y, z));
 			}
 			default:
 				return null;
@@ -32,7 +31,10 @@ public class GuiHandler implements IGuiHandler {
 
 	@Override
 	public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
-		switch (id) {
+		switch(id) {
+			case LibGuiID.SPELLSLINGER_CREATION: {
+				return new ContainerHexagonSpellCreation(player, world, new BlockPos(x, y, z));
+			}
 			default:
 				return null;
 		}

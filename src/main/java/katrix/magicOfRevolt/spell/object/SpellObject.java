@@ -23,6 +23,16 @@ public abstract class SpellObject extends Spell {
 	
 	@Override
 	public void updateChild() {
-		warmupDone = true; //Objects don't have children
+		//NO-OP Objects don't have children
+	}
+
+	@Override
+	public void onUpdate() {
+		super.onUpdate();
+	}
+
+	@Override
+	public boolean isExecuteComplete() {
+		return true;
 	}
 }

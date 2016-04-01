@@ -11,11 +11,11 @@ package katrix.magicOfRevolt.spell;
 import katrix.magicOfRevolt.spell.object.primitive.SpellBoolean;
 import net.minecraft.world.World;
 
-public class SpellContinousExecute extends Spell {
+public class SpellContinuousExecute extends Spell {
 	
 	public static final int CONDITION_INDEX = 0;
 
-	public SpellContinousExecute(World world) {
+	public SpellContinuousExecute(World world) {
 		super(world);
 		setInput(new SpellDummy(world), CONDITION_INDEX);
 	}

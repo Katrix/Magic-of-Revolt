@@ -8,6 +8,7 @@
  */
 package katrix.magicOfRevolt;
 
+import katrix.magicOfRevolt.spell.SpellDummy;
 import katrix.magicOfRevolt.spell.SpellOutput;
 import katrix.magicOfRevolt.spell.SpellRegistry;
 import katrix.magicOfRevolt.spell.functional.acting.SpellAddMotion;
@@ -35,5 +36,6 @@ public class CommonProxy {
 		SpellRegistry.register(SpellLiving.class, "objectLiving", MagicOfRevolt.instance);
 		SpellRegistry.register(SpellVectorFromLook.class, "lookVec", MagicOfRevolt.instance);
 		SpellRegistry.register(SpellAddMotion.class, "addMotion", MagicOfRevolt.instance);
+		SpellRegistry.register(SpellDummy.class, "dummy", MagicOfRevolt.instance);
 	}
 }

@@ -42,7 +42,7 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 	public int ticksExecuted = 0;
 	
 	protected World world;
-	protected ISpellActivator activator;
+	public ISpellActivator activator;
 	
 	protected boolean warmupDone;
 	protected boolean executeDone;
@@ -66,7 +66,7 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 	public void onUpdate() {
 		ticksUpdated++;
 		
-		if (warmupDone || ticksUpdated > getWarmup()) {
+		if(warmupDone || ticksUpdated > getWarmup()) {
 			updateChild();
 			warmupDone = true;
 		}
@@ -78,40 +78,40 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 			catch (SpellException e) {
 				activator.disable();
 				//activator.getPlayer().sendMessage("spell.exception." + e.getMessage());
-				if(e.getexplosion()) {
-					Vec3d pos = activator.getPosistion();
+				if(e.getExplosion()) {
+					Vec3d pos = activator.getPosition();
 					int cost = getTotalMindCost();
-					world.createExplosion(null, pos.xCoord, pos.yCoord, pos.zCoord, 20F / cost, cost > 100 ? true : false);
+					world.createExplosion(null, pos.xCoord, pos.yCoord, pos.zCoord, 20F / cost, cost > 100);
 				}
 			}
 		}
 	}
 
 	public void updateChild() {
-		for (Spell spell : getInputs()) {
-			spell.onUpdate();
-		}
+		getInputs().forEach(Spell::onUpdate);
 	}
 
 	public boolean isWarmupComplete() {
-		if (ticksUpdated > getWarmup()) {
-			for (Spell spell : getInputs()) {
-				if (!spell.isWarmupComplete() || !spell.warmupDone)
+		if(warmupDone) {
+			for(Spell spell : getInputs()) {
+				if(!spell.isWarmupComplete())
 					return false;
 			}
+			return true;
 		}
-		else
-			return false;
-		
-		return true;
+		return false;
 	}
 	
 	public boolean isExecuteComplete() {
-		for (Spell spell : getInputs()) {
-			if (!spell.isExecuteComplete() || !spell.executeDone)
-				return false;
+		if(executeDone) {
+			for(Spell spell : getInputs()) {
+				if(!spell.isExecuteComplete()) {
+					return false;
+				}
+			}
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 	public void execute() throws SpellException {

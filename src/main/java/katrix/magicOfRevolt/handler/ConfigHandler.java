@@ -18,7 +18,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class ConfigHandler {
 
-	public static Configuration cfg;
+	private static Configuration cfg;
 
 	public static void setConfig(File configFile) {
 
@@ -29,14 +29,14 @@ public class ConfigHandler {
 		MinecraftForge.EVENT_BUS.register(new ChangeListener());
 	}
 
-	public static void loadConfig() {
+	private static void loadConfig() {
 
 		if (cfg.hasChanged()) {
 			cfg.save();
 		}
 	}
 
-	public static class ChangeListener {
+	private static class ChangeListener {
 
 		@SubscribeEvent
 		public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent eventArgs) {

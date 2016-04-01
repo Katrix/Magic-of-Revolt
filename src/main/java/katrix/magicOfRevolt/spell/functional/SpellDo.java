@@ -38,6 +38,6 @@ public class SpellDo extends SpellFunctional {
 		if(limit >= 1000) {
 			throw new SpellException(SpellException.INFINITE_LOOP, true, 2);
 		}
-		warmupDone =true;
+		warmupDone = true;
 	}
 }

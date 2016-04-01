@@ -9,7 +9,6 @@
 package katrix.magicOfRevolt.spell;
 
 import katrix.magicOfRevolt.spell.object.SpellObject;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 
 public class SpellBridge extends Spell implements ISpellVariable<SpellBridge, SpellObject> {
