@@ -15,14 +15,14 @@ import katrix.magicOfRevolt.spell.object.SpellObject;
 import net.minecraft.world.World;
 
 public abstract class SpellTarget<T extends SpellObject> extends SpellFunctional {
-	
+
 	public static final int TARGET_INDEX = 0;
-	
+
 	public SpellTarget(World world) {
 		super(world);
 		setInput(new SpellDummy(world), TARGET_INDEX);
 	}
-	
+
 	protected T getTarget() throws SpellException {
 		return this.getVariable(TARGET_INDEX);
 	}

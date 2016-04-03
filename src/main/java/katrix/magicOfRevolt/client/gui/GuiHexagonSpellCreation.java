@@ -38,8 +38,6 @@ public class GuiHexagonSpellCreation extends GuiContainer {
 	private void initHexagons() {
 		int offsetX = 128;
 		int offsetY = 120;
-		int diameter = 5;
-
 		int map_radius = 2;
 		int i = 0;
 		for(int q = -map_radius; q <= map_radius; q++) {

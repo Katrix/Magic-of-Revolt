@@ -17,7 +17,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class SpellVectorMultiply extends Spell implements ISpellVariable<SpellVectorMultiply, SpellVector> {
-	
+
 	private static final int VEC1_INDEX = 0;
 	private static final int VEC2_INDEX = 1;
 

@@ -26,7 +26,8 @@ public class ClientProxy extends CommonProxy {
 	}
 
 	private void registerItem(Item item, int damage) {
-		ModelLoader.setCustomModelResourceLocation(item, damage, new ModelResourceLocation(new ResourceLocation(item.getRegistryName()), "inventory"));
+		ModelLoader.setCustomModelResourceLocation(item, damage,
+				new ModelResourceLocation(new ResourceLocation(item.getRegistryName()), "inventory"));
 	}
 
 	private void registerItemBlock(Block block, int damage) {

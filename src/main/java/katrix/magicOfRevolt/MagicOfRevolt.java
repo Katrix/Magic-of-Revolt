@@ -10,9 +10,9 @@ package katrix.magicOfRevolt;
 
 import katrix.magicOfRevolt.block.RevoltBlock;
 import katrix.magicOfRevolt.handler.ConfigHandler;
-import katrix.magicOfRevolt.net.GuiHandler;
 import katrix.magicOfRevolt.item.RevoltItem;
 import katrix.magicOfRevolt.lib.LibMod;
+import katrix.magicOfRevolt.net.GuiHandler;
 import katrix.magicOfRevolt.net.PacketHandler;
 import katrix.magicOfRevolt.tile.RevoltTile;
 import net.minecraftforge.fml.common.Mod;
@@ -50,6 +50,5 @@ public class MagicOfRevolt {
 	}
 
 	@EventHandler
-	public void postInit(FMLPostInitializationEvent event) {
-	}
+	public void postInit(FMLPostInitializationEvent event) {}
 }

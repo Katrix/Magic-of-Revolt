@@ -26,13 +26,13 @@ public class ItemMagicStick extends ItemRevoltBase {
 		setCreativeTab(CreativeTabs.tabTools);
 		setUnlocalizedName(LibItemName.MAGIC_STICK);
 	}
-	
+
 	@Override
-    public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-    {
+	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX,
+			float hitY, float hitZ) {
 		BlockPos blockPos = new BlockPos(pos.getX(), pos.getY(), pos.getZ()).offset(facing);
 		world.setBlockState(blockPos, RevoltBlock.magicCircle.getDefaultState());
-		
+
 		/*
 		SpellBlockPos spellPos = new SpellBlockPos(world);
 		spellPos.setPos(pos);
@@ -67,7 +67,7 @@ public class ItemMagicStick extends ItemRevoltBase {
 			LogHelper.info(output1.serializeNBT());
 		}
 		*/
-		
-        return super.onItemUse(stack, player, world, pos, hand, facing, hitX, hitY, hitZ);
-    }
+
+		return super.onItemUse(stack, player, world, pos, hand, facing, hitX, hitY, hitZ);
+	}
 }

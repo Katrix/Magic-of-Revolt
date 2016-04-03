@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 public class SpellByte extends SpellObject implements ISpellVariable<SpellByte, SpellByte>, ICopyable<SpellByte> {
 
 	private static final String NBT_BYTE = "byte";
-	
+
 	private byte spellByte;
 
 	public SpellByte(World world) {
@@ -51,17 +51,17 @@ public class SpellByte extends SpellObject implements ISpellVariable<SpellByte, 
 	public SpellByte getSpell() {
 		return this;
 	}
-	
+
 	@Override
-    public NBTTagCompound serializeNBT() {
-    	NBTTagCompound tag = super.serializeNBT();
-    	tag.setByte(NBT_BYTE, spellByte);
+	public NBTTagCompound serializeNBT() {
+		NBTTagCompound tag = super.serializeNBT();
+		tag.setByte(NBT_BYTE, spellByte);
 		return tag;
 	}
-    
+
 	@Override
-    public void deserializeNBT(NBTTagCompound tag) {
-    	super.deserializeNBT(tag);
-    	spellByte = tag.getByte(NBT_BYTE);
+	public void deserializeNBT(NBTTagCompound tag) {
+		super.deserializeNBT(tag);
+		spellByte = tag.getByte(NBT_BYTE);
 	}
 }

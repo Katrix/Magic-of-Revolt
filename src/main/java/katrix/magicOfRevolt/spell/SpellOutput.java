@@ -11,20 +11,20 @@ package katrix.magicOfRevolt.spell;
 import net.minecraft.world.World;
 
 public class SpellOutput extends Spell {
-	
+
 	public int limit = 6;
 
 	public SpellOutput(World world) {
 		super(world);
-		for (int i = 0; i < limit; i++) {
+		for(int i = 0; i < limit; i++) {
 			setInput(new SpellDummy(world), i);
 		}
 	}
-	
+
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		
+
 		if(isExecuteComplete()) {
 			activator.disable();
 		}

@@ -20,7 +20,7 @@ import net.minecraftforge.common.util.Constants;
 public class SpellBlockPos extends SpellObject implements ISpellVariable<SpellBlockPos, SpellBlockPos>, ICopyable<SpellBlockPos> {
 
 	private static final String NBT_POS = "pos";
-	
+
 	private BlockPos pos;
 
 	public SpellBlockPos(World world) {
@@ -55,22 +55,22 @@ public class SpellBlockPos extends SpellObject implements ISpellVariable<SpellBl
 	public SpellBlockPos getSpell() {
 		return this;
 	}
-	
+
 	@Override
-    public NBTTagCompound serializeNBT() {
-    	NBTTagCompound tag = super.serializeNBT();
-    	NBTTagList list = new NBTTagList();
-    	list.appendTag(new NBTTagDouble(pos.getX()));
-    	list.appendTag(new NBTTagDouble(pos.getY()));
-    	list.appendTag(new NBTTagDouble(pos.getZ()));
-    	tag.setTag(NBT_POS, list);
+	public NBTTagCompound serializeNBT() {
+		NBTTagCompound tag = super.serializeNBT();
+		NBTTagList list = new NBTTagList();
+		list.appendTag(new NBTTagDouble(pos.getX()));
+		list.appendTag(new NBTTagDouble(pos.getY()));
+		list.appendTag(new NBTTagDouble(pos.getZ()));
+		tag.setTag(NBT_POS, list);
 		return tag;
 	}
-    
+
 	@Override
-    public void deserializeNBT(NBTTagCompound tag) {
-    	super.deserializeNBT(tag);
-    	NBTTagList list = tag.getTagList(NBT_POS, Constants.NBT.TAG_DOUBLE);
-    	pos = new BlockPos(list.getDoubleAt(0), list.getDoubleAt(1), list.getDoubleAt(2));
+	public void deserializeNBT(NBTTagCompound tag) {
+		super.deserializeNBT(tag);
+		NBTTagList list = tag.getTagList(NBT_POS, Constants.NBT.TAG_DOUBLE);
+		pos = new BlockPos(list.getDoubleAt(0), list.getDoubleAt(1), list.getDoubleAt(2));
 	}
 }

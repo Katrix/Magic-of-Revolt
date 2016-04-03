@@ -31,14 +31,14 @@ public class SpellAddMotion extends SpellTarget<SpellEntity> {
 	@Override
 	public void execute() throws SpellException {
 		super.execute();
-		if (!world.isRemote) {
+		if(!world.isRemote) {
 			Entity entity = getTarget().getEntity();
 			Vec3d vector = this.<SpellVector>getVariable(VECTOR_INDEX).getVector();
 			entity.addVelocity(vector.xCoord, vector.yCoord, vector.zCoord);
 			entity.posX += vector.xCoord;
 			entity.posY += vector.yCoord;
 			entity.posZ += vector.zCoord;
-			if (entity instanceof EntityPlayer) {
+			if(entity instanceof EntityPlayer) {
 				((EntityPlayerMP)entity).playerNetServerHandler.sendPacket(new SPacketEntityVelocity(entity));
 			}
 		}

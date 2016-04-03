@@ -20,7 +20,7 @@ import net.minecraftforge.common.util.Constants;
 public class SpellVector extends SpellObject implements ISpellVariable<SpellVector, SpellVector>, ICopyable<SpellVector> {
 
 	private static final String NBT_VECTOR = "vector";
-	
+
 	private Vec3d vector;
 
 	public SpellVector(World world) {
@@ -55,22 +55,22 @@ public class SpellVector extends SpellObject implements ISpellVariable<SpellVect
 	public SpellVector getSpell() {
 		return this;
 	}
-	
+
 	@Override
-    public NBTTagCompound serializeNBT() {
-    	NBTTagCompound tag = super.serializeNBT();
-    	NBTTagList list = new NBTTagList();
-    	list.appendTag(new NBTTagDouble(vector.xCoord));
-    	list.appendTag(new NBTTagDouble(vector.yCoord));
-    	list.appendTag(new NBTTagDouble(vector.zCoord));
-    	tag.setTag(NBT_VECTOR, list);
+	public NBTTagCompound serializeNBT() {
+		NBTTagCompound tag = super.serializeNBT();
+		NBTTagList list = new NBTTagList();
+		list.appendTag(new NBTTagDouble(vector.xCoord));
+		list.appendTag(new NBTTagDouble(vector.yCoord));
+		list.appendTag(new NBTTagDouble(vector.zCoord));
+		tag.setTag(NBT_VECTOR, list);
 		return tag;
 	}
-    
+
 	@Override
-    public void deserializeNBT(NBTTagCompound tag) {
-    	super.deserializeNBT(tag);
-    	NBTTagList list = tag.getTagList(NBT_VECTOR, Constants.NBT.TAG_DOUBLE);
-    	vector = new Vec3d(list.getDoubleAt(0), list.getDoubleAt(1), list.getDoubleAt(2));
+	public void deserializeNBT(NBTTagCompound tag) {
+		super.deserializeNBT(tag);
+		NBTTagList list = tag.getTagList(NBT_VECTOR, Constants.NBT.TAG_DOUBLE);
+		vector = new Vec3d(list.getDoubleAt(0), list.getDoubleAt(1), list.getDoubleAt(2));
 	}
 }

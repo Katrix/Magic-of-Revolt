@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 public class SpellEntity extends SpellObject implements ISpellVariable<SpellEntity, SpellEntity>, ICopyable<SpellEntity> {
 
 	private static final String NBT_ENTITY = "entity";
-	
+
 	private Entity entity;
 
 	public SpellEntity(World world) {
@@ -54,17 +54,17 @@ public class SpellEntity extends SpellObject implements ISpellVariable<SpellEnti
 	public SpellEntity getSpell() {
 		return this;
 	}
-	
+
 	@Override
-    public NBTTagCompound serializeNBT() {
-    	NBTTagCompound tag = super.serializeNBT();
-    	tag.setTag(NBT_ENTITY, entity.serializeNBT());
+	public NBTTagCompound serializeNBT() {
+		NBTTagCompound tag = super.serializeNBT();
+		tag.setTag(NBT_ENTITY, entity.serializeNBT());
 		return tag;
 	}
-    
+
 	@Override
-    public void deserializeNBT(NBTTagCompound tag) {
-    	super.deserializeNBT(tag);
-    	entity = EntityList.createEntityFromNBT(tag.getCompoundTag(NBT_ENTITY), null); //FIXME: Not good at all
+	public void deserializeNBT(NBTTagCompound tag) {
+		super.deserializeNBT(tag);
+		entity = EntityList.createEntityFromNBT(tag.getCompoundTag(NBT_ENTITY), null); //FIXME: Not good at all
 	}
 }

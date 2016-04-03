@@ -33,18 +33,17 @@ public final class SpellVoid extends SpellObject implements ISpellVariable<Spell
 	public SpellVoid getSpell() {
 		return VOID;
 	}
-	
+
 	@Override
 	public boolean isWarmupComplete() {
 		return true;
 	}
-	
+
 	@Override
 	public NBTTagCompound serializeNBT() {
 		return new NBTTagCompound();
 	}
 
 	@Override
-	public void deserializeNBT(NBTTagCompound tag) {
-	}
+	public void deserializeNBT(NBTTagCompound tag) {}
 }

@@ -46,7 +46,7 @@ public class GuiButtonNgon extends GuiButton {
 
 	@Override
 	public void drawButton(Minecraft mc, int mouseX, int mouseY) {
-		if (visible) {
+		if(visible) {
 			FontRenderer fontrenderer = mc.fontRendererObj;
 			mc.getTextureManager().bindTexture(BUTTON_TEXTURE);
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -59,13 +59,13 @@ public class GuiButtonNgon extends GuiButton {
 			mouseDragged(mc, mouseX, mouseY);
 			int j = 14737632;
 
-			if (packedFGColour != 0) {
+			if(packedFGColour != 0) {
 				j = packedFGColour;
 			}
-			else if (!enabled) {
+			else if(!enabled) {
 				j = 10526880;
 			}
-			else if (hovered) {
+			else if(hovered) {
 				j = 16777120;
 			}
 
@@ -88,7 +88,7 @@ public class GuiButtonNgon extends GuiButton {
 		VertexBuffer vb = tes.getBuffer();
 
 		vb.begin(GL11.GL_TRIANGLE_FAN, DefaultVertexFormats.POSITION_COLOR);
-		for (PathIterator path = ngon.getPathIterator(null); !path.isDone(); path.next()) {
+		for(PathIterator path = ngon.getPathIterator(null); !path.isDone(); path.next()) {
 			float[] coords = new float[6];
 			path.currentSegment(coords);
 			int x = (int)coords[0];
@@ -109,7 +109,7 @@ public class GuiButtonNgon extends GuiButton {
 		VertexBuffer vb = tes.getBuffer();
 
 		vb.begin(GL11.GL_TRIANGLE_FAN, DefaultVertexFormats.POSITION_TEX);
-		for (PathIterator path = ngon.getPathIterator(null); !path.isDone(); path.next()) {
+		for(PathIterator path = ngon.getPathIterator(null); !path.isDone(); path.next()) {
 			float[] coords = new float[6];
 			path.currentSegment(coords);
 			int x = (int)coords[0];
@@ -131,7 +131,7 @@ public class GuiButtonNgon extends GuiButton {
 	protected int wrapSide(int i) {
 		i = i % cornerNum;
 
-		if (i < 0) {
+		if(i < 0) {
 			i += cornerNum;
 		}
 
@@ -147,7 +147,7 @@ public class GuiButtonNgon extends GuiButton {
 		Point center = getCenter();
 		double orientationAngle = 0.0F;
 
-		for (int i = 0; i < cornerNum; i++) {
+		for(int i = 0; i < cornerNum; i++) {
 			double angle = 2F * Math.PI * (i + orientationAngle) / cornerNum * -1;
 			double offsetX = width / 2 * Math.cos(angle);
 			double offsetY = height / 2 * Math.sin(angle);

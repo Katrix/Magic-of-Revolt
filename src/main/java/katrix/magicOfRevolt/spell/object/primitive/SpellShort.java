@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 public class SpellShort extends SpellObject implements ISpellVariable<SpellShort, SpellShort>, ICopyable<SpellShort> {
 
 	private static final String NBT_SHORT = "short";
-	
+
 	private short spellShort;
 
 	public SpellShort(World world) {
@@ -51,17 +51,17 @@ public class SpellShort extends SpellObject implements ISpellVariable<SpellShort
 	public SpellShort getSpell() {
 		return this;
 	}
-	
+
 	@Override
-    public NBTTagCompound serializeNBT() {
-    	NBTTagCompound tag = super.serializeNBT();
-    	tag.setShort(NBT_SHORT, spellShort);
+	public NBTTagCompound serializeNBT() {
+		NBTTagCompound tag = super.serializeNBT();
+		tag.setShort(NBT_SHORT, spellShort);
 		return tag;
 	}
-    
+
 	@Override
-    public void deserializeNBT(NBTTagCompound tag) {
-    	super.deserializeNBT(tag);
-    	spellShort = tag.getShort(NBT_SHORT);
+	public void deserializeNBT(NBTTagCompound tag) {
+		super.deserializeNBT(tag);
+		spellShort = tag.getShort(NBT_SHORT);
 	}
 }

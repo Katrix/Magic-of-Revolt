@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 public class SpellDouble extends SpellObject implements ISpellVariable<SpellDouble, SpellDouble>, ICopyable<SpellDouble> {
 
 	private static final String NBT_DOUBLE = "double";
-	
+
 	private double spellDouble;
 
 	public SpellDouble(World world) {
@@ -51,17 +51,17 @@ public class SpellDouble extends SpellObject implements ISpellVariable<SpellDoub
 	public SpellDouble getSpell() {
 		return this;
 	}
-	
+
 	@Override
-    public NBTTagCompound serializeNBT() {
-    	NBTTagCompound tag = super.serializeNBT();
-    	tag.setDouble(NBT_DOUBLE, spellDouble);
+	public NBTTagCompound serializeNBT() {
+		NBTTagCompound tag = super.serializeNBT();
+		tag.setDouble(NBT_DOUBLE, spellDouble);
 		return tag;
 	}
-    
+
 	@Override
-    public void deserializeNBT(NBTTagCompound tag) {
-    	super.deserializeNBT(tag);
-    	spellDouble = tag.getDouble(NBT_DOUBLE);
+	public void deserializeNBT(NBTTagCompound tag) {
+		super.deserializeNBT(tag);
+		spellDouble = tag.getDouble(NBT_DOUBLE);
 	}
 }

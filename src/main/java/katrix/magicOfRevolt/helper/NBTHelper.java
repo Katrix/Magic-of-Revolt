@@ -57,7 +57,7 @@ public class NBTHelper {
 	}
 
 	public static void setRay(NBTTagCompound tag, String tagName, RayTraceResult ray) {
-		switch (ray.typeOfHit) {
+		switch(ray.typeOfHit) {
 			case BLOCK:
 				tag.setInteger(NBT_RAY_TYPE_OF_HIT, 0);
 				setBlockPos(tag, NBT_BLOCKPOS, ray.getBlockPos());
@@ -74,15 +74,14 @@ public class NBTHelper {
 	}
 
 	public static RayTraceResult getRay(NBTTagCompound tag, String tagName, World world) {
-		switch (tag.getInteger(NBT_RAY_TYPE_OF_HIT)) {
+		switch(tag.getInteger(NBT_RAY_TYPE_OF_HIT)) {
 			case 0:
-				return new RayTraceResult(getVector(tag, NBT_VECTOR), EnumFacing.getFront(tag.getInteger(NBT_FACING)), getBlockPos(tag, NBT_BLOCKPOS));
+				return new RayTraceResult(getVector(tag, NBT_VECTOR), EnumFacing.getFront(tag.getInteger(NBT_FACING)),
+						getBlockPos(tag, NBT_BLOCKPOS));
 			case 1:
 				Entity entity = getEntityByUUID(tag, NBT_UUID, world);
-				if (entity != null)
-					return new RayTraceResult(entity, getVector(tag, NBT_VECTOR));
-				else
-					return null;
+				if(entity != null) return new RayTraceResult(entity, getVector(tag, NBT_VECTOR));
+				else return null;
 			default:
 				break;
 		}
@@ -96,12 +95,11 @@ public class NBTHelper {
 	public static Entity getEntityByUUID(NBTTagCompound tag, String tagName, World world) {
 		List<Entity> entityList = world.loadedEntityList;
 		UUID uuid = UUID.fromString(tag.getString(tagName));
-		
-		for (Entity entity : entityList) {
-			if (entity.getUniqueID().equals(uuid))
-				return entity;
+
+		for(Entity entity : entityList) {
+			if(entity.getUniqueID().equals(uuid)) return entity;
 		}
-		
+
 		return null;
 	}
 }

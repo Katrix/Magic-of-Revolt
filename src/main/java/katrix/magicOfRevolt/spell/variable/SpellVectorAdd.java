@@ -17,7 +17,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class SpellVectorAdd extends Spell implements ISpellVariable<SpellVectorAdd, SpellVector> {
-	
+
 	private static final int VEC1_INDEX = 0;
 	private static final int VEC2_INDEX = 1;
 

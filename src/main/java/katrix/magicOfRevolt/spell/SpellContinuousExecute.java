@@ -12,19 +12,20 @@ import katrix.magicOfRevolt.spell.object.primitive.SpellBoolean;
 import net.minecraft.world.World;
 
 public class SpellContinuousExecute extends Spell {
-	
+
 	public static final int CONDITION_INDEX = 0;
 
 	public SpellContinuousExecute(World world) {
 		super(world);
 		setInput(new SpellDummy(world), CONDITION_INDEX);
 	}
-	
+
+	@Override
 	public boolean isExecuteComplete() {
 		try {
 			return this.<SpellBoolean>getVariable(CONDITION_INDEX).getBoolean();
 		}
-		catch (SpellException e) {
+		catch(SpellException e) {
 			return true;
 		}
 	}

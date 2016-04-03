@@ -10,12 +10,9 @@ package katrix.magicOfRevolt.client.gui.button;
 
 import org.lwjgl.opengl.GL11;
 
-import katrix.magicOfRevolt.client.spell.SpellHexTextureRegistry;
 import katrix.magicOfRevolt.container.ContainerHexagonSpellCreation;
-import katrix.magicOfRevolt.spell.Spell;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.util.ResourceLocation;
 
 public class GuiButtonSpell extends GuiButtonNgon {
 
@@ -58,13 +55,5 @@ public class GuiButtonSpell extends GuiButtonNgon {
 			return true;
 		}
 		else return false;
-	}
-
-	private Spell getSpell() {
-		return container.getSpellAt(hexX, hexY);
-	}
-
-	private ResourceLocation getSpellTexture() {
-		return SpellHexTextureRegistry.getTexture(getSpell().getClass());
 	}
 }

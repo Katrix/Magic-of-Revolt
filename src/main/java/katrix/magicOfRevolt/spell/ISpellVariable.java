@@ -12,6 +12,7 @@ import katrix.magicOfRevolt.spell.object.SpellObject;
 
 /**
  * A spell that can hold some sort of object as a variable.
+ *
  * @param <T> The variable provider. Usually the spell itself.
  * @param <V> The variable object represented.
  */
@@ -19,7 +20,8 @@ public interface ISpellVariable<T extends Spell, V extends SpellObject> {
 
 	/**
 	 * @return The variable represented.
-	 * @throws SpellException If something went wrong when getting the variable. For example if the variable provider is missing arguments.
+	 * @throws SpellException If something went wrong when getting the variable. For example if the
+	 * variable provider is missing arguments.
 	 */
 	V getVariable() throws SpellException;
 
@@ -27,5 +29,5 @@ public interface ISpellVariable<T extends Spell, V extends SpellObject> {
 	 * @return The variable provider.
 	 */
 	T getSpell();
-	
+
 }

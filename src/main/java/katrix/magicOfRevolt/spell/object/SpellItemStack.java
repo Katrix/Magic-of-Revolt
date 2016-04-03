@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 public class SpellItemStack extends SpellObject implements ISpellVariable<SpellItemStack, SpellItemStack>, ICopyable<SpellItemStack> {
 
 	private static final String NBT_STACK = "stack";
-	
+
 	private ItemStack stack;
 
 	public SpellItemStack(World world) {
@@ -51,17 +51,17 @@ public class SpellItemStack extends SpellObject implements ISpellVariable<SpellI
 	public SpellItemStack getSpell() {
 		return this;
 	}
-	
+
 	@Override
-    public NBTTagCompound serializeNBT() {
-    	NBTTagCompound tag = super.serializeNBT();
-    	tag.setTag(NBT_STACK, stack.serializeNBT());
+	public NBTTagCompound serializeNBT() {
+		NBTTagCompound tag = super.serializeNBT();
+		tag.setTag(NBT_STACK, stack.serializeNBT());
 		return tag;
 	}
-    
+
 	@Override
-    public void deserializeNBT(NBTTagCompound tag) {
-    	super.deserializeNBT(tag);
-    	ItemStack.loadItemStackFromNBT(tag.getCompoundTag(NBT_STACK));
+	public void deserializeNBT(NBTTagCompound tag) {
+		super.deserializeNBT(tag);
+		ItemStack.loadItemStackFromNBT(tag.getCompoundTag(NBT_STACK));
 	}
 }

@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 public class SpellLong extends SpellObject implements ISpellVariable<SpellLong, SpellLong>, ICopyable<SpellLong> {
 
 	private static final String NBT_LONG = "long";
-	
+
 	private long spellLong;
 
 	public SpellLong(World world) {
@@ -51,17 +51,17 @@ public class SpellLong extends SpellObject implements ISpellVariable<SpellLong, 
 	public SpellLong getSpell() {
 		return this;
 	}
-	
+
 	@Override
-    public NBTTagCompound serializeNBT() {
-    	NBTTagCompound tag = super.serializeNBT();
-    	tag.setLong(NBT_LONG, spellLong);
+	public NBTTagCompound serializeNBT() {
+		NBTTagCompound tag = super.serializeNBT();
+		tag.setLong(NBT_LONG, spellLong);
 		return tag;
 	}
-    
+
 	@Override
-    public void deserializeNBT(NBTTagCompound tag) {
-    	super.deserializeNBT(tag);
-    	spellLong = tag.getLong(NBT_LONG);
+	public void deserializeNBT(NBTTagCompound tag) {
+		super.deserializeNBT(tag);
+		spellLong = tag.getLong(NBT_LONG);
 	}
 }

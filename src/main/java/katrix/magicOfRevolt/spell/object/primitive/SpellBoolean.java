@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 public class SpellBoolean extends SpellObject implements ISpellVariable<SpellBoolean, SpellBoolean>, ICopyable<SpellBoolean> {
 
 	private static final String NBT_BOOLEAN = "boolean";
-	
+
 	private boolean spellBoolean;
 
 	public SpellBoolean(World world) {
@@ -51,17 +51,17 @@ public class SpellBoolean extends SpellObject implements ISpellVariable<SpellBoo
 	public SpellBoolean getSpell() {
 		return this;
 	}
-	
+
 	@Override
-    public NBTTagCompound serializeNBT() {
-    	NBTTagCompound tag = super.serializeNBT();
-    	tag.setBoolean(NBT_BOOLEAN, spellBoolean);
+	public NBTTagCompound serializeNBT() {
+		NBTTagCompound tag = super.serializeNBT();
+		tag.setBoolean(NBT_BOOLEAN, spellBoolean);
 		return tag;
 	}
-    
+
 	@Override
-    public void deserializeNBT(NBTTagCompound tag) {
-    	super.deserializeNBT(tag);
-    	spellBoolean = tag.getBoolean(NBT_BOOLEAN);
+	public void deserializeNBT(NBTTagCompound tag) {
+		super.deserializeNBT(tag);
+		spellBoolean = tag.getBoolean(NBT_BOOLEAN);
 	}
 }

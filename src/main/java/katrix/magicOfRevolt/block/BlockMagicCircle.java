@@ -43,7 +43,8 @@ public class BlockMagicCircle extends BlockRevoltBase implements ITileEntityProv
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem,
+			EnumFacing side, float hitX, float hitY, float hitZ) {
 		if(player.isSneaking()) {
 			getTile(world, pos).activate();
 		}
@@ -78,7 +79,7 @@ public class BlockMagicCircle extends BlockRevoltBase implements ITileEntityProv
 		player.openGui(MagicOfRevolt.instance, LibGuiID.SPELLSLINGER_CREATION, world, pos.getX(), pos.getY(), pos.getZ());
 		return true;
 	}
-	
+
 	public TileMagicCircle getTile(World world, BlockPos pos) {
 		return (TileMagicCircle)world.getTileEntity(pos);
 	}
@@ -87,10 +88,10 @@ public class BlockMagicCircle extends BlockRevoltBase implements ITileEntityProv
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
 		return new TileMagicCircle();
 	}
-	
+
 	@Override
-    @SideOnly(Side.CLIENT)
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState worldIn, World pos, BlockPos state) {
-        return worldIn.getBoundingBox(pos, state).offset(state);
-    }
+	@SideOnly(Side.CLIENT)
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState worldIn, World pos, BlockPos state) {
+		return worldIn.getBoundingBox(pos, state).offset(state);
+	}
 }

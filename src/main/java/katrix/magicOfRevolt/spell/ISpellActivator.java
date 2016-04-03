@@ -20,7 +20,8 @@ import net.minecraft.util.math.Vec3d;
 public interface ISpellActivator {
 
 	/**
-	 * Called to activate the spell. When this is done, all the compiled spells must have their activator set to this.
+	 * Called to activate the spell. When this is done, all the compiled spells must have their
+	 * activator set to this.
 	 */
 	void activate();
 
@@ -31,6 +32,7 @@ public interface ISpellActivator {
 
 	/**
 	 * Used to get where to put the explosion in case of spell failure.
+	 *
 	 * @return The location of this activator
 	 */
 	Vec3d getPosition();
@@ -42,6 +44,7 @@ public interface ISpellActivator {
 
 	/**
 	 * Used to send a partial update about the compiler, without sending the whole compiler itself.
+	 *
 	 * @param container The container to update.
 	 */
 	void sendUpdate(ISpellContainer container);

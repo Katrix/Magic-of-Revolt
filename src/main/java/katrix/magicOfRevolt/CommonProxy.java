@@ -25,7 +25,7 @@ public class CommonProxy {
 	public void registerModels() {
 		//NO-OP
 	}
-	
+
 	public void registerSpells() {
 		SpellRegistry.register(SpellBlockPos.class, "objectBlockPos", MagicOfRevolt.instance);
 		SpellRegistry.register(SpellFloat.class, "objectFloat", MagicOfRevolt.instance);

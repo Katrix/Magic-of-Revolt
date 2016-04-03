@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 public class SpellSetBlock extends SpellTarget<SpellBlockPos> {
 
 	private static final int STATE_INDEX = 1;
-	
+
 	public SpellSetBlock(World world) {
 		super(world);
 		setInput(new SpellDummy(world), STATE_INDEX);
@@ -30,7 +30,7 @@ public class SpellSetBlock extends SpellTarget<SpellBlockPos> {
 		super.execute();
 		BlockPos target = getTarget().getVariable().getPos();
 		IBlockState state = this.<SpellIBlockState>getVariable(STATE_INDEX).getBlockState();
-		if (target != null && state != null) {
+		if(target != null && state != null) {
 			world.setBlockState(target, state);
 		}
 		else {

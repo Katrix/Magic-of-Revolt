@@ -2,7 +2,7 @@
  * This class was created by <Katrix>. It's distributed as
  * part of the Magic of Revolt Mod. Get the Source Code in github:
  * https://github.com/Katrix-/Magic-of-Revolt
- * 
+ *
  * Magic of Revolt is Open Source and distributed under the
  * Botania license: https://github.com/Katrix-/Magic-of-Revolt/blob/master/LICENSE.md
  */
@@ -14,12 +14,12 @@ import katrix.magicOfRevolt.spell.object.primitive.SpellBoolean;
 import net.minecraft.world.World;
 
 public class SpellWhile extends SpellFunctional {
-	
+
 	private static final int SPELL_INDEX = 0;
 	private static final int CONDITION_INDEX = 1;
-	
+
 	private int limit = 0;
-	
+
 	public SpellWhile(World world) {
 		super(world);
 	}
@@ -29,15 +29,13 @@ public class SpellWhile extends SpellFunctional {
 		super.execute();
 		Spell spell = getInput(SPELL_INDEX);
 		boolean condition = this.<SpellBoolean>getVariable(CONDITION_INDEX).getBoolean();
-		
+
 		while(condition && limit < 1000) {
 			spell.execute();
 			limit++;
 		}
-		
-		if(limit >= 1000) {
-			throw new SpellException(SpellException.INFINITE_LOOP, true, 2);
-		}
+
+		if(limit >= 1000) { throw new SpellException(SpellException.INFINITE_LOOP, true, 2); }
 		warmupDone = true;
 	}
 }

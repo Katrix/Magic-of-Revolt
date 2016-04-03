@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 public class SpellFloat extends SpellObject implements ISpellVariable<SpellFloat, SpellFloat>, ICopyable<SpellFloat> {
 
 	private static final String NBT_FLOAT = "float";
-	
+
 	private float spellFloat;
 
 	public SpellFloat(World world) {
@@ -52,17 +52,17 @@ public class SpellFloat extends SpellObject implements ISpellVariable<SpellFloat
 	public SpellFloat getSpell() {
 		return this;
 	}
-	
+
 	@Override
-    public NBTTagCompound serializeNBT() {
-    	NBTTagCompound tag = super.serializeNBT();
-    	tag.setFloat(NBT_FLOAT, spellFloat);
+	public NBTTagCompound serializeNBT() {
+		NBTTagCompound tag = super.serializeNBT();
+		tag.setFloat(NBT_FLOAT, spellFloat);
 		return tag;
 	}
-    
+
 	@Override
-    public void deserializeNBT(NBTTagCompound tag) {
-    	super.deserializeNBT(tag);
-    	spellFloat = tag.getFloat(NBT_FLOAT);
+	public void deserializeNBT(NBTTagCompound tag) {
+		super.deserializeNBT(tag);
+		spellFloat = tag.getFloat(NBT_FLOAT);
 	}
 }

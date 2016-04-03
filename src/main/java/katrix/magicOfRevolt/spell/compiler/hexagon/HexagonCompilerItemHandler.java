@@ -60,25 +60,22 @@ class HexagonCompilerItemHandler implements IItemHandlerModifiable {
 
 	@Override
 	public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
-		if(stack == null || stack.stackSize == 0)
-			return null;
+		if(stack == null || stack.stackSize == 0) return null;
 		ItemStack spellStack = getStackInSlot(slot);
 		int limit = stack.getMaxStackSize();
 
-		if (spellStack != null) {
-			if (!ItemHandlerHelper.canItemStacksStack(stack, spellStack))
-				return stack;
+		if(spellStack != null) {
+			if(!ItemHandlerHelper.canItemStacksStack(stack, spellStack)) return stack;
 
 			limit -= spellStack.stackSize;
 		}
 
-		if (limit <= 0)
-			return stack;
+		if(limit <= 0) return stack;
 
 		boolean reachedLimit = stack.stackSize > limit;
 
-		if (!simulate) {
-			if (spellStack == null) {
+		if(!simulate) {
+			if(spellStack == null) {
 				int counter = 0;
 				for(int x = 0; x < spellArray.length; x++) {
 					for(int y = 0; y < spellArray[x].length; y++) {
@@ -106,24 +103,22 @@ class HexagonCompilerItemHandler implements IItemHandlerModifiable {
 
 	@Override
 	public ItemStack extractItem(int slot, int amount, boolean simulate) {
-		if (amount == 0)
-			return null;
+		if(amount == 0) return null;
 
 		ItemStack stack = getStackInSlot(slot);
 
-		if (stack == null)
-			return null;
+		if(stack == null) return null;
 
 		int toExtract = Math.min(amount, stack.getMaxStackSize());
 
-		if (stack.stackSize <= toExtract) {
-			if (!simulate) {
+		if(stack.stackSize <= toExtract) {
+			if(!simulate) {
 				setStackInSlot(slot, null);
 			}
 			return stack;
 		}
 		else {
-			if (!simulate) {
+			if(!simulate) {
 				setStackInSlot(slot, ItemHandlerHelper.copyStackWithSize(stack, stack.stackSize - toExtract));
 			}
 

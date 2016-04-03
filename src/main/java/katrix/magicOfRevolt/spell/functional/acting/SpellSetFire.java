@@ -16,7 +16,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.world.World;
 
 public class SpellSetFire extends SpellTarget<SpellLiving> {
-	
+
 	private static final int DURATION_INDEX = 1;
 
 	public SpellSetFire(World world) {
@@ -29,7 +29,7 @@ public class SpellSetFire extends SpellTarget<SpellLiving> {
 		super.execute();
 		EntityLivingBase target = getTarget().getVariable().getLiving();
 		int duration = this.<SpellInt>getVariable(DURATION_INDEX).getInteger();
-		if (target != null && duration != 0) {
+		if(target != null && duration != 0) {
 			target.setFire(duration);
 		}
 		else {

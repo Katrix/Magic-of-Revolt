@@ -31,7 +31,7 @@ public class ConfigHandler {
 
 	private static void loadConfig() {
 
-		if (cfg.hasChanged()) {
+		if(cfg.hasChanged()) {
 			cfg.save();
 		}
 	}
@@ -40,7 +40,7 @@ public class ConfigHandler {
 
 		@SubscribeEvent
 		public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent eventArgs) {
-			if (eventArgs.modID.equals(LibMod.MODID)) {
+			if(eventArgs.modID.equals(LibMod.MODID)) {
 				loadConfig();
 			}
 		}

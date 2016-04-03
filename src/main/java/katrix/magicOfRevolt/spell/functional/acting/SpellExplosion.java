@@ -16,9 +16,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class SpellExplosion extends SpellTarget<SpellBlockPos> {
-	
+
 	public static final int STRENGTH_INDEX = 1;
-	
+
 	public SpellExplosion(World world) {
 		super(world);
 		setInput(new SpellDummy(world), STRENGTH_INDEX);

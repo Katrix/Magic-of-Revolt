@@ -31,8 +31,7 @@ public class SpellRegistry {
 	private BiMap<Class<? extends Spell>, SpellRegistration> spellClassRegistrations = HashBiMap.create();
 	private BiMap<Class<? extends Spell>, String> classStringMap = HashBiMap.create();
 
-	private SpellRegistry() {
-	}
+	private SpellRegistry() {}
 
 	public static SpellRegistry instance() {
 		return INSTANCE;
@@ -48,8 +47,8 @@ public class SpellRegistry {
 
 		try {
 			spellClassRegistrations.put(clazz, entry);
-			
-			if (!classStringMap.containsKey(clazz)) {
+
+			if(!classStringMap.containsKey(clazz)) {
 				String spellModName = String.format("%s:%s", container.getModId(), name);
 				classStringMap.put(clazz, spellModName);
 				FMLLog.finer("Automatically registered mod %s spell %s as %s", container.getModId(), name, spellModName);
@@ -58,28 +57,27 @@ public class SpellRegistry {
 				FMLLog.fine("Skipping automatic mod %s spell registration for already registered class %s", container.getModId(), clazz.getName());
 			}
 		}
-		catch (IllegalArgumentException e) {
+		catch(IllegalArgumentException e) {
 			FMLLog.log(Level.WARN, e, "The mod %s tried to register the spell (name,class) (%s,%s) one or both of which are already registered",
 					container.getModId(), name, clazz.getName());
 			return;
 		}
-		
+
 		spellRegistrations.put(container, entry);
 	}
 
 	public static Spell createSpellByName(String spellName, World world) {
-		if (spellName.equals(SpellVoid.SPELL_NAME))
-			return SpellVoid.VOID;
+		if(spellName.equals(SpellVoid.SPELL_NAME)) return SpellVoid.VOID;
 
 		Spell spell = null;
 		try {
 			Class<? extends Spell> clazz = instance().classStringMap.inverse().get(spellName);
 
-			if (clazz != null) {
+			if(clazz != null) {
 				spell = clazz.getConstructor(World.class).newInstance(world);
 			}
 		}
-		catch (Exception exception) {
+		catch(Exception exception) {
 			exception.printStackTrace();
 		}
 
@@ -88,27 +86,26 @@ public class SpellRegistry {
 
 	public static Spell createSpellFromNBT(NBTTagCompound tag, World world) {
 		String spellId = tag.getString(Spell.NBT_ID);
-		if (spellId.equals(SpellVoid.SPELL_NAME))
-			return SpellVoid.VOID;
-		
+		if(spellId.equals(SpellVoid.SPELL_NAME)) return SpellVoid.VOID;
+
 		Spell spell = null;
 		Class<? extends Spell> clazz = null;
 		try {
 			clazz = instance().classStringMap.inverse().get(spellId);
 
-			if (clazz != null) {
+			if(clazz != null) {
 				spell = clazz.getConstructor(World.class).newInstance(world);
 			}
 		}
-		catch (Exception exception) {
+		catch(Exception exception) {
 			exception.printStackTrace();
 		}
 
-		if (spell != null) {
+		if(spell != null) {
 			try {
 				spell.deserializeNBT(tag);
 			}
-			catch (Exception e) {
+			catch(Exception e) {
 				FMLLog.log(Level.ERROR, e,
 						"An Entity %s(%s) has thrown an exception during loading, its state cannot be restored. Report this to the mod author",
 						spellId, clazz.getName());
@@ -121,11 +118,11 @@ public class SpellRegistry {
 
 		return spell;
 	}
-	
+
 	public static String getStringFromClass(Class<? extends Spell> clazz) {
 		return instance().classStringMap.get(clazz);
 	}
-	
+
 	public static Class<? extends Spell> getClassFromString(String name) {
 		return instance().classStringMap.inverse().get(name);
 	}

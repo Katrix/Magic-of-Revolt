@@ -18,7 +18,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class SpellRaytrace extends Spell implements ISpellVariable<SpellRaytrace, SpellRay> {
-	
+
 	private static final int VEC1_INDEX = 0;
 	private static final int VEC2_INDEX = 1;
 

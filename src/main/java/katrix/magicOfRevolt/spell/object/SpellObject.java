@@ -16,11 +16,11 @@ public abstract class SpellObject extends Spell {
 	public SpellObject(World world) {
 		super(world);
 	}
-	
+
 	protected SpellObject(SpellObject object) {
 		super(object);
 	}
-	
+
 	@Override
 	public void updateChild() {
 		//NO-OP Objects don't have children

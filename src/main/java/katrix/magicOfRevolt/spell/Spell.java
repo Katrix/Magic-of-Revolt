@@ -37,18 +37,18 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 	public static final String NBT_KEY = "key";
 	public static final String NBT_VALUE = "value";
 	public static final String NBT_ID = "id";
-	
+
 	public int ticksUpdated = 0;
 	public int ticksExecuted = 0;
-	
+
 	protected World world;
 	public ISpellActivator activator;
-	
+
 	protected boolean warmupDone;
 	protected boolean executeDone;
 
 	private Map<Integer, Spell> inputs = new HashMap<>();
-	
+
 	public Spell(World world) {
 		this.world = world;
 	}
@@ -65,17 +65,17 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 
 	public void onUpdate() {
 		ticksUpdated++;
-		
+
 		if(warmupDone || ticksUpdated > getWarmup()) {
 			updateChild();
 			warmupDone = true;
 		}
 
-		if (isWarmupComplete() && !isExecuteComplete()) {
+		if(isWarmupComplete() && !isExecuteComplete()) {
 			try {
 				execute();
 			}
-			catch (SpellException e) {
+			catch(SpellException e) {
 				activator.disable();
 				//activator.getPlayer().sendMessage("spell.exception." + e.getMessage());
 				if(e.getExplosion()) {
@@ -94,20 +94,17 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 	public boolean isWarmupComplete() {
 		if(warmupDone) {
 			for(Spell spell : getInputs()) {
-				if(!spell.isWarmupComplete())
-					return false;
+				if(!spell.isWarmupComplete()) return false;
 			}
 			return true;
 		}
 		return false;
 	}
-	
+
 	public boolean isExecuteComplete() {
 		if(executeDone) {
 			for(Spell spell : getInputs()) {
-				if(!spell.isExecuteComplete()) {
-					return false;
-				}
+				if(!spell.isExecuteComplete()) { return false; }
 			}
 			return true;
 		}
@@ -119,10 +116,10 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 		executeDone = true;
 		renderParticle();
 	}
-	
+
 	//TODO: Change to abstract once I have particles set up
 	public void renderParticle() {
-		
+
 	}
 
 	public int getWarmup() {
@@ -135,7 +132,7 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 
 	public int getTotalMindCost() {
 		int total = getMindCost();
-		for (Spell spell : getInputs()) {
+		for(Spell spell : getInputs()) {
 			total += spell.getMindCost();
 		}
 		return total;
@@ -143,23 +140,23 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 
 	public int getTotalWarmup() {
 		int total = getWarmup();
-		for (Spell spell : getInputs()) {
+		for(Spell spell : getInputs()) {
 			total += spell.getWarmup();
 		}
 		return total;
 	}
-	
+
 	public void forEachChildSpell(Consumer<Spell> consumer) {
 		consumer.accept(this);
-		for (Spell spell : getInputs()) {
+		for(Spell spell : getInputs()) {
 			spell.forEachChildSpell(consumer);
 		}
 	}
-	
+
 	public void setActivatorTree(ISpellActivator activator) {
 		forEachChildSpell(spell -> spell.setActivator(activator));
 	}
-	
+
 	public void cancelSpell() {
 		forEachChildSpell(spell -> spell.executeDone = true);
 	}
@@ -171,27 +168,27 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 	public List<Integer> getInputKeys() {
 		return ImmutableList.copyOf(inputs.keySet());
 	}
-	
+
 	public Spell setInput(Spell spell, int index) {
 		if(inputs.containsKey(index)) {
 			inputs.remove(index);
 		}
-		
+
 		inputs.put(index, spell);
 		return this;
 	}
-	
+
 	public Spell getInput(int index) {
 		return inputs.get(index);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	protected <T extends SpellObject> T getVariable(int index) throws SpellException {
 		T var;
 		try {
 			var = ((ISpellVariable<?, T>)getInput(index)).getVariable();
 		}
-		catch (Exception e) {
+		catch(Exception e) {
 			throw new SpellException(SpellException.CAST_ERROR, e);
 		}
 		return var;
@@ -219,8 +216,7 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 	}
 
 	@Override
-	public void addChatMessage(ITextComponent component) {
-	}
+	public void addChatMessage(ITextComponent component) {}
 
 	@Override
 	public boolean canCommandSenderUseCommand(int permLevel, String commandName) {
@@ -253,9 +249,8 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 	}
 
 	@Override
-	public void setCommandStat(Type type, int amount) {
-	}
-	
+	public void setCommandStat(Type type, int amount) {}
+
 	@Override
 	public MinecraftServer getServer() {
 		return world.getMinecraftServer();
@@ -269,7 +264,7 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 		List<Integer> inputKey = getInputKeys();
 		NBTTagList inputs = new NBTTagList();
 
-		for (int i = 0; i < inputValues.size(); i++) {
+		for(int i = 0; i < inputValues.size(); i++) {
 			Spell spell = inputValues.get(i);
 			int key = inputKey.get(i);
 			NBTTagCompound entry = new NBTTagCompound();
@@ -287,7 +282,7 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 	@Override
 	public void deserializeNBT(NBTTagCompound tag) {
 		NBTTagList inputs = tag.getTagList(NBT_INPUTS, Constants.NBT.TAG_COMPOUND);
-		for (int i = 0; i < inputs.tagCount(); i++) {
+		for(int i = 0; i < inputs.tagCount(); i++) {
 			NBTTagCompound entry = inputs.getCompoundTagAt(i);
 			NBTTagCompound value = entry.getCompoundTag(NBT_VALUE);
 			Spell spell = SpellRegistry.createSpellFromNBT(value, world);
@@ -295,10 +290,11 @@ public abstract class Spell implements ICommandSender, INBTSerializable<NBTTagCo
 			this.inputs.put(index, spell);
 		}
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Spell [getSpellName()=" + getSpellName() + ", world=" + world + ", activator=" + activator + ", ticksUpdated=" + ticksUpdated + ", ticksExecuted=" + ticksExecuted + ", warmupDone="
-				+ warmupDone + ", executeDone=" + executeDone + ", getWarmup()=" + getWarmup() + ", getMindCost()=" + getMindCost() + "]";
+		return "Spell [getSpellName()=" + getSpellName() + ", world=" + world + ", activator=" + activator + ", ticksUpdated=" + ticksUpdated
+				+ ", ticksExecuted=" + ticksExecuted + ", warmupDone=" + warmupDone + ", executeDone=" + executeDone + ", getWarmup()=" + getWarmup()
+				+ ", getMindCost()=" + getMindCost() + "]";
 	}
 }
