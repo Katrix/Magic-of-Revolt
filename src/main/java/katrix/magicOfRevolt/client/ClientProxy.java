@@ -14,7 +14,6 @@ import katrix.magicOfRevolt.item.RevoltItem;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 
 public class ClientProxy extends CommonProxy {
@@ -27,11 +26,11 @@ public class ClientProxy extends CommonProxy {
 
 	private void registerItem(Item item, int damage) {
 		ModelLoader.setCustomModelResourceLocation(item, damage,
-				new ModelResourceLocation(new ResourceLocation(item.getRegistryName()), "inventory"));
+				new ModelResourceLocation(item.getRegistryName(), "inventory"));
 	}
 
 	private void registerItemBlock(Block block, int damage) {
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), damage,
-				new ModelResourceLocation(new ResourceLocation(block.getRegistryName()), "inventory"));
+				new ModelResourceLocation(block.getRegistryName(), "inventory"));
 	}
 }

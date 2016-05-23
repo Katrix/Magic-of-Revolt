@@ -40,7 +40,7 @@ public class ConfigHandler {
 
 		@SubscribeEvent
 		public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent eventArgs) {
-			if(eventArgs.modID.equals(LibMod.MODID)) {
+			if(eventArgs.getModID().equals(LibMod.MODID)) {
 				loadConfig();
 			}
 		}

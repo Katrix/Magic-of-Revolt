@@ -38,7 +38,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlockMagicCircle extends BlockRevoltBase implements ITileEntityProvider {
 
 	public BlockMagicCircle() {
-		super(Material.web);
+		super(Material.WEB);
 		setUnlocalizedName(LibBlockName.MAGIC_CIRCLE);
 	}
 

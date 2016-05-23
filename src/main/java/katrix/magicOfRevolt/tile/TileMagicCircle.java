@@ -11,6 +11,8 @@ package katrix.magicOfRevolt.tile;
 import java.util.List;
 import java.util.Optional;
 
+import javax.annotation.Nullable;
+
 import katrix.magicOfRevolt.container.ContainerHexagonSpellCreation;
 import katrix.magicOfRevolt.lib.LibGuiID;
 import katrix.magicOfRevolt.spell.ISpellActivator;
@@ -24,7 +26,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
@@ -80,8 +81,9 @@ public class TileMagicCircle extends TileEntity implements ITickable, ISpellActi
 		markDirty();
 	}
 
+	@Nullable
 	@Override
-	public Packet<?> getDescriptionPacket() {
+	public SPacketUpdateTileEntity getUpdatePacket() {
 		return new SPacketUpdateTileEntity(pos, 1, spellCompiler.serializeNBT());
 	}
 

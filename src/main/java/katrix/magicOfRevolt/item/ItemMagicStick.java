@@ -23,7 +23,7 @@ public class ItemMagicStick extends ItemRevoltBase {
 
 	public ItemMagicStick() {
 		super();
-		setCreativeTab(CreativeTabs.tabTools);
+		setCreativeTab(CreativeTabs.TOOLS);
 		setUnlocalizedName(LibItemName.MAGIC_STICK);
 	}
 

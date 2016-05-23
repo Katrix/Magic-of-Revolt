@@ -39,7 +39,7 @@ public class SpellAddMotion extends SpellTarget<SpellEntity> {
 			entity.posY += vector.yCoord;
 			entity.posZ += vector.zCoord;
 			if(entity instanceof EntityPlayer) {
-				((EntityPlayerMP)entity).playerNetServerHandler.sendPacket(new SPacketEntityVelocity(entity));
+				((EntityPlayerMP)entity).connection.sendPacket(new SPacketEntityVelocity(entity));
 			}
 		}
 	}
